@@ -1,0 +1,57 @@
+{
+  "info": {
+    "product": "widget_1",
+    "bom": "B00012-001",
+    "lot": "1806A",
+    "location": { "name": "canada/ontario/milton", "lon": 22.1, "lat": 33.1 }
+  },
+  "gui_config": {
+    "file": "./tests/example/example_gui.json",
+    "auto_guage": true
+  },
+  "config": {
+    "result_stage_dir": "./results_s",
+    "result_bkup_dir" : "./results_b",
+    "result_server_url": "http://127.0.0.1:6800/result/tmidemo",
+    "result_server_retry_timer_sec": 10,
+    "result_handler": "TMIDemoRecordV1",
+    "fail_fast": false,
+    "channel_hw_driver": ["drivers.micropythonbrd.tmi_micropython"]
+  },
+  "tests": [
+    { "module": "tests.example.example1",
+      "options": {
+        "fail_fast": false
+      },
+      "items": [
+        {"id": "SETUP",  "enable": true },
+        {"id": "TST000", "enable": true,  "args": {"min": 0, "max": 10}},
+        {"id": "TST001", "enable": true,  "args": {"min": 1, "max": 3}},
+        {"id": "TST002", "enable": true,  "args": {"min": 3, "max": 4}},
+        {"id": "TST003", "enable": true,  "args": {"min": 4, "max": 15}},
+        {"id": "TST004", "enable": true,  "args": {"min": 5, "max": 6}},
+        {"id": "TST005", "enable": false, "timeout": 30},
+        {"id": "TST006", "enable": false, "timeout": 60},
+        {"id": "TST007", "enable": false, "timeout": 30},
+        {"id": "TST008"},
+        {"id": "TST009", "enable": false},
+        {"id": "TST010", "enable": false},
+        {"id": "TEARDOWN", "enable": true }
+      ]
+    },
+    { "module": "tests.example.example2",
+      "options": {
+        "enable": true
+      },
+      "items": [
+        {"id": "SETUP",  "enable": true },
+        {"id": "TST010", "enable": true, "args": {"min": 0, "max": 1}},
+        {"id": "TST011", "enable": true, "args": {"min": 2, "max": 3}},
+        {"id": "TST012", "enable": true, "args": {"min": 3, "max": 4}},
+        {"id": "TST013", "enable": true, "args": {"min": 4, "max": 5}},
+        {"id": "TST014", "enable": true, "args": {"min": 5, "max": 6}},
+        {"id": "TEARDOWN", "enable": true }
+      ]
+    }
+  ]
+}
