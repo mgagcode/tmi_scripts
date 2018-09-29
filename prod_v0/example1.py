@@ -4,15 +4,14 @@
 Martin Guthrie, copyright, all rights reserved, 2018
 
 """
-import sys
 import logging
-sys.path.append("..")
 from core.tmi_test_item import TestItem
-from tests.api.test_api import TestAPI
+from public.api import ResultAPI
 import time
 from pubsub import pub
 from random import randint, random
 from drivers.micropythonbrd.tmi_micropython import TMIMicroPyBrd
+
 
 class example1(TestItem):
 
@@ -94,7 +93,7 @@ class example1(TestItem):
         measurement_results = []
         _result, _bullet = context["record"].record_test_add_measurement("apples",
                                                    random(),
-                                                   TestAPI.UNIT_DB,
+                                                   ResultAPI.UNIT_DB,
                                                    context["item"]["args"]["min"],
                                                    context["item"]["args"]["max"])
         self.log_bullet(_bullet)
@@ -102,7 +101,7 @@ class example1(TestItem):
 
         _result, _bullet = context["record"].record_test_add_measurement("banannas",
                                                    randint(0, 10),
-                                                   TestAPI.UNIT_DB,
+                                                   ResultAPI.UNIT_DB,
                                                    context["item"]["args"]["min"],
                                                    context["item"]["args"]["max"])
         self.log_bullet(_bullet)
@@ -127,7 +126,7 @@ class example1(TestItem):
         time.sleep(self.DEMO_TIME_DELAY_LOW + (randint(0, 10) / 10.0) * self.DEMO_TIME_RND_ENABLE)
         tst_str = "now is the time for all good men to come to the aid of their party"
         self.log_bullet(tst_str, "blue")
-        _, _ = context["record"].record_test_add_measurement("string", tst_str, unit=TestAPI.UNIT_STRING)
+        _, _ = context["record"].record_test_add_measurement("string", tst_str, unit=ResultAPI.UNIT_STRING)
         self.item_end_PASS_helper()  # always last line of test
 
     def TST003(self):
@@ -141,7 +140,7 @@ class example1(TestItem):
 
         _result, _bullet = context["record"].record_test_add_measurement("count",
                                                    randint(3, 15),
-                                                   TestAPI.UNIT_DB,
+                                                   ResultAPI.UNIT_DB,
                                                    context["item"]["args"]["min"],
                                                    context["item"]["args"]["max"])
         self.log_bullet(_bullet)
@@ -170,7 +169,7 @@ class example1(TestItem):
         # save the button that was pressed into shared state, so it can be retrieved later
         self.shared_set_kv( "button", args["name"])
 
-        context["record"].record_test_add_measurement("button", args["name"], unit=TestAPI.UNIT_STRING)
+        context["record"].record_test_add_measurement("button", args["name"], unit=ResultAPI.UNIT_STRING)
         self.item_end_PASS_helper()
 
     def TST005(self):
@@ -199,7 +198,7 @@ class example1(TestItem):
         self.shared_get_lock("text_entry").release()
         self.logger.info("%r" % args)
         self.log_bullet(args["value"])
-        context["record"].record_test_add_measurement(args["id"], args["value"], unit=TestAPI.UNIT_STRING)
+        context["record"].record_test_add_measurement(args["id"], args["value"], unit=ResultAPI.UNIT_STRING)
         self.item_end_PASS_helper()
 
     def TST006(self):
@@ -215,7 +214,7 @@ class example1(TestItem):
         self.text_entry_lock.release()
         self.logger.info("%r" % args)
         self.log_bullet(args["value"])
-        context["record"].record_test_add_measurement(args["id"], args["value"], unit=TestAPI.UNIT_STRING)
+        context["record"].record_test_add_measurement(args["id"], args["value"], unit=ResultAPI.UNIT_STRING)
         self.item_end_PASS_helper()
 
     def TST007(self):

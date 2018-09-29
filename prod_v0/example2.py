@@ -4,11 +4,9 @@
 Martin Guthrie, copyright, all rights reserved, 2018
 
 """
-import sys
 import logging
 from pubsub import pub
-sys.path.append("..")
-from tests.api.test_api import TestAPI
+from public.api import ResultAPI
 from core.tmi_test_item import TestItem
 import time
 from random import randint, uniform
@@ -75,12 +73,12 @@ class example2(TestItem):
 
         measurement_results = []
         _result, _bullet = info["record"].record_test_add_measurement(
-                "apples", uniform(0, 1.01), TestAPI.UNIT_DB, info["item"]["args"]["min"], info["item"]["args"]["max"])
+                "apples", uniform(0, 1.01), ResultAPI.UNIT_DB, info["item"]["args"]["min"], info["item"]["args"]["max"])
         measurement_results.append(_result)
         self.log_bullet(_bullet)
 
         _result, _bullet = info["record"].record_test_add_measurement(
-                "banannas", uniform(0, 1.01), TestAPI.UNIT_DB, info["item"]["args"]["min"], info["item"]["args"]["max"])
+                "banannas", uniform(0, 1.01), ResultAPI.UNIT_DB, info["item"]["args"]["min"], info["item"]["args"]["max"])
         measurement_results.append(_result)
         self.log_bullet(_bullet)
 
@@ -110,7 +108,7 @@ class example2(TestItem):
             time.sleep(self.DEMO_TIME_DELAY_MED)
         self.log_bullet("released the lock!")
 
-        info["record"].record_test_add_measurement("string", str, unit=TestAPI.UNIT_STRING)
+        info["record"].record_test_add_measurement("string", str, unit=ResultAPI.UNIT_STRING)
         self.item_end_PASS_helper()  # always last line of test
 
     def TST013(self):
