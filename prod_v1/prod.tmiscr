@@ -6,8 +6,6 @@
     "location": { "name": "canada/ontario/milton", "lon": 22.1, "lat": 33.1 }
   },
   "gui_config": {
-    # use relative path
-    "file": "gui.json",
     "auto_guage": true
   },
   "config": {
@@ -20,7 +18,9 @@
     "channel_hw_driver": []
   },
   "tests": [
-    { "module": "tmi_scripts.prod_v0.code_phase1",
+    {
+      # module is [path, file], if path is null, then path is current dir
+      "module": [null, "code_phase1"],
       "options": {
         "fail_fast": false
       },
@@ -40,7 +40,7 @@
         {"id": "TEARDOWN", "enable": true }
       ]
     },
-    { "module": "tmi_scripts.prod_v0.code_phase2",
+    { "module": [null, "code_phase2"],
       "options": {
         "enable": true
       },
