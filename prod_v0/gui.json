@@ -1,0 +1,21 @@
+{
+  "frame_gui": {
+    "has_tool": [
+      { "name": "STOP",   "tooltip": "STOP",   "status": "STOP",   "path": "media/pngfiles/button_red_stop.png" },
+      { "name": "PAUSE",  "tooltip": "PAUSE",  "status": "PAUSE",  "path": "media/pngfiles/button_red_pause.png" },
+      { "name": "REWIND", "tooltip": "REWIND", "status": "REWIND", "path": "media/pngfiles/button_blue_rewind.png" },
+      { "name": "STEP",   "tooltip": "STEP",   "status": "STEP",   "path": "media/pngfiles/button_green_add.png" },
+      { "name": "PLAY",   "tooltip": "PLAY",   "status": "PLAY",   "path": "media/pngfiles/button_green_play.png" },
+      { "name": "FF",     "tooltip": "FAST FORWARD", "status": "FAST FORWARD", "path": "media/pngfiles/button_blue_fastforward.png" },
+      { "name": "NOTICE", "tooltip": "System Notices", "status": "System Notices", "path": "media/pngfiles/comments_alert.png" }
+    ]
+  },
+  "channel_gui": {
+    "has_guage": { "label": "Progress" },
+    "has_button": [
+      #{ "label": "button", "tooltip": "press me!" },
+      #{ "label": "DEBUG", "tooltip": "!press me!" }
+    ],
+    "has_tool": [ ]
+  }
+}
