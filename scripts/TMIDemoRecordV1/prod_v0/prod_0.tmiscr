@@ -1,0 +1,63 @@
+# Example: Shows most of all the features of test portal UI
+{
+  "info": {
+    # info is captured in the result record and can be searched/filtered
+    # Cannot add fields here without updating the result record handler and backend database
+    "product": "widget_1",
+    "bom": "B00012-001",
+    "lot": "95035",
+    "location": "canada/ontario/milton"
+  },
+  "config": {
+    # -- These items can override those from tmi_config.json
+    # In general these should not be defined, as any system these
+    # should not change, but there may be (development) reason
+    # why they need to be overridden here.
+    #"result_stage_dir": "~/results_s",
+    #"result_bkup_dir" : "~/results_b",
+    #"result_server_url": "http://127.0.0.1:6600",
+    #"result_server_retry_timer_sec": 10,
+    # --
+    # result_handler: a specific definition of the result record (fields, backend database schema, etc)
+    "result_handler": "TMIDemoRecordV1",
+    # fail_fast: if true (default), testing will stop on first failed test
+    "fail_fast": false,
+    # channel_hw_driver: list of code to initialize the test environment, must be specified
+    "channel_hw_driver": ["public.scripts.TMIDemoRecordV1.prod_v0.drivers.tmi_fake"]
+  },
+  "tests": [
+    {
+      # module is path to python code supporting this test
+      "module": "public.scripts.TMIDemoRecordV1.prod_v0.tst00xx",
+      "options": {
+        # fail_fast: if true (default), testing will stop on first failed test, overrides config section
+        "fail_fast": false
+        # timeout: defaults to 10 seconds, but can be overridden here, or in a test item (below)
+        #"timeout": 20
+        #
+        # Other options may be added here for your specific use cases.
+        # Options here are available to each item python coded implementation.
+        # Think of these options like global variable to all test items in this module.
+      },
+      "items": [
+        {"id": "TST0xxSETUP",           "enable": true },
+        {"id": "TST000_Meas",           "enable": true, "args": {"min": 0, "max": 10},
+                                        # fail: this is a list of 'fid' and 'msg' that get displayed and
+                                        #       recorded with the test record.  The python code for this
+                                        #       test item assigns which item in the list best represents
+                                        #       the failure mode.  This information is to assist repair.
+                                        "fail": [ {"fid": "TST000-0", "msg": "Component apple R1"},
+                                                  {"fid": "TST000-1", "msg": "Component banana R1"}] },
+        {"id": "TST001_Skip",           "enable": false },
+        {"id": "TST002_Buttons",        "enable": true, "timeout": 10 },
+        {"id": "TST003_KeyAdd",         "enable": true },
+        {"id": "TST004_KeyGet",         "enable": true },
+        {"id": "TST005_RsrcLock",       "enable": true, "args": {"holdTime": 1}, "timeout": 60 },
+        {"id": "TST006_HWDriver",       "enable": true },
+        {"id": "TST008_TextInput",      "enable": true, "timeout": 10 },
+        {"id": "TST007_LogPctProgress", "enable": true, "timeout": 15 },
+        {"id": "TST0xxTRDN",            "enable": true }
+      ]
+    }
+  ]
+}
