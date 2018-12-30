@@ -7,13 +7,13 @@
     "location": "canada/ontario/milton"
   },
   "config": {
-    "result_handler": "TMIDemoRecordV1",
+    "result_handler": "public.src.result.TMIDemoRecordV1",
     "fail_fast": false,
-    "channel_hw_driver": ["public.drivers.micropythonbrd.tmi_hwdrv_upybrd"]
+    "channel_hw_driver": ["public.src.drivers.micropythonbrd.tmi_hwdrv_upybrd"]
   },
   "tests": [
     {
-      "module": "public.scripts.TMIDemoRecordV1.pybrd_v1.pybrd00xx",
+      "module": "public.src.scripts.TMIDemoRecordV1.pybrd_v1.pybrd00xx",
       "options": {
       },
       "items": [

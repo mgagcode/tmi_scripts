@@ -9,26 +9,24 @@
     "location": "canada/ontario/milton"
   },
   "config": {
-    # -- These items can override those from tmi_config.json
-    # In general these should not be defined, as any system these
-    # should not change, but there may be (development) reason
-    # why they need to be overridden here.
-    #"result_stage_dir": "~/results_s",
-    #"result_bkup_dir" : "~/results_b",
+    # -- These items can override those from tmi_config.json, defaults are shown as example
+    #"result_stage_dir": "public/result/stage",
+    #"result_bkup_dir" : "public/result/bkup",
     #"result_server_url": "http://127.0.0.1:6600",
     #"result_server_retry_timer_sec": 10,
     # --
     # result_handler: a specific definition of the result record (fields, backend database schema, etc)
-    "result_handler": "TMIDemoRecordV1",
+    #   and must be located in public/result
+    "result_handler": "public.src.result.TMIDemoRecordV1",
     # fail_fast: if true (default), testing will stop on first failed test
     "fail_fast": false,
     # channel_hw_driver: list of code to initialize the test environment, must be specified
-    "channel_hw_driver": ["public.scripts.TMIDemoRecordV1.prod_v0.drivers.tmi_fake"]
+    "channel_hw_driver": ["public.src.scripts.TMIDemoRecordV1.prod_v0.drivers.tmi_fake"]
   },
   "tests": [
     {
       # module is path to python code supporting this test
-      "module": "public.scripts.TMIDemoRecordV1.prod_v0.tst00xx",
+      "module": "public.src.scripts.TMIDemoRecordV1.prod_v0.tst00xx",
       "options": {
         # fail_fast: if true (default), testing will stop on first failed test, overrides config section
         "fail_fast": false

@@ -7,8 +7,8 @@ Martin Guthrie, copyright, all rights reserved, 2018
 import logging
 import time
 from core.tmi_test_item import TestItem
-from public.api import ResultAPI
-from drivers.micropythonbrd.tmi_upybrd import TMIMicroPyBrd
+from public.src.api import ResultAPI
+from public.src.drivers.micropythonbrd.tmi_upybrd import TMIMicroPyBrd
 
 
 # file and class name must match
