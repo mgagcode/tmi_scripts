@@ -33,15 +33,15 @@
     "location": "%%Loc"
   },
   "config": {
-    "result_handler": "public.src.result.TMIDemoRecordV1",
+    "record_handler": "public.station.record.TMIDemoRecordV1",
     "fail_fast": false,
-    "channel_hw_driver": ["public.src.scripts.TMIDemoRecordV1.prod_v0.drivers.tmi_fake"]
+    "channel_hw_driver": ["public.station.scripts.TMIDemoRecordV1.prod_v0.drivers.tmi_fake"]
   },
   "tests": [
     {
       # module is [path, file], if path is null, then path is current dir
       # - this is to support a repo of common code
-      "module": "public.src.scripts.TMIDemoRecordV1.prod_v0.tst00xx",
+      "module": "public.station.scripts.TMIDemoRecordV1.prod_v0.tst00xx",
       "options": {
         "fail_fast": false
       },

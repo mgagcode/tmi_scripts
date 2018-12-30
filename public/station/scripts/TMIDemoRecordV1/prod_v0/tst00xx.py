@@ -6,7 +6,7 @@ Martin Guthrie, copyright, all rights reserved, 2018
 """
 import logging
 from core.tmi_test_item import TestItem
-from public.src.api import ResultAPI
+from public.station.api import ResultAPI
 import time
 from random import randint, random
 
