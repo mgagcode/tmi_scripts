@@ -7,8 +7,8 @@ Martin Guthrie, copyright, all rights reserved, 2018
 import logging
 import threading
 import time
-from drivers.micropythonbrd.list_serial import serial_ports
-from drivers.micropythonbrd.tmi_upybrd import TMIMicroPyBrd
+from public.station.drivers.micropythonbrd.list_serial import serial_ports
+from public.station.drivers.micropythonbrd.tmi_upybrd import TMIMicroPyBrd
 
 from pubsub import pub
 from app.const import TMI_PUB, TMI_CHANNEL

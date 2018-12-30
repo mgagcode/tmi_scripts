@@ -7,7 +7,7 @@ Martin Guthrie, copyright, all rights reserved, 2018
 try:
     # for when used by TMI
     import drivers.micropythonbrd.pyboard as pyboard
-    from drivers.micropythonbrd.list_serial import serial_ports
+    from public.station.drivers.micropythonbrd.list_serial import serial_ports
 except:
     # for when called by main
     import pyboard
