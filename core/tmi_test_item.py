@@ -34,7 +34,7 @@ class TestItem(object):
                 where # is the index of the button selected by user
         """
         self.logger.debug(buttons)
-        button_idx = int(input("Press Button (0-{}):".format(len(buttons))))
+        button_idx = int(input("Press Button (0-{}):".format(len(buttons) - 1)))
         if not (0 <= button_idx < len(buttons)):
             # fake a timeout if the range is wrong... a wrong index is not possible in the GUI
             return {'success': False, 'button': None, 'err': "Timeout"}

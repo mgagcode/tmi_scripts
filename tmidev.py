@@ -108,11 +108,11 @@ class TMIChanCon(object):
 
              # TODO: add more stuff as needed
             }
+        self.record.record_item_create(d["item"]["id"])
         return attrdict(d)
 
     def item_end(self, item_result_state=ResultAPI.RECORD_RESULT_PASS, _next=None):
-        info = self.item_start()
-        self.logger.debug("{}, {}".format(info["item"]["id"], item_result_state))
+        self.logger.debug("{}, {}".format(self._item["id"], item_result_state))
 
         if self.record.record_test_get_result() not in [ResultAPI.RECORD_RESULT_UNKNOWN]:
             # there must have been another early failure, either a timeout or crash...
@@ -131,7 +131,6 @@ class TMIChanCon(object):
 
         self.record.record_test_set_result(item_result_state)
         self.record.record_item_end()
-        self.logger.debug(info)
 
     def log_bullet(self, text, ovrwrite_last_line):
         self.logger.info("BULLET: {}".format(text))
@@ -151,11 +150,11 @@ class TMIChanCon(object):
             test_klass = test_module_klass(controller=self, ch_num=self.ch, shared_state=self.shared_state)
 
             for item in test["items"]:
-                logger.info("ITEM: {}".format(item["id"]))
-                self.record.record_item_create(item["id"])
-                self._item = item
-                func = getattr(test_klass, item["id"])
-                func()
+                logger.info("ITEM: {}".format(item))
+                if item.get("enable", True):
+                    self._item = item
+                    func = getattr(test_klass, item["id"])
+                    func()
 
         self.record.record_record_meta_fini()
         self.record.record_publish()
@@ -171,7 +170,7 @@ def setup_logging(log_file_name_prefix="log", level=logging.INFO, path="./log"):
     if not os.path.exists(path): os.makedirs(path)
 
     # Here we define our formatter
-    FORMAT = "%(asctime)s %(threadName)15s %(filename)25s:%(lineno)4s - %(name)30s:%(funcName)20s() %(levelname)-5.5s : %(message)s"
+    FORMAT = "%(relativeCreated)5d %(filename)20s:%(lineno)4s - %(name)21s:%(funcName)16s() %(levelname)-5.5s : %(message)s"
     formatter = logging.Formatter(FORMAT)
 
     allLogHandler_filename = os.path.join(path, "".join([log_file_name_prefix, ".log"]))

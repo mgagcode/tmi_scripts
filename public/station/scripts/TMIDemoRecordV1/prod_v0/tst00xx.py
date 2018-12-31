@@ -258,7 +258,7 @@ class tst00xx(TestItem):
 
             # qualify the text here, and either if the text is invalid, re-ask
             # make sure you don't timeout...
-
+            ctx.record.measurement("input", user_text["textbox"], ResultAPI.UNIT_NONE)
             _result = ResultAPI.RECORD_RESULT_PASS
         else:
             _result = ResultAPI.RECORD_RESULT_FAIL
