@@ -4,13 +4,10 @@
 Martin Guthrie, copyright, all rights reserved, 2018
 
 """
-import sys
-sys.path.append('../tmi')
 import logging
 import argparse
 from pubsub import pub
-
-TMI_FRAME_SYSTEM_NOTICE = "TMIFrame.system_notice"
+from app.const import TMI_PUB
 
 TMI_VERSION = "0.0.1"
 
@@ -50,7 +47,7 @@ class TMIHWDriver(object):
 
             dd = {"notice": "TMIHWDriver: Found channel {}".format(i),
                   "from": "{}.{}".format(__class__.__name__, "discover_channels")}
-            pub.sendMessage(TMI_FRAME_SYSTEM_NOTICE, item_dict=dd)
+            pub.sendMessage(TMI_PUB.TMI_FRAME_SYSTEM_NOTICE, item_dict=dd)
 
         self.shared_state.add_drivers("TMIFake", drivers)
         self._num_chan = NUM_CHANNELS
@@ -63,7 +60,7 @@ class TMIHWDriver(object):
     def init_play_pub(self):
         """ Function to instantiate a class/thread to trigger PLAY of script
         """
-        self.logger.info("Not supported")
+        self.logger.info("TMIFake does not support 'play' messaging")
 
     def close(self):
         self.logger.info("closed")
