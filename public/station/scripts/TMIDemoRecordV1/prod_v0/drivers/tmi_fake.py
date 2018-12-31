@@ -9,8 +9,8 @@ sys.path.append('../tmi')
 import logging
 import argparse
 from pubsub import pub
-from app.const import TMI_PUB
 
+TMI_FRAME_SYSTEM_NOTICE = "TMIFrame.system_notice"
 
 TMI_VERSION = "0.0.1"
 
@@ -50,7 +50,7 @@ class TMIHWDriver(object):
 
             dd = {"notice": "TMIHWDriver: Found channel {}".format(i),
                   "from": "{}.{}".format(__class__.__name__, "discover_channels")}
-            pub.sendMessage(TMI_PUB.TMI_FRAME_SYSTEM_NOTICE, item_dict=dd)
+            pub.sendMessage(TMI_FRAME_SYSTEM_NOTICE, item_dict=dd)
 
         self.shared_state.add_drivers("TMIFake", drivers)
         self._num_chan = NUM_CHANNELS

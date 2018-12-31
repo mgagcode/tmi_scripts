@@ -91,6 +91,7 @@ class TMIChanCon(object):
         self.script = script
         self.shared_state = shared_state
         self.operator = operator
+        self.num_channels = 0
 
         record_handler = script["config"]["record_handler"]
         i = importlib.import_module(record_handler)
@@ -137,6 +138,20 @@ class TMIChanCon(object):
 
     def run(self):
 
+        # process HW drivers
+        for hwdrv in self.script["config"]["channel_hw_driver"]:
+            logger.info("HWDRV: {}".format(hwdrv))
+            hwdrv_module = importlib.import_module(hwdrv)
+            klass = hwdrv.split(".")[-1]
+            hwdrv_module_klass = getattr(hwdrv_module, "TMIHWDriver")
+            hwdriver = hwdrv_module_klass(self.shared_state)
+
+            self.num_channels = hwdriver.discover_channels()
+            self.logger.info("{} - number channels {}".format(hwdrv, self.num_channels))
+
+            # install 'play' action if the driver supports it
+            hwdriver.init_play_pub()
+
         for test in self.script["tests"]:
 
             self._options = test["options"]
@@ -170,7 +185,7 @@ def setup_logging(log_file_name_prefix="log", level=logging.INFO, path="./log"):
     if not os.path.exists(path): os.makedirs(path)
 
     # Here we define our formatter
-    FORMAT = "%(relativeCreated)5d %(filename)20s:%(lineno)4s - %(name)21s:%(funcName)16s() %(levelname)-5.5s : %(message)s"
+    FORMAT = "%(relativeCreated)5d %(filename)20s:%(lineno)4s - %(name)21s:%(funcName)20s() %(levelname)-5.5s : %(message)s"
     formatter = logging.Formatter(FORMAT)
 
     allLogHandler_filename = os.path.join(path, "".join([log_file_name_prefix, ".log"]))
