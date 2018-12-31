@@ -4,10 +4,8 @@
 Martin Guthrie, copyright, all rights reserved, 2018
 """
 
-from app.const import Const
 
-
-class ResultAPI(Const):
+class ResultAPI(object):
 
     RECORD_RESULT_UNKNOWN = "UNKNOWN" # this is an error if not changed
     RECORD_RESULT_PASS = "PASS"

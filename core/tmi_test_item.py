@@ -5,15 +5,14 @@ Martin Guthrie, copyright, all rights reserved, 2018
 
 """
 import logging
-
+from public.station.api import ResultAPI
 
 class TestItem(object):
 
-    # TODO: for html, consider this, https://github.com/Knio/dominate
-
-    def __init__(self, ch_num, shared_state):
+    def __init__(self, controller, ch_num, shared_state):
         self.logger = logging.getLogger("TMI.{}.{}".format(__class__.__name__, ch_num))
         self.chan = ch_num
+        self.con = controller
         self.shared_state = shared_state
 
         self._record = None
@@ -44,16 +43,10 @@ class TestItem(object):
         :param timeout: seconds
         :return {'success': True/False, 'textbox': <string>, ['err': <msg>]}
 
-        TODO: regex feature.  Where to put the logic?
         """
-        height = 60       # TODO: this is not exposed to the client yet, as single line only bokeh TextBox
-        regex = None      # TODO: future regex feature... implement in JS in the test portal?
-
-        self.shared_lock("__tmi_textbox_input__").acquire()
-
         LOOPDELAY = 0.2
         loop_count = timeout / LOOPDELAY
-        tb = {"title": title, "placeholder": placeholder, "height": height, "regex": regex}
+        tb = {"title": title, "placeholder": placeholder}
         self.logger.info(tb)
 
         return {'success': False, 'textbox': None, 'err': "Timeout"}
@@ -66,6 +59,11 @@ class TestItem(object):
         """
         self._record.add_key(key, value, slot)
 
+    def item_start(self):
+        return self.con.item_start()
+
+    def item_end(self, item_result_state=ResultAPI.RECORD_RESULT_PASS, _next=None):
+        self.con.item_end(item_result_state, _next)
 
     def shared_set_kv(self, key, value):
         self.shared_state.channel_set_kv(self.chan, key, value)

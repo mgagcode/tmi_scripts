@@ -23,7 +23,7 @@ class TMIDemoRecordV1(ResultBaseClass):
     """
     MAX_KEYS = 4
 
-    def __init__(self, chan_num, operator="UNKNOWN", script_filename=None):
+    def __init__(self, chan_num, operator="UNKNOWN", script_filename="UNKNOWN"):
         super().__init__(chan_num, operator, script_filename)
 
         self.logger = logging.getLogger("TMI.{}.{}".format(__class__.__name__, chan_num))
