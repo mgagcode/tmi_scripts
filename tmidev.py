@@ -239,7 +239,8 @@ def parse_args():
     parser.add_argument("--script",
                         dest="script",
                         action="store",
-                        default=SCRIPT_PATH,
+#                        default=SCRIPT_PATH,
+                        required=True,
                         help="Path to script files")
 
     args = parser.parse_args()
