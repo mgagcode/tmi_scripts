@@ -74,7 +74,7 @@ class SharedState(object):
             # create the new lock
             _lock = threading.Lock()
             self._shared["common"]["rsrc_locks"].append({"name": name, "lock":_lock})
-            self.logger.info("created {}".format(name))
+            self.logger.debug("created {}".format(name))
             return _lock
 
     def channel_set_kv(self, num, key, value):

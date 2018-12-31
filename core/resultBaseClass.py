@@ -9,6 +9,7 @@ import time
 import logging
 import datetime
 import platform
+import json
 import uuid
 from public.station.api import ResultAPI
 
@@ -218,6 +219,13 @@ class ResultBaseClass(object):
              "file": _file,
              "processor": self._record["meta"]["processor"],
              "from": "{}.record_publish".format(__class__.__name__)}
+
+        if "from" in d: d.pop("from")  # remove debugging key
+        if "type" in d: d.pop("type")  # remove event key
+
+        with open(_file, 'w') as fp:
+            json.dump(d, fp, indent=2)
+        self.logger.info("Created: {}".format(_file))
 
         return _file
 

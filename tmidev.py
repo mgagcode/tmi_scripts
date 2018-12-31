@@ -99,6 +99,7 @@ class TMIChanCon(object):
 
         self.record = record_handler_klass(0, "tmidev", script_filename)
         self.record.record_info_set(script.get("info", {}))
+        self.record.record_record_meta_init()
 
     def item_start(self):
         d = {"item": self._item,             # item dict from the script, ex {"id": "TST000", "enable": true,  "args": {"min": 0, "max": 2}}
@@ -111,7 +112,7 @@ class TMIChanCon(object):
 
     def item_end(self, item_result_state=ResultAPI.RECORD_RESULT_PASS, _next=None):
         info = self.item_start()
-        self.logger.info("{}, {}".format(info["item"]["id"], item_result_state))
+        self.logger.debug("{}, {}".format(info["item"]["id"], item_result_state))
 
         if self.record.record_test_get_result() not in [ResultAPI.RECORD_RESULT_UNKNOWN]:
             # there must have been another early failure, either a timeout or crash...
@@ -130,7 +131,7 @@ class TMIChanCon(object):
 
         self.record.record_test_set_result(item_result_state)
         self.record.record_item_end()
-        self.logger.info(info)
+        self.logger.debug(info)
 
     def log_bullet(self, text, ovrwrite_last_line):
         self.logger.info("BULLET: {}".format(text))
@@ -144,16 +145,20 @@ class TMIChanCon(object):
             logger.info("Module: {}".format(test["module"]))
             test_module = importlib.import_module(test["module"])
             klass = test["module"].split(".")[-1]
-            logger.info("class: {}".format(klass))
+            logger.debug("class: {}".format(klass))
 
             test_module_klass = getattr(test_module, klass)
             test_klass = test_module_klass(controller=self, ch_num=self.ch, shared_state=self.shared_state)
 
             for item in test["items"]:
+                logger.info("ITEM: {}".format(item["id"]))
                 self.record.record_item_create(item["id"])
                 self._item = item
                 func = getattr(test_klass, item["id"])
                 func()
+
+        self.record.record_record_meta_fini()
+        self.record.record_publish()
 
 
 def setup_logging(log_file_name_prefix="log", level=logging.INFO, path="./log"):

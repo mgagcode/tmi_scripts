@@ -10,7 +10,7 @@ from public.station.api import ResultAPI
 class TestItem(object):
 
     def __init__(self, controller, ch_num, shared_state):
-        self.logger = logging.getLogger("TMI.{}.{}".format(__class__.__name__, ch_num))
+        self.logger = logging.getLogger("TMI.{}.{}".format("TestItem", ch_num))
         self.chan = ch_num
         self.con = controller
         self.shared_state = shared_state
@@ -33,23 +33,26 @@ class TestItem(object):
         :return {'success': True/False, 'button': <#>, ['err': <msg>]}
                 where # is the index of the button selected by user
         """
-        LOOPDELAY = 0.2
-        loop_count = timeout / LOOPDELAY
-        self.logger.info(buttons)
-        return {'success': False, 'button': None, 'err': "Timeout"}
+        self.logger.debug(buttons)
+        button_idx = int(input("Press Button (0-{}):".format(len(buttons))))
+        if not (0 <= button_idx < len(buttons)):
+            # fake a timeout if the range is wrong... a wrong index is not possible in the GUI
+            return {'success': False, 'button': None, 'err': "Timeout"}
+        return {'success': True, 'button': button_idx, 'err': None}
 
     def input_textbox(self, title, placeholder="", timeout=10):
-        """ Create a textbox
-        :param timeout: seconds
-        :return {'success': True/False, 'textbox': <string>, ['err': <msg>]}
-
+        """ Get text input
+        :param title:
+        :param placeholder:
+        :param timeout:
+        :return: {'success': True/False, 'textbox': <string>, ['err': <msg>]}
         """
-        LOOPDELAY = 0.2
-        loop_count = timeout / LOOPDELAY
         tb = {"title": title, "placeholder": placeholder}
-        self.logger.info(tb)
-
-        return {'success': False, 'textbox': None, 'err': "Timeout"}
+        self.logger.debug(tb)
+        usr_input = input("Enter:")
+        return {'success': True, 'textbox': usr_input, 'err': None}
+        # a failure looks like this...
+        #return {'success': False, 'textbox': None, 'err': "Timeout"}
 
     def add_key(self, key, value, slot=None):
         """ Add keys to the suite test record
