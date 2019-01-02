@@ -139,18 +139,29 @@ class TMIChanCon(object):
     def run(self):
 
         # process HW drivers
+        num_channels = -1
         for hwdrv in self.script["config"]["channel_hw_driver"]:
             logger.info("HWDRV: {}".format(hwdrv))
             hwdrv_module = importlib.import_module(hwdrv)
-            klass = hwdrv.split(".")[-1]
             hwdrv_module_klass = getattr(hwdrv_module, "TMIHWDriver")
             hwdriver = hwdrv_module_klass(self.shared_state)
 
             self.num_channels = hwdriver.discover_channels()
-            self.logger.info("{} - number channels {}".format(hwdrv, self.num_channels))
+            _num_channels = hwdriver.discover_channels()
+            self.logger.info("{} - number channels {}".format(hwdriver, _num_channels))
+            if _num_channels == -1:
+                # this HW DRV does not indicate number of channels, its a shared resource
+                pass
+            elif num_channels == -1:
+                num_channels = _num_channels
+            elif num_channels != _num_channels:
+                self.logger.error("{} - number channels {} does not match previous HWDRV".format(hwdriver, _num_channels))
+                raise ValueError('Mismatch number of channels between HW Drivers')
 
             # install 'play' action if the driver supports it
             hwdriver.init_play_pub()
+
+        self.ctx["num_chan"] = num_channels
 
         for test in self.script["tests"]:
 
