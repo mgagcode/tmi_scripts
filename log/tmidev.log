@@ -312,3 +312,178 @@
 2018-12-31 13:36:52,546      MainThread                 tmidev.py: 133 -               TMI.TMIChanCon.0:            item_end() INFO  : {'item': {'id': 'TST007_LogPctProgress', 'enable': True, 'timeout': 15}, 'options': {'fail_fast': False}, 'record': {'meta': {'channel': 0, 'result': 'FAIL', 'processor': 'TMIDemoRecordV1', 'operator': 'tmidev', 'ip': '127.0.0.1', 'script': 'public/station/scripts/TMIDemoRecordV1/prod_v0/prod_0.tmiscr'}, 'info': {'product': 'widget_1', 'bom': 'B00012-001', 'lot': '95035', 'location': 'canada/ontario/milton'}, 'config': {}, 'items': [{'name': 'TST0xxSETUP', 'result': 'PASS', 'timestamp_start': 1546281404.2, 'timestamp_end': 1546281404.28, 'measurements': [], 'fail_msg': {}}, {'name': 'TST000_Meas', 'result': 'PASS', 'timestamp_start': 1546281404.28, 'timestamp_end': 1546281405.03, 'measurements': [{'name': 'TST000_Meas.apples', 'unit': 'dB', 'min': '0.0', 'max': '10.0', 'value': '0.11043013335703', 'result': 'PASS'}, {'name': 'TST000_Meas.bananas', 'unit': 'dB', 'min': '0.0', 'max': '10.0', 'value': '2.0', 'result': 'PASS'}], 'fail_msg': {}}, {'name': 'TST001_Skip', 'result': 'PASS', 'timestamp_start': 1546281405.03, 'timestamp_end': 1546281405.55, 'measurements': [], 'fail_msg': {}}, {'name': 'TST002_Buttons', 'result': 'FAIL', 'timestamp_start': 1546281405.55, 'timestamp_end': 1546281405.55, 'measurements': [], 'fail_msg': {}}, {'name': 'TST003_KeyAdd', 'result': 'PASS', 'timestamp_start': 1546281405.55, 'timestamp_end': 1546281406.02, 'measurements': [], 'fail_msg': {}}, {'name': 'TST004_KeyGet', 'result': 'PASS', 'timestamp_start': 1546281406.02, 'timestamp_end': 1546281406.24, 'measurements': [], 'fail_msg': {}}, {'name': 'TST005_RsrcLock', 'result': 'PASS', 'timestamp_start': 1546281406.24, 'timestamp_end': 1546281407.24, 'measurements': [], 'fail_msg': {}}, {'name': 'TST006_HWDriver', 'result': 'PASS', 'timestamp_start': 1546281407.24, 'timestamp_end': 1546281407.28, 'measurements': [], 'fail_msg': {}}, {'name': 'TST008_TextInput', 'result': 'FAIL', 'timestamp_start': 1546281407.28, 'timestamp_end': 1546281407.29, 'measurements': [], 'fail_msg': {}}, {'name': 'TST007_LogPctProgress', 'result': 'PASS', 'timestamp_start': 1546281407.29, 'timestamp_end': 1546281412.55, 'measurements': [], 'fail_msg': {}}], 'errors': [], 'html_summary': None, 'keys': {'key0': 'value:4'}}}
 2018-12-31 13:36:53,280      MainThread                 tmidev.py: 114 -               TMI.TMIChanCon.0:            item_end() INFO  : TST0xxTRDN, PASS
 2018-12-31 13:36:53,280      MainThread                 tmidev.py: 133 -               TMI.TMIChanCon.0:            item_end() INFO  : {'item': {'id': 'TST0xxTRDN', 'enable': True}, 'options': {'fail_fast': False}, 'record': {'meta': {'channel': 0, 'result': 'FAIL', 'processor': 'TMIDemoRecordV1', 'operator': 'tmidev', 'ip': '127.0.0.1', 'script': 'public/station/scripts/TMIDemoRecordV1/prod_v0/prod_0.tmiscr'}, 'info': {'product': 'widget_1', 'bom': 'B00012-001', 'lot': '95035', 'location': 'canada/ontario/milton'}, 'config': {}, 'items': [{'name': 'TST0xxSETUP', 'result': 'PASS', 'timestamp_start': 1546281404.2, 'timestamp_end': 1546281404.28, 'measurements': [], 'fail_msg': {}}, {'name': 'TST000_Meas', 'result': 'PASS', 'timestamp_start': 1546281404.28, 'timestamp_end': 1546281405.03, 'measurements': [{'name': 'TST000_Meas.apples', 'unit': 'dB', 'min': '0.0', 'max': '10.0', 'value': '0.11043013335703', 'result': 'PASS'}, {'name': 'TST000_Meas.bananas', 'unit': 'dB', 'min': '0.0', 'max': '10.0', 'value': '2.0', 'result': 'PASS'}], 'fail_msg': {}}, {'name': 'TST001_Skip', 'result': 'PASS', 'timestamp_start': 1546281405.03, 'timestamp_end': 1546281405.55, 'measurements': [], 'fail_msg': {}}, {'name': 'TST002_Buttons', 'result': 'FAIL', 'timestamp_start': 1546281405.55, 'timestamp_end': 1546281405.55, 'measurements': [], 'fail_msg': {}}, {'name': 'TST003_KeyAdd', 'result': 'PASS', 'timestamp_start': 1546281405.55, 'timestamp_end': 1546281406.02, 'measurements': [], 'fail_msg': {}}, {'name': 'TST004_KeyGet', 'result': 'PASS', 'timestamp_start': 1546281406.02, 'timestamp_end': 1546281406.24, 'measurements': [], 'fail_msg': {}}, {'name': 'TST005_RsrcLock', 'result': 'PASS', 'timestamp_start': 1546281406.24, 'timestamp_end': 1546281407.24, 'measurements': [], 'fail_msg': {}}, {'name': 'TST006_HWDriver', 'result': 'PASS', 'timestamp_start': 1546281407.24, 'timestamp_end': 1546281407.28, 'measurements': [], 'fail_msg': {}}, {'name': 'TST008_TextInput', 'result': 'FAIL', 'timestamp_start': 1546281407.28, 'timestamp_end': 1546281407.29, 'measurements': [], 'fail_msg': {}}, {'name': 'TST007_LogPctProgress', 'result': 'PASS', 'timestamp_start': 1546281407.29, 'timestamp_end': 1546281412.55, 'measurements': [], 'fail_msg': {}}, {'name': 'TST0xxTRDN', 'result': 'PASS', 'timestamp_start': 1546281412.55, 'timestamp_end': 1546281413.28, 'measurements': [], 'fail_msg': {}}], 'errors': [], 'html_summary': None, 'keys': {'key0': 'value:4'}}}
+    7            tmidev.py: 285 -                   TMI:                main() INFO  : args: {'script': 'public/station/scripts/TMIDemoRecordV1/dso_v0/dso_v0.tmiscr'}
+    9            tmidev.py: 277 -                   TMI:    script_validated() INFO  : Script passed validation tests
+   31   resultBaseClass.py:  45 - TMI.ResultBaseClass.0:            __init__() INFO  : DONE
+   31   TMIDemoRecordV1.py:  37 - TMI.TMIDemoRecordV1.0:            __init__() INFO  : DONE
+   35            tmidev.py: 144 -                   TMI:                 run() INFO  : HWDRV: public.station.drivers.agilent_dso_usb_1.tmi_hwdrv_agilent_dso_usb_1
+  240 tmi_hwdrv_agilent_dso_usb_1.py:  32 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:            __init__() INFO  : Start
+  578 tmi_hwdrv_agilent_dso_usb_1.py:  73 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:   discover_channels() INFO  : found: True AGILENT TECHNOLOGIES,DSO7104B,MY49520121,06.00.0003
+
+    9            tmidev.py: 285 -                   TMI:                main() INFO  : args: {'script': 'public/station/scripts/TMIDemoRecordV1/dso_v0/dso_v0.tmiscr'}
+    9            tmidev.py: 277 -                   TMI:    script_validated() INFO  : Script passed validation tests
+   27   resultBaseClass.py:  45 - TMI.ResultBaseClass.0:            __init__() INFO  : DONE
+   28   TMIDemoRecordV1.py:  37 - TMI.TMIDemoRecordV1.0:            __init__() INFO  : DONE
+   29            tmidev.py: 144 -                   TMI:                 run() INFO  : HWDRV: public.station.drivers.agilent_dso_usb_1.tmi_hwdrv_agilent_dso_usb_1
+  200 tmi_hwdrv_agilent_dso_usb_1.py:  32 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:            __init__() INFO  : Start
+  541 tmi_hwdrv_agilent_dso_usb_1.py:  73 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:   discover_channels() INFO  : found: True AGILENT TECHNOLOGIES,DSO7104B,MY49520121,06.00.0003
+
+  542 tmi_hwdrv_agilent_dso_usb_1.py:  91 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:   discover_channels() INFO  : Done
+  865 tmi_hwdrv_agilent_dso_usb_1.py:  73 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:   discover_channels() INFO  : found: True AGILENT TECHNOLOGIES,DSO7104B,MY49520121,06.00.0003
+
+  866 tmi_hwdrv_agilent_dso_usb_1.py:  91 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:   discover_channels() INFO  : Done
+  867            tmidev.py: 151 -      TMI.TMIChanCon.0:                 run() INFO  : <public.station.drivers.agilent_dso_usb_1.tmi_hwdrv_agilent_dso_usb_1.TMIHWDriver object at 0x7ff0afd78898> - number channels -1
+  867 tmi_hwdrv_agilent_dso_usb_1.py: 103 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:       init_play_pub() INFO  : AGILENT_DSO_USB_1 does not support 'play' messaging
+    8            tmidev.py: 285 -                   TMI:                main() INFO  : args: {'script': 'public/station/scripts/TMIDemoRecordV1/dso_v0/dso_v0.tmiscr'}
+    8            tmidev.py: 277 -                   TMI:    script_validated() INFO  : Script passed validation tests
+   26   resultBaseClass.py:  45 - TMI.ResultBaseClass.0:            __init__() INFO  : DONE
+   26   TMIDemoRecordV1.py:  37 - TMI.TMIDemoRecordV1.0:            __init__() INFO  : DONE
+   28            tmidev.py: 144 -                   TMI:                 run() INFO  : HWDRV: public.station.drivers.agilent_dso_usb_1.tmi_hwdrv_agilent_dso_usb_1
+  199 tmi_hwdrv_agilent_dso_usb_1.py:  32 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:            __init__() INFO  : Start
+  531 tmi_hwdrv_agilent_dso_usb_1.py:  73 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:   discover_channels() INFO  : found: True AGILENT TECHNOLOGIES,DSO7104B,MY49520121,06.00.0003
+
+  532 tmi_hwdrv_agilent_dso_usb_1.py:  91 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:   discover_channels() INFO  : Done
+  533            tmidev.py: 150 -      TMI.TMIChanCon.0:                 run() INFO  : <public.station.drivers.agilent_dso_usb_1.tmi_hwdrv_agilent_dso_usb_1.TMIHWDriver object at 0x7fdc61ea3e80> - number channels 0
+  534 tmi_hwdrv_agilent_dso_usb_1.py: 103 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:       init_play_pub() INFO  : AGILENT_DSO_USB_1 does not support 'play' messaging
+  534            tmidev.py: 164 -      TMI.TMIChanCon.0:                 run() INFO  : number channels -1
+  534            tmidev.py: 170 -                   TMI:                 run() INFO  : Module: public.station.scripts.TMIDemoRecordV1.dso_v0.pydso00xx
+    8            tmidev.py: 285 -                   TMI:                main() INFO  : args: {'script': 'public/station/scripts/TMIDemoRecordV1/dso_v0/dso_v0.tmiscr'}
+    8            tmidev.py: 277 -                   TMI:    script_validated() INFO  : Script passed validation tests
+   26   resultBaseClass.py:  45 - TMI.ResultBaseClass.0:            __init__() INFO  : DONE
+   26   TMIDemoRecordV1.py:  37 - TMI.TMIDemoRecordV1.0:            __init__() INFO  : DONE
+   28            tmidev.py: 144 -                   TMI:                 run() INFO  : HWDRV: public.station.drivers.agilent_dso_usb_1.tmi_hwdrv_agilent_dso_usb_1
+  197 tmi_hwdrv_agilent_dso_usb_1.py:  32 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:            __init__() INFO  : Start
+  536 tmi_hwdrv_agilent_dso_usb_1.py:  73 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:   discover_channels() INFO  : found: True AGILENT TECHNOLOGIES,DSO7104B,MY49520121,06.00.0003
+
+  538 tmi_hwdrv_agilent_dso_usb_1.py:  91 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:   discover_channels() INFO  : Done
+  540            tmidev.py: 150 -      TMI.TMIChanCon.0:                 run() INFO  : <public.station.drivers.agilent_dso_usb_1.tmi_hwdrv_agilent_dso_usb_1.TMIHWDriver object at 0x7f68aa439ef0> - number channels 0
+  541 tmi_hwdrv_agilent_dso_usb_1.py: 103 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:       init_play_pub() INFO  : AGILENT_DSO_USB_1 does not support 'play' messaging
+  541            tmidev.py: 164 -      TMI.TMIChanCon.0:                 run() INFO  : number channels -1
+  542            tmidev.py: 170 -                   TMI:                 run() INFO  : Module: public.station.scripts.TMIDemoRecordV1.dso_v0.pydso00xx
+    8            tmidev.py: 285 -                   TMI:                main() INFO  : args: {'script': 'public/station/scripts/TMIDemoRecordV1/dso_v0/dso_v0.tmiscr'}
+    8            tmidev.py: 277 -                   TMI:    script_validated() INFO  : Script passed validation tests
+   25   resultBaseClass.py:  45 - TMI.ResultBaseClass.0:            __init__() INFO  : DONE
+   26   TMIDemoRecordV1.py:  37 - TMI.TMIDemoRecordV1.0:            __init__() INFO  : DONE
+   29            tmidev.py: 144 -                   TMI:                 run() INFO  : HWDRV: public.station.drivers.agilent_dso_usb_1.tmi_hwdrv_agilent_dso_usb_1
+  198 tmi_hwdrv_agilent_dso_usb_1.py:  32 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:            __init__() INFO  : Start
+  535 tmi_hwdrv_agilent_dso_usb_1.py:  73 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:   discover_channels() INFO  : found: True AGILENT TECHNOLOGIES,DSO7104B,MY49520121,06.00.0003
+
+  537 tmi_hwdrv_agilent_dso_usb_1.py:  91 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:   discover_channels() INFO  : Done
+  538            tmidev.py: 150 -      TMI.TMIChanCon.0:                 run() INFO  : <public.station.drivers.agilent_dso_usb_1.tmi_hwdrv_agilent_dso_usb_1.TMIHWDriver object at 0x7ff9424fdeb8> - number channels 0
+  539 tmi_hwdrv_agilent_dso_usb_1.py: 103 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:       init_play_pub() INFO  : AGILENT_DSO_USB_1 does not support 'play' messaging
+  540            tmidev.py: 164 -      TMI.TMIChanCon.0:                 run() INFO  : number channels -1
+  540            tmidev.py: 170 -                   TMI:                 run() INFO  : Module: public.station.scripts.TMIDemoRecordV1.dso_v0.pydso00xx
+  551     tmi_test_item.py:  19 -        TMI.TestItem.0:            __init__() INFO  : DONE
+  551            tmidev.py: 179 -                   TMI:                 run() INFO  : ITEM: {'id': 'PYDSO0xxSETUP', 'enable': True}
+  552         pydso00xx.py:  29 - TMI.public.station.scripts.TMIDemoRecordV1.dso_v0.pydso00xx.0:       PYDSO0xxSETUP() ERROR : Unexpected number of drivers: [{'channel': None, 'type': 'AGILENT_DSO_USB_1', 'obj': 'id'}, {'channel': None, 'type': 'AGILENT_DSO_USB_1', 'obj': 'version'}, {'channel': None, 'type': 'AGILENT_DSO_USB_1', 'obj': 'close'}, {'channel': None, 'type': 'AGILENT_DSO_USB_1', 'obj': 'visa'}]
+  552            tmidev.py: 137 -      TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: Unexpected number of drivers
+  552            tmidev.py: 179 -                   TMI:                 run() INFO  : ITEM: {'id': 'PYDSO0xxTRDN', 'enable': True}
+  553   resultBaseClass.py: 228 - TMI.TMIDemoRecordV1.0:      record_publish() INFO  : Created: result_e2ae673a-f96d-43b3-ab56-bf6a9fcb10ec.json
+    7            tmidev.py: 285 -                   TMI:                main() INFO  : args: {'script': 'public/station/scripts/TMIDemoRecordV1/dso_v0/dso_v0.tmiscr'}
+    7            tmidev.py: 277 -                   TMI:    script_validated() INFO  : Script passed validation tests
+   24   resultBaseClass.py:  45 - TMI.ResultBaseClass.0:            __init__() INFO  : DONE
+   24   TMIDemoRecordV1.py:  37 - TMI.TMIDemoRecordV1.0:            __init__() INFO  : DONE
+   26            tmidev.py: 144 -                   TMI:                 run() INFO  : HWDRV: public.station.drivers.agilent_dso_usb_1.tmi_hwdrv_agilent_dso_usb_1
+  199 tmi_hwdrv_agilent_dso_usb_1.py:  32 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:            __init__() INFO  : Start
+  529 tmi_hwdrv_agilent_dso_usb_1.py:  73 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:   discover_channels() INFO  : found: True AGILENT TECHNOLOGIES,DSO7104B,MY49520121,06.00.0003
+  531 tmi_hwdrv_agilent_dso_usb_1.py:  91 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:   discover_channels() INFO  : Done
+  532            tmidev.py: 150 -      TMI.TMIChanCon.0:                 run() INFO  : <public.station.drivers.agilent_dso_usb_1.tmi_hwdrv_agilent_dso_usb_1.TMIHWDriver object at 0x7f9017e54e10> - number channels 0
+  532 tmi_hwdrv_agilent_dso_usb_1.py: 103 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:       init_play_pub() INFO  : AGILENT_DSO_USB_1 does not support 'play' messaging
+  533            tmidev.py: 164 -      TMI.TMIChanCon.0:                 run() INFO  : number channels -1
+  533            tmidev.py: 170 -                   TMI:                 run() INFO  : Module: public.station.scripts.TMIDemoRecordV1.dso_v0.pydso00xx
+  538     tmi_test_item.py:  19 -        TMI.TestItem.0:            __init__() INFO  : DONE
+  539            tmidev.py: 179 -                   TMI:                 run() INFO  : ITEM: {'id': 'PYDSO0xxSETUP', 'enable': True}
+  540         pydso00xx.py:  29 - TMI.public.station.scripts.TMIDemoRecordV1.dso_v0.pydso00xx.0:       PYDSO0xxSETUP() ERROR : Unexpected number of drivers: [{'channel': None, 'type': 'AGILENT_DSO_USB_1', 'obj': 'id'}, {'channel': None, 'type': 'AGILENT_DSO_USB_1', 'obj': 'version'}, {'channel': None, 'type': 'AGILENT_DSO_USB_1', 'obj': 'close'}, {'channel': None, 'type': 'AGILENT_DSO_USB_1', 'obj': 'visa'}]
+  540            tmidev.py: 137 -      TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: Unexpected number of drivers
+  541            tmidev.py: 179 -                   TMI:                 run() INFO  : ITEM: {'id': 'PYDSO0xxTRDN', 'enable': True}
+  543   resultBaseClass.py: 228 - TMI.TMIDemoRecordV1.0:      record_publish() INFO  : Created: result_f64d9492-7b9a-45ab-a3ac-08838b1c9c0f.json
+    8                      tmidev.py: 285 -                            TMI:                main() INFO  : args: {'script': 'public/station/scripts/TMIDemoRecordV1/dso_v0/dso_v0.tmiscr'}
+    8                      tmidev.py: 277 -                            TMI:    script_validated() INFO  : Script passed validation tests
+   25             resultBaseClass.py:  45 -          TMI.ResultBaseClass.0:            __init__() INFO  : DONE
+   25             TMIDemoRecordV1.py:  37 -          TMI.TMIDemoRecordV1.0:            __init__() INFO  : DONE
+   27                      tmidev.py: 144 -                            TMI:                 run() INFO  : HWDRV: public.station.drivers.agilent_dso_usb_1.tmi_hwdrv_agilent_dso_usb_1
+  195 tmi_hwdrv_agilent_dso_usb_1.py:  32 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:            __init__() INFO  : Start
+  528 tmi_hwdrv_agilent_dso_usb_1.py:  73 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:   discover_channels() INFO  : found: True AGILENT TECHNOLOGIES,DSO7104B,MY49520121,06.00.0003
+  530 tmi_hwdrv_agilent_dso_usb_1.py:  91 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:   discover_channels() INFO  : Done
+  531                      tmidev.py: 150 -               TMI.TMIChanCon.0:                 run() INFO  : <public.station.drivers.agilent_dso_usb_1.tmi_hwdrv_agilent_dso_usb_1.TMIHWDriver object at 0x7fea7f14cef0> - number channels 0
+  531 tmi_hwdrv_agilent_dso_usb_1.py: 103 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:       init_play_pub() INFO  : AGILENT_DSO_USB_1 does not support 'play' messaging
+  532                      tmidev.py: 164 -               TMI.TMIChanCon.0:                 run() INFO  : number channels -1
+  532                      tmidev.py: 170 -                            TMI:                 run() INFO  : Module: public.station.scripts.TMIDemoRecordV1.dso_v0.pydso00xx
+  538               tmi_test_item.py:  19 -                 TMI.TestItem.0:            __init__() INFO  : DONE
+  539                      tmidev.py: 179 -                            TMI:                 run() INFO  : ITEM: {'id': 'PYDSO0xxSETUP', 'enable': True}
+  540                   pydso00xx.py:  29 - TMI.public.station.scripts.TMIDemoRecordV1.dso_v0.pydso00xx.0:       PYDSO0xxSETUP() ERROR : Unexpected number of drivers: [{'channel': None, 'type': 'AGILENT_DSO_USB_1', 'obj': 'id'}, {'channel': None, 'type': 'AGILENT_DSO_USB_1', 'obj': 'version'}, {'channel': None, 'type': 'AGILENT_DSO_USB_1', 'obj': 'close'}, {'channel': None, 'type': 'AGILENT_DSO_USB_1', 'obj': 'visa'}]
+  540                      tmidev.py: 137 -               TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: Unexpected number of drivers
+  540                      tmidev.py: 179 -                            TMI:                 run() INFO  : ITEM: {'id': 'PYDSO0xxTRDN', 'enable': True}
+  542             resultBaseClass.py: 228 -          TMI.TMIDemoRecordV1.0:      record_publish() INFO  : Created: result_832d887c-cb94-49bb-a56b-b6400f5ebe86.json
+    9                      tmidev.py: 285 -                            TMI:                main() INFO  : args: {'script': 'public/station/scripts/TMIDemoRecordV1/dso_v0/dso_v0.tmiscr'}
+    9                      tmidev.py: 277 -                            TMI:    script_validated() INFO  : Script passed validation tests
+   27             resultBaseClass.py:  45 -          TMI.ResultBaseClass.0:            __init__() INFO  : DONE
+   27             TMIDemoRecordV1.py:  37 -          TMI.TMIDemoRecordV1.0:            __init__() INFO  : DONE
+   29                      tmidev.py: 144 -                            TMI:                 run() INFO  : HWDRV: public.station.drivers.agilent_dso_usb_1.tmi_hwdrv_agilent_dso_usb_1
+  199 tmi_hwdrv_agilent_dso_usb_1.py:  32 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:            __init__() INFO  : Start
+  533 tmi_hwdrv_agilent_dso_usb_1.py:  73 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:   discover_channels() INFO  : found: True AGILENT TECHNOLOGIES,DSO7104B,MY49520121,06.00.0003
+  535 tmi_hwdrv_agilent_dso_usb_1.py:  91 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:   discover_channels() INFO  : Done
+  536                      tmidev.py: 150 -               TMI.TMIChanCon.0:                 run() INFO  : <public.station.drivers.agilent_dso_usb_1.tmi_hwdrv_agilent_dso_usb_1.TMIHWDriver object at 0x7fb9f0089e48> - number channels 0
+  537 tmi_hwdrv_agilent_dso_usb_1.py: 103 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:       init_play_pub() INFO  : AGILENT_DSO_USB_1 does not support 'play' messaging
+  537                      tmidev.py: 164 -               TMI.TMIChanCon.0:                 run() INFO  : number channels -1
+  537                      tmidev.py: 170 -                            TMI:                 run() INFO  : Module: public.station.scripts.TMIDemoRecordV1.dso_v0.pydso00xx
+  542               tmi_test_item.py:  19 -                 TMI.TestItem.0:            __init__() INFO  : DONE
+  544                      tmidev.py: 179 -                            TMI:                 run() INFO  : ITEM: {'id': 'PYDSO0xxSETUP', 'enable': True}
+  545                   pydso00xx.py:  29 - TMI.public.station.scripts.TMIDemoRecordV1.dso_v0.pydso00xx.0:       PYDSO0xxSETUP() ERROR : Unexpected number of drivers: [{'channel': None, 'type': 'AGILENT_DSO_USB_1', 'obj': 'id'}, {'channel': None, 'type': 'AGILENT_DSO_USB_1', 'obj': 'version'}, {'channel': None, 'type': 'AGILENT_DSO_USB_1', 'obj': 'close'}, {'channel': None, 'type': 'AGILENT_DSO_USB_1', 'obj': 'visa'}]
+  546                      tmidev.py: 137 -               TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: Unexpected number of drivers
+  546                      tmidev.py: 179 -                            TMI:                 run() INFO  : ITEM: {'id': 'PYDSO0xxTRDN', 'enable': True}
+  549             resultBaseClass.py: 228 -          TMI.TMIDemoRecordV1.0:      record_publish() INFO  : Created: result_d09bcdac-a577-41bf-ae03-0beb8d553011.json
+    7                      tmidev.py: 285 -                            TMI:                main() INFO  : args: {'script': 'public/station/scripts/TMIDemoRecordV1/dso_v0/dso_v0.tmiscr'}
+    8                      tmidev.py: 277 -                            TMI:    script_validated() INFO  : Script passed validation tests
+   26             resultBaseClass.py:  45 -          TMI.ResultBaseClass.0:            __init__() INFO  : DONE
+   26             TMIDemoRecordV1.py:  37 -          TMI.TMIDemoRecordV1.0:            __init__() INFO  : DONE
+   28                      tmidev.py: 144 -                            TMI:                 run() INFO  : HWDRV: public.station.drivers.agilent_dso_usb_1.tmi_hwdrv_agilent_dso_usb_1
+  198 tmi_hwdrv_agilent_dso_usb_1.py:  32 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:            __init__() INFO  : Start
+  534 tmi_hwdrv_agilent_dso_usb_1.py:  73 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:   discover_channels() INFO  : found: True AGILENT TECHNOLOGIES,DSO7104B,MY49520121,06.00.0003
+  536 tmi_hwdrv_agilent_dso_usb_1.py:  91 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:   discover_channels() INFO  : Done
+  537                      tmidev.py: 150 -               TMI.TMIChanCon.0:                 run() INFO  : <public.station.drivers.agilent_dso_usb_1.tmi_hwdrv_agilent_dso_usb_1.TMIHWDriver object at 0x7f2d752d9c18> - number channels 0
+  537 tmi_hwdrv_agilent_dso_usb_1.py: 103 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:       init_play_pub() INFO  : AGILENT_DSO_USB_1 does not support 'play' messaging
+  538                      tmidev.py: 164 -               TMI.TMIChanCon.0:                 run() INFO  : number channels -1
+  538                      tmidev.py: 170 -                            TMI:                 run() INFO  : Module: public.station.scripts.TMIDemoRecordV1.dso_v0.pydso00xx
+  544               tmi_test_item.py:  19 -                 TMI.TestItem.0:            __init__() INFO  : DONE
+  545                      tmidev.py: 179 -                            TMI:                 run() INFO  : ITEM: {'id': 'PYDSO0xxSETUP', 'enable': True}
+  545                   pydso00xx.py:  33 - TMI.public.station.scripts.TMIDemoRecordV1.dso_v0.pydso00xx.0:       PYDSO0xxSETUP() INFO  : [{'channel': None, 'type': 'AGILENT_DSO_USB_1', 'obj': {'id': 0, 'version': '0.0.1', 'close': False, 'visa': <'USBInstrument'('USB0::2391::5981::MY49520121::0::INSTR')>}}]
+    7                      tmidev.py: 285 -                            TMI:                main() INFO  : args: {'script': 'public/station/scripts/TMIDemoRecordV1/dso_v0/dso_v0.tmiscr'}
+    8                      tmidev.py: 277 -                            TMI:    script_validated() INFO  : Script passed validation tests
+   29             resultBaseClass.py:  45 -          TMI.ResultBaseClass.0:            __init__() INFO  : DONE
+   29             TMIDemoRecordV1.py:  37 -          TMI.TMIDemoRecordV1.0:            __init__() INFO  : DONE
+   31                      tmidev.py: 144 -                            TMI:                 run() INFO  : HWDRV: public.station.drivers.agilent_dso_usb_1.tmi_hwdrv_agilent_dso_usb_1
+  247 tmi_hwdrv_agilent_dso_usb_1.py:  32 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:            __init__() INFO  : Start
+  580 tmi_hwdrv_agilent_dso_usb_1.py:  73 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:   discover_channels() INFO  : found: True AGILENT TECHNOLOGIES,DSO7104B,MY49520121,06.00.0003
+  581 tmi_hwdrv_agilent_dso_usb_1.py:  91 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:   discover_channels() INFO  : Done
+  582                      tmidev.py: 150 -               TMI.TMIChanCon.0:                 run() INFO  : <public.station.drivers.agilent_dso_usb_1.tmi_hwdrv_agilent_dso_usb_1.TMIHWDriver object at 0x7fb50bd1dc18> - number channels 0
+  582 tmi_hwdrv_agilent_dso_usb_1.py: 103 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:       init_play_pub() INFO  : AGILENT_DSO_USB_1 does not support 'play' messaging
+  583                      tmidev.py: 164 -               TMI.TMIChanCon.0:                 run() INFO  : number channels -1
+  583                      tmidev.py: 170 -                            TMI:                 run() INFO  : Module: public.station.scripts.TMIDemoRecordV1.dso_v0.pydso00xx
+  591               tmi_test_item.py:  19 -                 TMI.TestItem.0:            __init__() INFO  : DONE
+  591                      tmidev.py: 179 -                            TMI:                 run() INFO  : ITEM: {'id': 'PYDSO0xxSETUP', 'enable': True}
+  592                   pydso00xx.py:  33 - TMI.public.station.scripts.TMIDemoRecordV1.dso_v0.pydso00xx.0:       PYDSO0xxSETUP() INFO  : [{'channel': None, 'type': 'AGILENT_DSO_USB_1', 'obj': {'id': 0, 'version': '0.0.1', 'close': False, 'visa': <'USBInstrument'('USB0::2391::5981::MY49520121::0::INSTR')>}}]
+  593                   pydso00xx.py:  35 - TMI.public.station.scripts.TMIDemoRecordV1.dso_v0.pydso00xx.0:       PYDSO0xxSETUP() INFO  : Found dso: USBInstrument at USB0::2391::5981::MY49520121::0::INSTR
+  599             resultBaseClass.py: 153 -          TMI.TMIDemoRecordV1.0:         measurement() INFO  : {'name': 'PYDSO0xxSETUP.dso', 'unit': 'None', 'min': None, 'max': None, 'value': 'AGILENT TECHNOLOGIES,DSO7104B,MY49520121,06.00.0003', 'result': 'PASS'}
+  600                      tmidev.py: 137 -               TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: dso: None <= AGILENT TECHNOLOGIES,DSO7104B,MY49520121,06.00.0003 <= None None :: PASS
+  601                      tmidev.py: 179 -                            TMI:                 run() INFO  : ITEM: {'id': 'PYDSO0xxTRDN', 'enable': True}
+  603             resultBaseClass.py: 228 -          TMI.TMIDemoRecordV1.0:      record_publish() INFO  : Created: result_94bca231-364b-4f2b-8692-483d8657e9b6.json
+    7                      tmidev.py: 285 -                            TMI:                main() INFO  : args: {'script': 'public/station/scripts/TMIDemoRecordV1/dso_v0/dso_v0.tmiscr'}
+    8                      tmidev.py: 277 -                            TMI:    script_validated() INFO  : Script passed validation tests
+   26             resultBaseClass.py:  45 -          TMI.ResultBaseClass.0:            __init__() INFO  : DONE
+   27             TMIDemoRecordV1.py:  37 -          TMI.TMIDemoRecordV1.0:            __init__() INFO  : DONE
+   29                      tmidev.py: 144 -                            TMI:                 run() INFO  : HWDRV: public.station.drivers.agilent_dso_usb_1.tmi_hwdrv_agilent_dso_usb_1
+  199 tmi_hwdrv_agilent_dso_usb_1.py:  32 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:            __init__() INFO  : Start
+  535 tmi_hwdrv_agilent_dso_usb_1.py:  73 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:   discover_channels() INFO  : found: True AGILENT TECHNOLOGIES,DSO7104B,MY49520121,06.00.0003
+  537 tmi_hwdrv_agilent_dso_usb_1.py:  91 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:   discover_channels() INFO  : Done
+  537                      tmidev.py: 150 -               TMI.TMIChanCon.0:                 run() INFO  : <public.station.drivers.agilent_dso_usb_1.tmi_hwdrv_agilent_dso_usb_1.TMIHWDriver object at 0x7f00eec7ba20> - number channels 0
+  537 tmi_hwdrv_agilent_dso_usb_1.py: 103 - TMI.TMIHWDriver.AGILENT_DSO_USB_1:       init_play_pub() INFO  : AGILENT_DSO_USB_1 does not support 'play' messaging
+  538                      tmidev.py: 164 -               TMI.TMIChanCon.0:                 run() INFO  : number channels -1
+  538                      tmidev.py: 170 -                            TMI:                 run() INFO  : Module: public.station.scripts.TMIDemoRecordV1.dso_v0.pydso00xx
+  545               tmi_test_item.py:  19 -                 TMI.TestItem.0:            __init__() INFO  : DONE
+  546                      tmidev.py: 179 -                            TMI:                 run() INFO  : ITEM: {'id': 'PYDSO0xxSETUP', 'enable': True}
+  547                   pydso00xx.py:  34 - TMI.public.station.scripts.TMIDemoRecordV1.dso_v0.pydso00xx.0:       PYDSO0xxSETUP() INFO  : Found dso: USBInstrument at USB0::2391::5981::MY49520121::0::INSTR
+  552             resultBaseClass.py: 153 -          TMI.TMIDemoRecordV1.0:         measurement() INFO  : {'name': 'PYDSO0xxSETUP.dso', 'unit': 'None', 'min': None, 'max': None, 'value': 'AGILENT TECHNOLOGIES,DSO7104B,MY49520121,06.00.0003', 'result': 'PASS'}
+  552                      tmidev.py: 137 -               TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: dso: None <= AGILENT TECHNOLOGIES,DSO7104B,MY49520121,06.00.0003 <= None None :: PASS
+  552                      tmidev.py: 179 -                            TMI:                 run() INFO  : ITEM: {'id': 'PYDSO0xxTRDN', 'enable': True}
+  554             resultBaseClass.py: 228 -          TMI.TMIDemoRecordV1.0:      record_publish() INFO  : Created: result_c7915139-6468-4af9-ad9a-d34b773d4b2b.json

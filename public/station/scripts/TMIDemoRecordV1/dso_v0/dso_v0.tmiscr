@@ -1,0 +1,25 @@
+# Example: Shows most of all the features of test portal UI
+{
+  "info": {
+    "product": "pybrd_1",
+    "bom": "B00100-001",
+    "lot": "95135",
+    "location": "canada/ontario/milton"
+  },
+  "config": {
+    "record_handler": "public.station.record.TMIDemoRecordV1",
+    "fail_fast": false,
+    "channel_hw_driver": ["public.station.drivers.agilent_dso_usb_1.tmi_hwdrv_agilent_dso_usb_1"]
+  },
+  "tests": [
+    {
+      "module": "public.station.scripts.TMIDemoRecordV1.dso_v0.pydso00xx",
+      "options": {
+      },
+      "items": [
+        {"id": "PYDSO0xxSETUP",           "enable": true },
+        {"id": "PYDSO0xxTRDN",            "enable": true }
+      ]
+    }
+  ]
+}

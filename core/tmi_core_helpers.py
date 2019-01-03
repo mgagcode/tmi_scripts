@@ -107,13 +107,20 @@ class SharedState(object):
 
             return True, self._shared[num][key]
 
-    def add_drivers(self, type, drivers):
+    def add_drivers(self, type, drivers, shared=False):
         """ Add a driver
 
         The hw driver objects are expected to have an 'id' field, the lowest
         id is assigned to channel 0, the next highest to channel 1, etc
 
+        [ {'id': i,               # id of the channel
+           "version": <VERSION>,  # version of the driver
+           "close": False},       # register a callback on closing the channel
+           "<foo>": <bar>,        # something that makes your HW work...
+        ]
+        :param type: Type of hardware (string)
         :param drivers: list of drivers to add
+        :param shared: True if driver is shared among all channels
         :return: True on success, False otherwise
         """
         if not isinstance(drivers, list):
@@ -121,10 +128,16 @@ class SharedState(object):
             return False
 
         with self.lock:
-            drivers_sorted = sorted(drivers, key=itemgetter('id'))
-            for idx, d in enumerate(drivers_sorted):
-                dd = {"channel": idx, "type": type, "obj": d}
-                self._shared["drivers"].append(dd)
+            if not shared:
+                drivers_sorted = sorted(drivers, key=itemgetter('id'))
+                for idx, d in enumerate(drivers_sorted):
+                    dd = {"channel": idx, "type": type, "obj": d}
+                    self._shared["drivers"].append(dd)
+            elif shared:
+                print(drivers)
+                for idx, d in enumerate(drivers):
+                    dd = {"channel": None, "type": type, "obj": d}
+                    self._shared["drivers"].append(dd)
 
         return True
 
@@ -136,12 +149,13 @@ class SharedState(object):
         drivers = []
         with self.lock:
             for driver in self._shared["drivers"]:
-                if driver["channel"] == channel:
+                if driver["channel"] == channel or driver["channel"] is None:
                     if type is not None:
                         if driver["type"] == type:
                             drivers.append(driver)
                     else:
                         drivers.append(driver)
+
         return drivers
 
     def get(self):

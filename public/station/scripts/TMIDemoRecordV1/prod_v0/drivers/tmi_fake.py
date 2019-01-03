@@ -38,6 +38,25 @@ class TMIHWDriver(object):
         self.shared_state = shared_state
 
     def discover_channels(self):
+        """ determine the number of channels, and popultae hw drivers into shared state
+
+        shared_state: a list,
+            self.shared_state.add_drivers(DRV_TYPE, [ {}, {}, ... ], shared=True/False)
+
+        [ {'id': i,               # id of the channel (see Note 1)
+           "version": <VERSION>,  # version of the driver
+           "close": False},       # register a callback on closing the channel
+           "<foo>": <bar>,        # something that makes your HW work...
+        ]
+
+        Note:
+        1) The hw driver objects are expected to have an 'id' field, the lowest
+        id is assigned to channel 0, the next highest to channel 1, etc
+
+        :return: >0 number of channels,
+                  0 does not indicate num channels, like a shared hardware driver
+                 <0 error
+        """
         drivers = []
         for i in range(NUM_CHANNELS):
 
@@ -59,6 +78,7 @@ class TMIHWDriver(object):
 
     def init_play_pub(self):
         """ Function to instantiate a class/thread to trigger PLAY of script
+        - this is called right after discover_channels
         """
         self.logger.info("TMIFake does not support 'play' messaging")
 

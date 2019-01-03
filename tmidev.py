@@ -146,10 +146,9 @@ class TMIChanCon(object):
             hwdrv_module_klass = getattr(hwdrv_module, "TMIHWDriver")
             hwdriver = hwdrv_module_klass(self.shared_state)
 
-            self.num_channels = hwdriver.discover_channels()
             _num_channels = hwdriver.discover_channels()
             self.logger.info("{} - number channels {}".format(hwdriver, _num_channels))
-            if _num_channels == -1:
+            if _num_channels == 0:
                 # this HW DRV does not indicate number of channels, its a shared resource
                 pass
             elif num_channels == -1:
@@ -161,7 +160,8 @@ class TMIChanCon(object):
             # install 'play' action if the driver supports it
             hwdriver.init_play_pub()
 
-        self.ctx["num_chan"] = num_channels
+        self.num_channels = num_channels
+        self.logger.info("number channels {}".format(self.num_channels))
 
         for test in self.script["tests"]:
 
@@ -173,7 +173,7 @@ class TMIChanCon(object):
             logger.debug("class: {}".format(klass))
 
             test_module_klass = getattr(test_module, klass)
-            test_klass = test_module_klass(controller=self, ch_num=self.ch, shared_state=self.shared_state)
+            test_klass = test_module_klass(controller=self, chan=self.ch, shared_state=self.shared_state)
 
             for item in test["items"]:
                 logger.info("ITEM: {}".format(item))
@@ -196,7 +196,7 @@ def setup_logging(log_file_name_prefix="log", level=logging.INFO, path="./log"):
     if not os.path.exists(path): os.makedirs(path)
 
     # Here we define our formatter
-    FORMAT = "%(relativeCreated)5d %(filename)20s:%(lineno)4s - %(name)21s:%(funcName)20s() %(levelname)-5.5s : %(message)s"
+    FORMAT = "%(relativeCreated)5d %(filename)30s:%(lineno)4s - %(name)30s:%(funcName)20s() %(levelname)-5.5s : %(message)s"
     formatter = logging.Formatter(FORMAT)
 
     allLogHandler_filename = os.path.join(path, "".join([log_file_name_prefix, ".log"]))
@@ -301,7 +301,6 @@ def main():
     shared_state = SharedState()
 
     con = TMIChanCon(0, script, shared_state, args["script"])
-
     con.run()
 
     return 0

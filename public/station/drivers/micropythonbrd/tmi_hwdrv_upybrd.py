@@ -171,6 +171,9 @@ class TMIHWDriver(object):
         return self._num_chan
 
     def init_play_pub(self):
+        """ Function to instantiate a class/thread to trigger PLAY of script
+        - this is called right after discover_channels
+        """
         self.logger.info("Creating...")
 
         # Note that channels are mapped to 'id' in ascending order, which is done
