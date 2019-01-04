@@ -24,6 +24,7 @@ class TMIHWDriver(object):
     """
     TMI_VERSION = "0.0.1"
     DRIVER_TYPE = "AGILENT_DSO_USB_1"
+    QUERY_STRING = 'USB?::2391::5981::?*::?*::INSTR'
     # list of DSOs that accept the same command set
     WHITE_LIST = ["DSO7104B"]
 
@@ -55,7 +56,7 @@ class TMIHWDriver(object):
         pub.sendMessage(TMI_PUB.TMI_FRAME_SYSTEM_NOTICE, item_dict=dd)
 
         rm = visa.ResourceManager()
-        dso_agilent_usb_list = rm.list_resources(query='USB?::2391::5981::?*::?*::INSTR')
+        dso_agilent_usb_list = rm.list_resources(query=self.QUERY_STRING)
 
         # find the first scope
         found = False
@@ -68,11 +69,12 @@ class TMIHWDriver(object):
                     found = True
                     break
 
-            if found: break
-
-        self.logger.info("found: {} {}".format(found, deets))
+            if found:
+                self.logger.info("found: {} {}".format(found, deets))
+                break
 
         if not found:
+            self.logger.error("No matching {} VISA instrument found".format(self.QUERY_STRING))
             dd = {"notice": "TMIHWDriver: none found", "from": "{}.{}".format(__class__.__name__, self.DRIVER_TYPE)}
             pub.sendMessage(TMI_PUB.TMI_FRAME_SYSTEM_NOTICE, item_dict=dd)
             return -1

@@ -4,7 +4,3 @@
 core/__pycache__/
 
 *.pyc
-
-log/
-
-*.log

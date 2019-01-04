@@ -93,7 +93,7 @@ class TMIChanCon(object):
         self.operator = operator
         self.num_channels = 0
 
-        record_handler = script["config"]["record_handler"]
+        record_handler = script["config"]["record"]
         i = importlib.import_module(record_handler)
         klass = record_handler.split(".")[-1]
         record_handler_klass = getattr(i, klass)
@@ -140,17 +140,20 @@ class TMIChanCon(object):
 
         # process HW drivers
         num_channels = -1
-        for hwdrv in self.script["config"]["channel_hw_driver"]:
+        for hwdrv in self.script["config"]["drivers"]:
             logger.info("HWDRV: {}".format(hwdrv))
+            hwdrv_sname = hwdrv.split(".")[-1]
             hwdrv_module = importlib.import_module(hwdrv)
             hwdrv_module_klass = getattr(hwdrv_module, "TMIHWDriver")
             hwdriver = hwdrv_module_klass(self.shared_state)
 
             _num_channels = hwdriver.discover_channels()
-            self.logger.info("{} - number channels {}".format(hwdriver, _num_channels))
+            self.logger.info("{} - number channels {}".format(hwdrv_sname, _num_channels))
             if _num_channels == 0:
                 # this HW DRV does not indicate number of channels, its a shared resource
                 pass
+            elif _num_channels < 0:
+                raise ValueError('Error returned by HWDRV {}'.format(hwdrv_sname))
             elif num_channels == -1:
                 num_channels = _num_channels
             elif num_channels != _num_channels:
@@ -162,6 +165,9 @@ class TMIChanCon(object):
 
         self.num_channels = num_channels
         self.logger.info("number channels {}".format(self.num_channels))
+        if self.num_channels < 1:
+            self.logger.error("Invalid number of channels, must be >0")
+            raise ValueError('Invalid number of channels')
 
         for test in self.script["tests"]:
 
@@ -264,11 +270,11 @@ def script_validated(script):
         logger.error("Script is missing 'config' section")
         return False
 
-    if not script["config"].get("record_handler", False):
+    if not script["config"].get("record", False):
         logger.error("Script is missing 'config.record_handler' section")
         return False
 
-    if not script["config"].get("channel_hw_driver", False):
+    if not script["config"].get("drivers", False):
         logger.error("Script is missing 'config.channel_hw_driver' section")
         return False
 

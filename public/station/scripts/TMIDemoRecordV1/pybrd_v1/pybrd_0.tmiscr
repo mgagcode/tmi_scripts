@@ -7,9 +7,9 @@
     "location": "canada/ontario/milton"
   },
   "config": {
-    "record_handler": "public.station.record.TMIDemoRecordV1",
+    "record": "public.station.record.TMIDemoRecordV1",
     "fail_fast": false,
-    "channel_hw_driver": ["public.station.drivers.micropythonbrd.tmi_hwdrv_upybrd"]
+    "drivers": ["public.station.drivers.micropythonbrd.tmi_hwdrv_upybrd"]
   },
   "tests": [
     {

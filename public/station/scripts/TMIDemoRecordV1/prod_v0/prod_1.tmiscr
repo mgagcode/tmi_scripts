@@ -33,9 +33,9 @@
     "location": "%%Loc"
   },
   "config": {
-    "record_handler": "public.station.record.TMIDemoRecordV1",
+    "record": "public.station.record.TMIDemoRecordV1",
     "fail_fast": false,
-    "channel_hw_driver": ["public.station.scripts.TMIDemoRecordV1.prod_v0.drivers.tmi_fake"]
+    "drivers": ["public.station.drivers.fake.tmi_fake"]
   },
   "tests": [
     {

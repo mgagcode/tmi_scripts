@@ -17,11 +17,11 @@
     # --
     # record_handler: a specific definition of the result record (fields, backend database schema, etc)
     #   and must be located in public/station/record
-    "record_handler": "public.station.record.TMIDemoRecordV1",
+    "record": "public.station.record.TMIDemoRecordV1",
     # fail_fast: if true (default), testing will stop on first failed test
     "fail_fast": false,
     # channel_hw_driver: list of code to initialize the test environment, must be specified
-    "channel_hw_driver": ["public.station.scripts.TMIDemoRecordV1.prod_v0.drivers.tmi_fake"]
+    "drivers": ["public.station.drivers.fake.tmi_fake"]
   },
   "tests": [
     {

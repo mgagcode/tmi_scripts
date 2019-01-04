@@ -7,9 +7,12 @@
     "location": "canada/ontario/milton"
   },
   "config": {
-    "record_handler": "public.station.record.TMIDemoRecordV1",
+    "record": "public.station.record.TMIDemoRecordV1",
     "fail_fast": false,
-    "channel_hw_driver": ["public.station.drivers.agilent_dso_usb_1.tmi_hwdrv_agilent_dso_usb_1"]
+    "drivers": [
+      "public.station.drivers.fake.tmi_fake",
+      "public.station.drivers.agilent_dso_usb_1.tmi_hwdrv_agilent_dso_usb_1"
+    ]
   },
   "tests": [
     {
