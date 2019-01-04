@@ -271,11 +271,16 @@ def script_validated(script):
         return False
 
     if not script["config"].get("record", False):
-        logger.error("Script is missing 'config.record_handler' section")
+        logger.error("Script is missing 'config.record' section")
         return False
 
     if not script["config"].get("drivers", False):
-        logger.error("Script is missing 'config.channel_hw_driver' section")
+        logger.error("Script is missing 'config.drivers' section")
+        return False
+
+    if script.get("subs", False):
+        logger.error("'subs' are not supported in console development")
+        logger.error("Rename 'subs' to something else, make the substitutions manually, and retry")
         return False
 
     # TODO: add more stuff, check imports....

@@ -49,7 +49,7 @@ class TestItem(object):
         """
         tb = {"title": title, "placeholder": placeholder}
         self.logger.debug(tb)
-        usr_input = input("Enter:")
+        usr_input = input("Enter({}):".format(placeholder))
         return {'success': True, 'textbox': usr_input, 'err': None}
         # a failure looks like this...
         #return {'success': False, 'textbox': None, 'err': "Timeout"}

@@ -17,8 +17,8 @@ class tst00xx(TestItem):
     DEMO_TIME_DELAY = 1.0
     DEMO_TIME_RND_ENABLE = 1
 
-    def __init__(self, controller, ch_num, shared_state):
-        super(tst00xx, self).__init__(controller, ch_num, shared_state)
+    def __init__(self, controller, chan, shared_state):
+        super(tst00xx, self).__init__(controller, chan, shared_state)
         self.logger = logging.getLogger("TMI.{}.{}".format(__name__, self.chan))
 
         # ------------------------------------------------------------------------
