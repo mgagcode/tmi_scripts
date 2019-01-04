@@ -1,4 +1,4 @@
-#TMI Station/Server Production Test System
+# TMI Station/Server Production Test System
 
 * A framework to develop automated production test fixtures
 * Single PC can control multiple test fixtures
@@ -7,7 +7,7 @@
 * Server dashboard to monitor production yield, rate, etc
 * Check out the PDF slide deck for more information
 
-#TMI Scripts
+# TMI Scripts
 * Examples of scripts/code
     * Testing is controlled by JSON 'script files'
       * Human readable, allows for non-programmers to change limits, enable/disable tests
@@ -15,14 +15,14 @@
 * Check out the public directory
     * other directories provide a framework for running code outside the framework, for development purposes
 
-#Installation
+# Installation
 * Development on Ubuntu 18.04, or Windows 10
 * Python 3.6+
 * Run this command to test if everything is working,
 
     `python3 tmidev.py --script public/station/scripts/TMIDemoRecordV1/prod_v0/prod_0.tmiscr`
     
-#Advanced Notes
+# Advanced Notes
 * Record Types
     * A record type defines the result JSON file and the backend server database
     * TMIDemoRecordV1
