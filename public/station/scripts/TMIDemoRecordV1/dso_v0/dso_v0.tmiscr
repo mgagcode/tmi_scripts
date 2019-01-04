@@ -16,12 +16,16 @@
   },
   "tests": [
     {
-      "module": "public.station.scripts.TMIDemoRecordV1.dso_v0.pydso00xx",
+      "module": "public.station.scripts.TMIDemoRecordV1.dso_v0.pydso",
       "options": {
       },
       "items": [
-        {"id": "PYDSO0xxSETUP",           "enable": true },
-        {"id": "PYDSO0xxTRDN",            "enable": true }
+        {"id": "PYDSO000SETUP",     "enable": true },
+        {"id": "PYDSO010SETCHAN",   "enable": true, "chan": 1 },
+        {"id": "PYDSO010SETCHAN",   "enable": true, "chan": 2 },
+        {"id": "PYDSO010SETCHAN",   "enable": true, "chan": 3 },
+        {"id": "PYDSO010SETCHAN",   "enable": true, "chan": 4 },
+        {"id": "PYDSO999TRDN",      "enable": true }
       ]
     }
   ]

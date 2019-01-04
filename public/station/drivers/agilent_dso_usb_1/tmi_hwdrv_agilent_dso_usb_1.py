@@ -21,6 +21,8 @@ class TMIHWDriver(object):
     - therefore, assuming 2391::5981, means Agilent DSO7000 series (?)
     - query('*IDN?') returns
         AGILENT TECHNOLOGIES,DSO7104B,MY49520121,06.00.0003
+
+    - see http://ridl.cfd.rit.edu/products/manuals/Agilent/oscilloscopes/InfiniiVision7000/InfiniiVision7000_series_prog_guide.pdf
     """
     TMI_VERSION = "0.0.1"
     DRIVER_TYPE = "AGILENT_DSO_USB_1"
@@ -78,6 +80,9 @@ class TMIHWDriver(object):
             dd = {"notice": "TMIHWDriver: none found", "from": "{}.{}".format(__class__.__name__, self.DRIVER_TYPE)}
             pub.sendMessage(TMI_PUB.TMI_FRAME_SYSTEM_NOTICE, item_dict=dd)
             return -1
+
+        # reset scope to a known state
+        instr.write('*RST')
 
         d = {
             "id": 0,
