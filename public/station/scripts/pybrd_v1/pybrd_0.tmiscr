@@ -7,7 +7,7 @@
     "location": "canada/ontario/milton"
   },
   "config": {
-    "record": "public.station.record.TMIDemoRecordV1",
+    "result": "public.station.result.ResultBaseV1",
     "fail_fast": false,
     "drivers": ["public.station.drivers.micropythonbrd.tmi_hwdrv_upybrd"]
   },

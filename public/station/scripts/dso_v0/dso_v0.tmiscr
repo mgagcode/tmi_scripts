@@ -1,4 +1,4 @@
-# Example: Shows most of all the features of test portal UI
+# Example: Connects to a DSO via VISA
 {
   "info": {
     "product": "pybrd_1",
@@ -7,7 +7,7 @@
     "location": "canada/ontario/milton"
   },
   "config": {
-    "record": "public.station.record.TMIDemoRecordV1",
+    "result": "public.station.result.ResultBaseV1",
     "fail_fast": false,
     "drivers": [
       "public.station.drivers.fake.tmi_fake",

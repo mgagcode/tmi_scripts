@@ -8,11 +8,11 @@ import logging
 from core.resultBaseClass import ResultBaseClass
 
 
-class TMIDemoRecordV1(ResultBaseClass):
-    """ TMIDemoRecord V1
+class ResultBaseKeysV1(ResultBaseClass):
+    """ ResultBaseKeysV1
 
     This result extends the base class with a "keys" section.
-    "keys" holds serial numbers from the product.  This is an example.
+    "keys" are meant to hold things like serial numbers, password keys, etc from the product.
 
     The DB record holds key0, key1, key2, .. up to key{}.format(MAX_KEYS).
     The idea is that these keys would be mapped for specific purposes, and thus

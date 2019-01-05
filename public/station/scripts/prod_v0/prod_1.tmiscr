@@ -1,9 +1,20 @@
-# Example: Shows substitution being used in more than one place.
+# Example: Shows how fields can be assigned to variables to be set
+#          in the GUI.
 {
   "subs": {
+    # Each item here is described by,
+    # "key":
+    #   "title": "<title>",
+    #   "type" : "<str|num>", "widget": "<textinput|select>",
+    #   "regex": <"regex"|null|omit>, "default": <default>
+    #
+    # Rules:
+    # 1. key must not have any spaces or special characters
+    # 2. regex can be omitted if not applicable
+    #
     "Lot": {
       "title": "Lot (format #####)",
-      "type" : "str", "widget": "textinput", "regex": "\\d{5}", "default": "95035"
+      "type" : "str", "widget": "textinput", "regex": "^\\d{5}$", "default": "95035"
     },
     "Loc": {
       "title": "Location",
@@ -11,11 +22,7 @@
     },
     "TST000Max": {
       "title": "TST000 Max Attenuation (db)",
-      "type" : "num", "widget": "select", "choices": [9, 10]
-    },
-    "TST100Max": {
-      "title": "TST100 Max Attenuation (db)",
-      "type" : "num", "widget": "select", "choices": [11.1, 12.2, 13.3]
+      "type" : "num", "widget": "select", "choices": [1, 9, 10]
     }
   },
   "info": {
@@ -26,12 +33,14 @@
     "location": "%%Loc"
   },
   "config": {
-    "record": "public.station.record.TMIDemoRecordV1",
+    "result": "public.station.result.ResultBaseV1",
     "fail_fast": false,
     "drivers": ["public.station.drivers.fake.tmi_fake"]
   },
   "tests": [
     {
+      # module is [path, file], if path is null, then path is current dir
+      # - this is to support a repo of common code
       "module": "public.station.scripts.TMIDemoRecordV1.prod_v0.tst00xx",
       "options": {
         "fail_fast": false
@@ -43,21 +52,6 @@
                                                   {"fid": "TST000-1", "msg": "Component banana R1"}] },
         {"id": "TST001_Skip",           "enable": false },
         {"id": "TST0xxTRDN",            "enable": true }
-      ]
-    },
-    {
-      "module": "public.station.scripts.TMIDemoRecordV1.prod_v0.tst01xx",
-      "options": {
-        "fail_fast": false
-      },
-      "items": [
-        {"id": "TST1xxSETUP", "enable": true },
-        {"id": "TST100_Meas", "enable": true,  "args": {"min": 0, "max": "%%TST100Max"},
-                              "fail": [ {"fid": "TST100-0", "msg": "Component R1"} ] },
-        {"id": "TST100_Meas", "enable": true,  "args": {"min": 0, "max": "%%TST100Max"},
-                              "fail": [ {"fid": "TST100-0", "msg": "Component R1"} ] },
-        {"id": "TST001_Skip", "enable": false },
-        {"id": "TST1xxTRDN",  "enable": true }
       ]
     }
   ]

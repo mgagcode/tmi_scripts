@@ -270,8 +270,8 @@ def script_validated(script):
         logger.error("Script is missing 'config' section")
         return False
 
-    if not script["config"].get("record", False):
-        logger.error("Script is missing 'config.record' section")
+    if not script["config"].get("result", False):
+        logger.error("Script is missing 'config.result' section")
         return False
 
     if not script["config"].get("drivers", False):
