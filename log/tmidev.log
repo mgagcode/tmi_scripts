@@ -915,3 +915,71 @@
  1634                      tmidev.py: 137 -               TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: VPP4: None <= 0.022 <= None Volts :: PASS
  1735                      tmidev.py: 185 -                            TMI:                 run() INFO  : ITEM: {'id': 'PYDSO999TRDN', 'enable': True}
  1739             resultBaseClass.py: 228 -          TMI.TMIDemoRecordV1.0:      record_publish() INFO  : Created: result_21704b8c-d4d6-4b2f-b34c-1f2f2f25b6c8.json
+    9                      tmidev.py: 296 -                            TMI:                main() INFO  : args: {'script': 'public/station/scripts/prod_v0/prod_0.tmiscr'}
+    9                      tmidev.py: 274 -                            TMI:    script_validated() ERROR : Script is missing 'config.result' section
+    9                      tmidev.py: 309 -                            TMI:                main() ERROR : Script failed to validate
+    8                      tmidev.py: 296 -                            TMI:                main() INFO  : args: {'script': 'public/station/scripts/prod_v0/prod_0.tmiscr'}
+    8                      tmidev.py: 288 -                            TMI:    script_validated() INFO  : Script passed validation tests
+    8                      tmidev.py: 296 -                            TMI:                main() INFO  : args: {'script': 'public/station/scripts/prod_v0/prod_0.tmiscr'}
+    8                      tmidev.py: 288 -                            TMI:    script_validated() INFO  : Script passed validation tests
+   39             resultBaseClass.py:  45 -          TMI.ResultBaseClass.0:            __init__() INFO  : DONE
+   40            ResultBaseKeysV1.py:  37 -         TMI.ResultBaseKeysV1.0:            __init__() INFO  : DONE
+   41                      tmidev.py: 144 -                            TMI:                 run() INFO  : HWDRV: public.station.drivers.fake.tmi_fake
+   67                    tmi_fake.py:  37 -                TMI.TMIHWDriver:            __init__() INFO  : Start
+   67                    tmi_fake.py:  73 -                TMI.TMIHWDriver:   discover_channels() INFO  : 1 channels found
+   67                      tmidev.py: 151 -               TMI.TMIChanCon.0:                 run() INFO  : tmi_fake - number channels 1
+   67                    tmi_fake.py:  83 -                TMI.TMIHWDriver:       init_play_pub() INFO  : TMIFake does not support 'play' messaging
+   67                      tmidev.py: 167 -               TMI.TMIChanCon.0:                 run() INFO  : number channels 1
+   67                      tmidev.py: 176 -                            TMI:                 run() INFO  : Module: public.station.scripts.TMIDemoRecordV1.prod_v0.tst00xx
+    8                      tmidev.py: 296 -                            TMI:                main() INFO  : args: {'script': 'public/station/scripts/prod_v0/prod_0.tmiscr'}
+    8                      tmidev.py: 288 -                            TMI:    script_validated() INFO  : Script passed validation tests
+   26             resultBaseClass.py:  45 -          TMI.ResultBaseClass.0:            __init__() INFO  : DONE
+   26            ResultBaseKeysV1.py:  37 -         TMI.ResultBaseKeysV1.0:            __init__() INFO  : DONE
+   28                      tmidev.py: 144 -                            TMI:                 run() INFO  : HWDRV: public.station.drivers.fake.tmi_fake
+   54                    tmi_fake.py:  37 -                TMI.TMIHWDriver:            __init__() INFO  : Start
+   54                    tmi_fake.py:  73 -                TMI.TMIHWDriver:   discover_channels() INFO  : 1 channels found
+   54                      tmidev.py: 151 -               TMI.TMIChanCon.0:                 run() INFO  : tmi_fake - number channels 1
+   54                    tmi_fake.py:  83 -                TMI.TMIHWDriver:       init_play_pub() INFO  : TMIFake does not support 'play' messaging
+   55                      tmidev.py: 167 -               TMI.TMIChanCon.0:                 run() INFO  : number channels 1
+   55                      tmidev.py: 176 -                            TMI:                 run() INFO  : Module: public.station.scripts.prod_v0.tst00xx
+   57               tmi_test_item.py:  19 -                 TMI.TestItem.0:            __init__() INFO  : DONE
+   58                      tmidev.py: 185 -                            TMI:                 run() INFO  : ITEM: {'id': 'TST0xxSETUP', 'enable': True}
+  725                      tmidev.py: 185 -                            TMI:                 run() INFO  : ITEM: {'id': 'TST000_Meas', 'enable': True, 'args': {'min': 0, 'max': 10}, 'fail': [{'fid': 'TST000-0', 'msg': 'Component apple R1'}, {'fid': 'TST000-1', 'msg': 'Component banana R1'}]}
+  782             resultBaseClass.py: 153 -         TMI.ResultBaseKeysV1.0:         measurement() INFO  : {'name': 'TST000_Meas.apples', 'unit': 'dB', 'min': '0.0', 'max': '10.0', 'value': '0.95041042026815', 'result': 'PASS'}
+  783                      tmidev.py: 137 -               TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: apples: 0.0 <= 0.95041042026815 <= 10.0 dB :: PASS
+  784             resultBaseClass.py: 153 -         TMI.ResultBaseKeysV1.0:         measurement() INFO  : {'name': 'TST000_Meas.bananas', 'unit': 'dB', 'min': '0.0', 'max': '10.0', 'value': '7.0', 'result': 'PASS'}
+  784                      tmidev.py: 137 -               TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: bananas: 0.0 <= 7.0 <= 10.0 dB :: PASS
+  785                      tmidev.py: 185 -                            TMI:                 run() INFO  : ITEM: {'id': 'TST001_Skip', 'enable': False}
+  785                      tmidev.py: 185 -                            TMI:                 run() INFO  : ITEM: {'id': 'TST002_Buttons', 'enable': True, 'timeout': 10}
+  785                      tmidev.py: 137 -               TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: Please press a button!
+ 2861                      tmidev.py: 137 -               TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: one was pressed!
+ 2861             resultBaseClass.py: 153 -         TMI.ResultBaseKeysV1.0:         measurement() INFO  : {'name': 'TST002_Buttons.button', 'unit': 'Integer', 'min': None, 'max': None, 'value': 0, 'result': 'PASS'}
+ 2862                      tmidev.py: 137 -               TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: button: None <= 0 <= None Integer :: PASS
+ 2862                      tmidev.py: 185 -                            TMI:                 run() INFO  : ITEM: {'id': 'TST003_KeyAdd', 'enable': True}
+ 3787                      tmidev.py: 137 -               TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: added key value: 25
+ 3788                      tmidev.py: 185 -                            TMI:                 run() INFO  : ITEM: {'id': 'TST004_KeyGet', 'enable': True}
+ 4131                      tmidev.py: 137 -               TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: got key[0]: value:25
+ 4131                      tmidev.py: 185 -                            TMI:                 run() INFO  : ITEM: {'id': 'TST005_RsrcLock', 'enable': True, 'args': {'holdTime': 1}, 'timeout': 60}
+ 4132                      tmidev.py: 137 -               TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: waiting for my_resource...
+ 4132                      tmidev.py: 137 -               TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: my_resource is locked for 1 seconds
+ 5134                      tmidev.py: 137 -               TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: my_resource is free
+ 5135                      tmidev.py: 185 -                            TMI:                 run() INFO  : ITEM: {'id': 'TST006_HWDriver', 'enable': True}
+ 5711                      tmidev.py: 137 -               TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: found driver: TMIFake 0 0.0.1
+ 5712                      tmidev.py: 185 -                            TMI:                 run() INFO  : ITEM: {'id': 'TST008_TextInput', 'enable': True, 'timeout': 10}
+ 5713                      tmidev.py: 137 -               TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: Please Enter Text!
+ 6902                      tmidev.py: 137 -               TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: Text: 123
+ 6903             resultBaseClass.py: 153 -         TMI.ResultBaseKeysV1.0:         measurement() INFO  : {'name': 'TST008_TextInput.input', 'unit': 'None', 'min': None, 'max': None, 'value': '123', 'result': 'PASS'}
+ 6903                      tmidev.py: 185 -                            TMI:                 run() INFO  : ITEM: {'id': 'TST007_LogPctProgress', 'enable': True, 'timeout': 15}
+ 6904                      tmidev.py: 137 -               TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: Completed   0% 
+ 7278                      tmidev.py: 137 -               TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: Completed  10% ####
+ 7393                      tmidev.py: 137 -               TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: Completed  20% ########
+ 7914                      tmidev.py: 137 -               TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: Completed  30% ############
+ 8784                      tmidev.py: 137 -               TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: Completed  40% ################
+ 8974                      tmidev.py: 137 -               TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: Completed  50% ####################
+ 9736                      tmidev.py: 137 -               TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: Completed  60% ########################
+10300                      tmidev.py: 137 -               TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: Completed  70% ############################
+10561                      tmidev.py: 137 -               TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: Completed  80% ################################
+11030                      tmidev.py: 137 -               TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: Completed  90% ####################################
+11407                      tmidev.py: 137 -               TMI.TMIChanCon.0:          log_bullet() INFO  : BULLET: Completed 100% ########################################
+12112                      tmidev.py: 185 -                            TMI:                 run() INFO  : ITEM: {'id': 'TST0xxTRDN', 'enable': True}
+12675             resultBaseClass.py: 228 -         TMI.ResultBaseKeysV1.0:      record_publish() INFO  : Created: result_7faa948f-a9c9-40ac-bdce-33b07616bc8f.json

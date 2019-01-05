@@ -93,7 +93,7 @@ class TMIChanCon(object):
         self.operator = operator
         self.num_channels = 0
 
-        record_handler = script["config"]["record"]
+        record_handler = script["config"]["result"]
         i = importlib.import_module(record_handler)
         klass = record_handler.split(".")[-1]
         record_handler_klass = getattr(i, klass)

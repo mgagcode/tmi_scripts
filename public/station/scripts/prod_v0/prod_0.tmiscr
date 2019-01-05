@@ -17,7 +17,7 @@
     # --
     # record_handler: a specific definition of the result record (fields, backend database schema, etc)
     #   and must be located in public/station/record
-    "record": "public.station.result.ResultBaseKeysV1",
+    "result": "public.station.result.ResultBaseKeysV1",
     # fail_fast: if true (default), testing will stop on first failed test
     "fail_fast": false,
     # channel_hw_driver: list of code to initialize the test environment, must be specified
@@ -26,7 +26,7 @@
   "tests": [
     {
       # module is path to python code supporting this test
-      "module": "public.station.scripts.TMIDemoRecordV1.prod_v0.tst00xx",
+      "module": "public.station.scripts.prod_v0.tst00xx",
       "options": {
         # fail_fast: if true (default), testing will stop on first failed test, overrides config section
         "fail_fast": false

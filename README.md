@@ -20,12 +20,12 @@
 * Python 3.6+
 * Run this command to test if everything is working,
 
-    `python3 tmidev.py --script public/station/scripts/TMIDemoRecordV1/prod_v0/prod_0.tmiscr`
+    `python3 tmidev.py --script public/station/scripts/prod_v0/prod_0.tmiscr`
     
 # Advanced Notes
 * Record Types
     * A record type defines the result JSON file and the backend server database
-    * TMIDemoRecordV1
+    * ResultBaseKeysV1
         * An example of how to extend the base record type
         * This extension is used for the Demo scripts
         * It extends the base class be adding 4 "keys" to the JSON result which end up as entries in the backend DB
