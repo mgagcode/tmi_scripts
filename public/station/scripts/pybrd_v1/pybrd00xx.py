@@ -18,7 +18,7 @@ class pybrd00xx(TestItem):
     DEMO_TIME_RND_ENABLE = 1
 
     def __init__(self, controller, chan, shared_state):
-        super(pybrd00xx, self).__init__(controller, chan, shared_state)
+        super().__init__(controller, chan, shared_state)
         self.logger = logging.getLogger("TMI.{}.{}".format(__name__, self.chan))
 
         self.pyb = None

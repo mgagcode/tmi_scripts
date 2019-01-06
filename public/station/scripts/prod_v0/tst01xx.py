@@ -11,13 +11,14 @@ import time
 from random import randint, random
 
 
+# file name and class name must match
 class tst01xx(TestItem):
 
     DEMO_TIME_DELAY = 1.0
     DEMO_TIME_RND_ENABLE = 1
 
     def __init__(self, controller, chan, shared_state):
-        super(tst01xx, self).__init__(controller, chan, shared_state)
+        super().__init__(controller, chan, shared_state)
         self.logger = logging.getLogger("TMI.{}.{}".format(__name__, self.chan))
 
     def TST1xxSETUP(self):

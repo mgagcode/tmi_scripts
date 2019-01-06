@@ -1,5 +1,6 @@
 # TMI Station/Server Production Test System
 
+* Now in **BETA**
 * A framework to develop automated production test fixtures
 * Single PC can control multiple test fixtures
 * Write Python scripts to control measurement equipment and other fixtures
@@ -67,16 +68,16 @@
         mkdir ~/postgres
         cd ~/postgres
         mkdir datadir
-        docker run --name tmi-postgres -p 5432:5432 -v $(pwd)/datadir:/var/lib/postgresql/data -e POSTGRES_PASSWORD=qwerty -d postgres:11
-    
-    * now create the required databases - you only need to do this *ONCE*
-    ```
-    docker exec -it tmi-postgres bash
-    psql -U postgres
-    CREATE DATABASE ResultBaseV1;
-    CREATE DATABASE ResultBaseKeysV1;
-    \q
-    exit
+        docker run -p 5432:5432 -v $(pwd)/datadir:/var/lib/postgresql/data -e POSTGRES_PASSWORD=qwerty -d postgres:11
+        ```
+        * now create the required databases - you only need to do this *ONCE*
+            ```
+            docker exec -it tmi-postgres bash
+            psql -U postgres
+            CREATE DATABASE ResultBaseV1;
+            CREATE DATABASE ResultBaseKeysV1;
+            \q
+            exit
     
   * Pull the tmiserver image from Docker
   
