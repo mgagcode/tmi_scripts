@@ -9,7 +9,12 @@
 * postgresql backend
 * deployed as Docker containers for easy deployment
 
-# Instillation
+# Screenshots
+![TMIStation_1](app/test_view_4.png)
+
+![TMIStation_1](app/tmiserver_1.png)
+
+# Installation
 * There are 3 components to the system
   * TMIStation
     * This is the interface that production operators would use
@@ -25,14 +30,14 @@
   * ONE station is easier to DEMO because localhost is used for IP addresses
 * Operating System
   * The system was developed on both Windows 10 and Ubuntu 18.04
-  * Most testing occurs on Ubuntu given its the expected OS because of cost (its free)
+  * Most testing occurs on Ubuntu given its the expected OS used in the factory because of cost (its free)
   * All these instructions are for Ubuntu
-* Outside Software (its all free)
+* Outside Software Requirements (its all free)
   * Google Chrome browser (other browsers are not tested)
   * install Docker (https://docs.docker.com/install/linux/docker-ce/ubuntu/)
-  * Python IDE (many to choose from)
+  * Python IDE (many to choose from) (NOT needed for the DEMO)
     * https://www.jetbrains.com/pycharm/download/#section=linux
-  * git (not needed for pure DEMO mode)
+  * git (NOT needed for pure DEMO mode)
   
     `sudo apt-get install git`
 * TMIStation (pure DEMO mode)

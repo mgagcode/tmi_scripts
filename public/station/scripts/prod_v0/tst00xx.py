@@ -92,7 +92,7 @@ class tst00xx(TestItem):
 
         # Apples measurement...
         _result, _bullet = ctx.record.measurement("apples",
-                                                  random(),
+                                                  randint(0, 10),
                                                   ResultAPI.UNIT_DB,
                                                   ctx.item.args.min,
                                                   ctx.item.args.max)
