@@ -93,7 +93,7 @@ class TMIChanCon(object):
         self.operator = operator
         self.num_channels = 0
 
-        record_handler = script["config"]["record_handler"]
+        record_handler = script["config"]["result"]
         i = importlib.import_module(record_handler)
         klass = record_handler.split(".")[-1]
         record_handler_klass = getattr(i, klass)
@@ -139,18 +139,35 @@ class TMIChanCon(object):
     def run(self):
 
         # process HW drivers
-        for hwdrv in self.script["config"]["channel_hw_driver"]:
+        num_channels = -1
+        for hwdrv in self.script["config"]["drivers"]:
             logger.info("HWDRV: {}".format(hwdrv))
+            hwdrv_sname = hwdrv.split(".")[-1]
             hwdrv_module = importlib.import_module(hwdrv)
-            klass = hwdrv.split(".")[-1]
             hwdrv_module_klass = getattr(hwdrv_module, "TMIHWDriver")
             hwdriver = hwdrv_module_klass(self.shared_state)
 
-            self.num_channels = hwdriver.discover_channels()
-            self.logger.info("{} - number channels {}".format(hwdrv, self.num_channels))
+            _num_channels = hwdriver.discover_channels()
+            self.logger.info("{} - number channels {}".format(hwdrv_sname, _num_channels))
+            if _num_channels == 0:
+                # this HW DRV does not indicate number of channels, its a shared resource
+                pass
+            elif _num_channels < 0:
+                raise ValueError('Error returned by HWDRV {}'.format(hwdrv_sname))
+            elif num_channels == -1:
+                num_channels = _num_channels
+            elif num_channels != _num_channels:
+                self.logger.error("{} - number channels {} does not match previous HWDRV".format(hwdriver, _num_channels))
+                raise ValueError('Mismatch number of channels between HW Drivers')
 
             # install 'play' action if the driver supports it
             hwdriver.init_play_pub()
+
+        self.num_channels = num_channels
+        self.logger.info("number channels {}".format(self.num_channels))
+        if self.num_channels < 1:
+            self.logger.error("Invalid number of channels, must be >0")
+            raise ValueError('Invalid number of channels')
 
         for test in self.script["tests"]:
 
@@ -162,7 +179,7 @@ class TMIChanCon(object):
             logger.debug("class: {}".format(klass))
 
             test_module_klass = getattr(test_module, klass)
-            test_klass = test_module_klass(controller=self, ch_num=self.ch, shared_state=self.shared_state)
+            test_klass = test_module_klass(controller=self, chan=self.ch, shared_state=self.shared_state)
 
             for item in test["items"]:
                 logger.info("ITEM: {}".format(item))
@@ -185,7 +202,7 @@ def setup_logging(log_file_name_prefix="log", level=logging.INFO, path="./log"):
     if not os.path.exists(path): os.makedirs(path)
 
     # Here we define our formatter
-    FORMAT = "%(relativeCreated)5d %(filename)20s:%(lineno)4s - %(name)21s:%(funcName)20s() %(levelname)-5.5s : %(message)s"
+    FORMAT = "%(relativeCreated)5d %(filename)30s:%(lineno)4s - %(name)30s:%(funcName)20s() %(levelname)-5.5s : %(message)s"
     formatter = logging.Formatter(FORMAT)
 
     allLogHandler_filename = os.path.join(path, "".join([log_file_name_prefix, ".log"]))
@@ -253,12 +270,17 @@ def script_validated(script):
         logger.error("Script is missing 'config' section")
         return False
 
-    if not script["config"].get("record_handler", False):
-        logger.error("Script is missing 'config.record_handler' section")
+    if not script["config"].get("result", False):
+        logger.error("Script is missing 'config.result' section")
         return False
 
-    if not script["config"].get("channel_hw_driver", False):
-        logger.error("Script is missing 'config.channel_hw_driver' section")
+    if not script["config"].get("drivers", False):
+        logger.error("Script is missing 'config.drivers' section")
+        return False
+
+    if script.get("subs", False):
+        logger.error("'subs' are not supported in console development")
+        logger.error("Rename 'subs' to something else, make the substitutions manually, and retry")
         return False
 
     # TODO: add more stuff, check imports....
@@ -290,7 +312,6 @@ def main():
     shared_state = SharedState()
 
     con = TMIChanCon(0, script, shared_state, args["script"])
-
     con.run()
 
     return 0

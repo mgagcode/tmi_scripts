@@ -1,0 +1,32 @@
+# Example: Connects to a DSO via VISA
+{
+  "info": {
+    "product": "pybrd_1",
+    "bom": "B00100-001",
+    "lot": "95135",
+    "location": "canada/ontario/milton"
+  },
+  "config": {
+    "result": "public.station.result.ResultBaseV1",
+    "fail_fast": false,
+    "drivers": [
+      "public.station.drivers.fake.tmi_fake",
+      "public.station.drivers.agilent_dso_usb_1.tmi_hwdrv_agilent_dso_usb_1"
+    ]
+  },
+  "tests": [
+    {
+      "module": "public.station.scripts.TMIDemoRecordV1.dso_v0.pydso",
+      "options": {
+      },
+      "items": [
+        {"id": "PYDSO000SETUP",     "enable": true },
+        {"id": "PYDSO010SETCHAN",   "enable": true, "chan": 1 },
+        {"id": "PYDSO010SETCHAN",   "enable": true, "chan": 2 },
+        {"id": "PYDSO010SETCHAN",   "enable": true, "chan": 3 },
+        {"id": "PYDSO010SETCHAN",   "enable": true, "chan": 4 },
+        {"id": "PYDSO999TRDN",      "enable": true }
+      ]
+    }
+  ]
+}

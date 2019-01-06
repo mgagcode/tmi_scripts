@@ -8,8 +8,8 @@ import logging
 from core.resultBaseClass import ResultBaseClass
 
 
-class TMIBasicV1(ResultBaseClass):
-    """ TMIBasicV1
+class ResultBaseV1(ResultBaseClass):
+    """ ResultBaseV1
     - basic record type, no extensions
     """
     def __init__(self, chan_num, operator="UNKNOWN", script_filename="UNKNOWN"):

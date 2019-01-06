@@ -17,8 +17,8 @@ class tst00xx(TestItem):
     DEMO_TIME_DELAY = 1.0
     DEMO_TIME_RND_ENABLE = 1
 
-    def __init__(self, controller, ch_num, shared_state):
-        super(tst00xx, self).__init__(controller, ch_num, shared_state)
+    def __init__(self, controller, chan, shared_state):
+        super(tst00xx, self).__init__(controller, chan, shared_state)
         self.logger = logging.getLogger("TMI.{}.{}".format(__name__, self.chan))
 
         # ------------------------------------------------------------------------
@@ -92,7 +92,7 @@ class tst00xx(TestItem):
 
         # Apples measurement...
         _result, _bullet = ctx.record.measurement("apples",
-                                                  random(),
+                                                  randint(0, 10),
                                                   ResultAPI.UNIT_DB,
                                                   ctx.item.args.min,
                                                   ctx.item.args.max)
@@ -257,10 +257,11 @@ class tst00xx(TestItem):
             self.log_bullet("Text: {}".format(user_text["textbox"]))
 
             # qualify the text here, and either if the text is invalid, re-ask
-            # make sure you don't timeout...
-            ctx.record.measurement("input", user_text["textbox"], ResultAPI.UNIT_NONE)
+            # Note: ResultAPI.UNIT_STRING is used to format the measurement correctly in JSON
+            ctx.record.measurement("input", user_text["textbox"], ResultAPI.UNIT_STRING)
             _result = ResultAPI.RECORD_RESULT_PASS
         else:
+            # operator probably times out...
             _result = ResultAPI.RECORD_RESULT_FAIL
             self.log_bullet(user_text.get("err", "UNKNOWN ERROR"))
 

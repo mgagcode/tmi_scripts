@@ -22,7 +22,7 @@
     },
     "TST000Max": {
       "title": "TST000 Max Attenuation (db)",
-      "type" : "num", "widget": "select", "choices": [1, 9, 10]
+      "type" : "num", "widget": "select", "choices": [9, 10, 11]
     }
   },
   "info": {
@@ -33,15 +33,15 @@
     "location": "%%Loc"
   },
   "config": {
-    "record_handler": "public.station.record.TMIDemoRecordV1",
+    "result": "public.station.result.ResultBaseV1",
     "fail_fast": false,
-    "channel_hw_driver": ["public.station.scripts.TMIDemoRecordV1.prod_v0.drivers.tmi_fake"]
+    "drivers": ["public.station.drivers.fake.tmi_fake"]
   },
   "tests": [
     {
       # module is [path, file], if path is null, then path is current dir
       # - this is to support a repo of common code
-      "module": "public.station.scripts.TMIDemoRecordV1.prod_v0.tst00xx",
+      "module": "public.station.scripts.prod_v0.tst00xx",
       "options": {
         "fail_fast": false
       },
