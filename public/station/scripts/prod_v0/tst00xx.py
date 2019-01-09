@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Martin Guthrie, copyright, all rights reserved, 2018
+Martin Guthrie, copyright, all rights reserved, 2018-2019
 
 """
 import logging
@@ -22,10 +22,15 @@ class tst00xx(TestItem):
         self.logger = logging.getLogger("TMI.{}.{}".format(__name__, self.chan))
 
         # ------------------------------------------------------------------------
-        # API Reference
+        # API Reference:
+        #
+        # from prod_0.tmiscr:
+        #         {"id": "TST000_Meas",  "enable": true, "args": {"min": 0, "max": 10},
+        #                                "fail": [ {"fid": "TST000-0", "msg": "Component apple R1"},
+        #                                          {"fid": "TST000-1", "msg": "Component banana R1"}] },
         #
         # ctx = self.item_start()  # always first line of test
-        #  - use ctx (context) to extract information to drive the test program
+        #  - use ctx (context) to extract information to drive the test program (see above)
         #  - ctx (context) is a namespace of content from the test script
         #  - ctx.item = {"id": "TST000", "enable": True,  "args": {"min": 0, "max": 10}}
         #  - ctx.item.args = {"min": 0, "max": 10}
@@ -56,8 +61,8 @@ class tst00xx(TestItem):
         # 1) Test Item Timeout
         #    - every test time is guarded by a timeout which has a default of ResultAPI.TESTITEM_TIMEOUT Sec.
         #    - this value can be overridden by adding '"timeout": <value>' to the test item in the script
-        #    - if the timeout expires, it is considered an internal crash, even if it is
-        #      on a user input item.  The test script will fail, and a crash report is generated.
+        #    - if the timeout expires, it is considered a Fail, even if it is
+        #      on a user input item.  The test script will fail.
         #
 
     def TST0xxSETUP(self):
@@ -79,7 +84,6 @@ class tst00xx(TestItem):
             {"id": "TST000_Meas",    "enable": true, "args": {"min": 0, "max": 10},
                                      "fail": [ {"fid": "TST000-0", "msg": "Component apple R1"},
                                                {"fid": "TST000-1", "msg": "Component banana R1"}] },
-        :return:
         """
         ctx = self.item_start()   # always first line of test
 
@@ -123,6 +127,10 @@ class tst00xx(TestItem):
         self.item_end(item_result_state=measurement_results)  # always last line of test
 
     def TST001_Skip(self):
+        """ Example of an item that is skipped
+
+            {"id": "TST001_Skip",           "enable": false },
+        """
         ctx = self.item_start()   # always first line of test
         # this is a skipped test for testing, in some scripts
 
@@ -135,6 +143,8 @@ class tst00xx(TestItem):
     def TST002_Buttons(self):
         """ Select one of three buttons
         - capture the button index in the test record
+
+            {"id": "TST002_Buttons",        "enable": true, "timeout": 10 },
         """
         ctx = self.item_start()   # always first line of test
 
@@ -159,7 +169,8 @@ class tst00xx(TestItem):
           key# in the record, you can force the slot though.  It depends how you will
           manage the keys in the final database; either by convention force every slot
           to represent a specific thing (preferred), or search all keys for the 'k' you want.
-        :return:
+
+            {"id": "TST003_KeyAdd",         "enable": true },
         """
         ctx = self.item_start()   # always first line of test
 
@@ -174,6 +185,8 @@ class tst00xx(TestItem):
     def TST004_KeyGet(self):
         """ How use of keys works
         - retrieve a previous key, otherwise fail test
+
+            {"id": "TST004_KeyGet",         "enable": true },
         """
         ctx = self.item_start()  # always first line of test
 
@@ -191,11 +204,14 @@ class tst00xx(TestItem):
     def TST005_RsrcLock(self):
         """ Demonstrate locking of a resource in shared_state
         - lock a resource for some time, and then release
+        - note the hold time comes from the test script
         - this is useful for a piece of test equipment that is shared across channels
+
+            {"id": "TST005_RsrcLock",       "enable": true, "args": {"holdTime": 1}, "timeout": 60 },
         """
         ctx = self.item_start()  # always first line of test
 
-        hold_time = ctx.item.args.get("holdTime", 5)
+        hold_time = ctx.item.args.get("holdTime", 5)  # a safe way to get parms, a default backup
 
         self.log_bullet("waiting for my_resource...")
         self.shared_lock("my_resource").acquire()
@@ -247,6 +263,8 @@ class tst00xx(TestItem):
 
     def TST008_TextInput(self):
         """ Text Input Box
+
+            {"id": "TST008_TextInput",      "enable": true, "timeout": 10 },
         """
         ctx = self.item_start()   # always first line of test
 

@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Martin Guthrie, copyright, all rights reserved, 2018
+Martin Guthrie, copyright, all rights reserved, 2018-2019
 
 """
 import logging
@@ -121,6 +121,25 @@ class TMIHWDriver(object):
         self._num_chan = 0
 
     def discover_channels(self):
+        """ determine the number of channels, and populate hw drivers into shared state
+
+        shared_state: a list,
+            self.shared_state.add_drivers(DRV_TYPE, [ {}, {}, ... ], shared=True/False)
+
+        [ {'id': i,               # id of the channel (see Note 1)
+           "version": <VERSION>,  # version of the driver
+           "close": False},       # register a callback on closing the channel
+           "<foo>": <bar>,        # something that makes your HW work...
+        ]
+
+        Note:
+        1) The hw driver objects are expected to have an 'id' field, the lowest
+        id is assigned to channel 0, the next highest to channel 1, etc
+
+        :return: >0 number of channels,
+                  0 does not indicate num channels, like a shared hardware driver
+                 <0 error
+        """
         ports = serial_ports()
 
         dd = {"notice": "TMIHWDriver: Scanning for MicroPyBoards on {}".format(ports),

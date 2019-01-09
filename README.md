@@ -75,6 +75,10 @@
             CREATE DATABASE ResultBaseKeysV1;
             \q
             exit
+            
+    * The postgres container needs to be restarted every time you reboot your PC.  Or consider this,
+    
+        https://serverfault.com/questions/633067/how-do-i-auto-start-docker-containers-at-system-boot
     
   * Run "tmiserver" container
     
@@ -136,14 +140,13 @@ retain these files between runs (meaning you lose all your data), and you cannot
   * Fun excersize
     * change the number of channels from 1 to 4, to show parallel channels running at the same time
     * The number of channels for the `prod_0.tmiscr` is determined by the "fake" HWDRV
-    * Access ./public/stations/drivers/fake/tmi_fake.py and change **NUM_CHANNELS** at the top of the file
+    * Access `./public/stations/drivers/fake/tmi_fake.py` and change **NUM_CHANNELS** at the top of the file
 * Check out the public directory
-    * ./public/station/drivers
+    * `./public/station/drivers`
       * examples of drivers, which configure the system
       * a script lists which drivers to load
-      * see the Agilent scope driver, public/station/drivers/agilent_dso_usb_1/tmi_hwdrv_agilent_dso_usb_1.py
+      * see the Agilent scope driver, `./public/station/drivers/agilent_dso_usb_1/tmi_hwdrv_agilent_dso_usb_1.py`
       
-    
 # Development Installation
 * A simple console environment is available for developing scripts outside of the web GUI interface
 * Development on Ubuntu 18.04, or Windows 10
