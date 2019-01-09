@@ -1,6 +1,7 @@
 {
   "config": {
     # path to results waiting to be sent to TMI Server
+    # must be named 'stage', must be under parent 'public'
     # DEFAULT: "public/result/stage",
     "result_stage_dir": "public/result/stage",
 
@@ -16,6 +17,9 @@
 
     # How often to check for TMI Server connection, when
     # connection available, any results in stage directory are sent
-    "result_server_retry_timer_sec": 10
+    "result_server_retry_timer_sec": 10,
+
+    # set result encryption (defaults to true)
+    #"result_encrypt": false
   }
 }

@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Martin Guthrie, copyright, all rights reserved, 2018
+Martin Guthrie, copyright, all rights reserved, 2018-2019
 
 """
 import logging
@@ -12,7 +12,7 @@ import visa
 class TMIHWDriver(object):
     """
     Create a single instance of an Agilent DSO of "type 1"
-    - presumably most Agolent scopes are compatible with each other...
+    - presumably most Agilent scopes are compatible with each other...
     - those that are compatible can share the same driver...(presumably)
     - this driver supports USB attached devices
     - See https://pyvisa.readthedocs.io/en/1.8/names.html
@@ -23,10 +23,13 @@ class TMIHWDriver(object):
         AGILENT TECHNOLOGIES,DSO7104B,MY49520121,06.00.0003
 
     - see http://ridl.cfd.rit.edu/products/manuals/Agilent/oscilloscopes/InfiniiVision7000/InfiniiVision7000_series_prog_guide.pdf
+
+    NOTE: This driver assumes only one scope is attached to the PC via USB
+          and this scope is shared among the channels
     """
     TMI_VERSION = "0.0.1"
     DRIVER_TYPE = "AGILENT_DSO_USB_1"
-    QUERY_STRING = 'USB?::2391::5981::?*::?*::INSTR'
+    QUERY_STRING = 'USB?::2391::5981::?*::?*::INSTR'  # look for USB Agilent scopes only...
     # list of DSOs that accept the same command set
     WHITE_LIST = ["DSO7104B"]
 
@@ -35,10 +38,10 @@ class TMIHWDriver(object):
         self.logger.info("Start")
         self.shared_state = shared_state
         self.pybs = []
-        self._num_chan = -1  # indicates this device does not set channels
+        self._num_chan = 0  # not used in this driver
 
     def discover_channels(self):
-        """ determine the number of channels, and popultae hw drivers into shared state
+        """ determine the number of channels, and populate hw drivers into shared state
 
         shared_state: a list,
             self.shared_state.add_drivers(DRV_TYPE, [ {}, {}, ... ])
@@ -46,7 +49,7 @@ class TMIHWDriver(object):
         [ {'id': i,               # id of the channel
            "version": <VERSION>,  # version of the driver
            "close": False},       # register a callback on closing the channel
-           "<foo>": <bar>,        # something that makes your HW work...
+           "<foo>": <bar>,        # reference to this driver (can be named anything)
         ]
 
         :return: >0 number of channels,
@@ -67,6 +70,7 @@ class TMIHWDriver(object):
             instr = rm.open_resource(dso)
             deets = instr.query('*IDN?').strip()
             for scope in self.WHITE_LIST:
+                # deets looks like: AGILENT TECHNOLOGIES,DSO7104B,MY49520121,06.00.0003
                 if scope in deets:
                     found = True
                     break
@@ -79,15 +83,18 @@ class TMIHWDriver(object):
             self.logger.error("No matching {} VISA instrument found".format(self.QUERY_STRING))
             dd = {"notice": "TMIHWDriver: none found", "from": "{}.{}".format(__class__.__name__, self.DRIVER_TYPE)}
             pub.sendMessage(TMI_PUB.TMI_FRAME_SYSTEM_NOTICE, item_dict=dd)
+            # if no scope is found, the test fixture cannot operate, returning
+            # an error here will indicate a system fail and won't proceed to testing
             return -1
 
         # reset scope to a known state
         instr.write('*RST')
 
+        # this is the data required by shared_state to register the driver
         d = {
             "id": 0,
             "version": self.TMI_VERSION,
-            "close": False,
+            "close": None,
             "visa": instr,
         }
 

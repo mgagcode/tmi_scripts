@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Martin Guthrie, copyright, all rights reserved, 2018
+Martin Guthrie, copyright, all rights reserved, 2018-2019
 
 """
 import os
