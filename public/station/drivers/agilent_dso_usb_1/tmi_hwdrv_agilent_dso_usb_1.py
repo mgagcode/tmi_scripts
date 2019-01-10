@@ -5,8 +5,8 @@ Martin Guthrie, copyright, all rights reserved, 2018-2019
 
 """
 import logging
-from pubsub import pub
-from app.const import TMI_PUB
+from app.const import APP
+from app.sys_log import pub_notice
 import visa
 
 class TMIHWDriver(object):
@@ -56,9 +56,8 @@ class TMIHWDriver(object):
                   0 does not indicate num channels, like a shared hardware driver
                  <0 error
         """
-        dd = {"notice": "TMIHWDriver: Scanning for {}".format(self.DRIVER_TYPE),
-              "from": "{}:{}".format(__class__.__name__, "discover_channels")}
-        pub.sendMessage(TMI_PUB.TMI_FRAME_SYSTEM_NOTICE, item_dict=dd)
+        sender = "{}:{}".format(__file__, __class__.__name__)
+        pub_notice("TMIHWDriver: Scanning for {}".format(self.DRIVER_TYPE), sender=sender)
 
         rm = visa.ResourceManager()
         dso_agilent_usb_list = rm.list_resources(query=self.QUERY_STRING)
@@ -81,8 +80,8 @@ class TMIHWDriver(object):
 
         if not found:
             self.logger.error("No matching {} VISA instrument found".format(self.QUERY_STRING))
-            dd = {"notice": "TMIHWDriver: none found", "from": "{}.{}".format(__class__.__name__, self.DRIVER_TYPE)}
-            pub.sendMessage(TMI_PUB.TMI_FRAME_SYSTEM_NOTICE, item_dict=dd)
+            pub_notice("TMIHWDriver: Error none found", sender=sender, type=APP.NOTICE_ERR)
+
             # if no scope is found, the test fixture cannot operate, returning
             # an error here will indicate a system fail and won't proceed to testing
             return -1
@@ -100,8 +99,7 @@ class TMIHWDriver(object):
 
         self.shared_state.add_drivers(self.DRIVER_TYPE, [d], shared=True)
 
-        dd = {"notice": "TMIHWDriver: Found {}!".format(instr), "from": "{}".format(__class__.__name__)}
-        pub.sendMessage(TMI_PUB.TMI_FRAME_SYSTEM_NOTICE, item_dict=dd)
+        pub_notice("TMIHWDriver: Found {}!".format(instr), sender=sender)
         self.logger.info("Done")
 
         # by returning 0, it means this return values DOES not represent number of channels

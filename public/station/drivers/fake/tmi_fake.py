@@ -6,12 +6,11 @@ Martin Guthrie, copyright, all rights reserved, 2018
 """
 import logging
 import argparse
-from pubsub import pub
-from app.const import TMI_PUB
+from app.sys_log import pub_notice
 
 TMI_VERSION = "0.0.1"
 
-NUM_CHANNELS = 1  # set this to simulate multiple channels
+NUM_CHANNELS = 1  # set this to simulate multiple channels, range 1-4
 
 
 class TMIHWDriver(object):
@@ -64,9 +63,7 @@ class TMIHWDriver(object):
             # close field is a method called when channel is torn down
             drivers.append({'id': i, "version": TMI_VERSION, "close": False})
 
-            dd = {"notice": "TMIHWDriver: Found channel {}".format(i),
-                  "from": "{}.{}".format(__class__.__name__, "discover_channels")}
-            pub.sendMessage(TMI_PUB.TMI_FRAME_SYSTEM_NOTICE, item_dict=dd)
+            pub_notice("TMIHWDriver: Found channel {}".format(i), sender="tmi_fake.{}".format(__class__.__name__))
 
         self.shared_state.add_drivers("TMIFake", drivers)
         self._num_chan = NUM_CHANNELS

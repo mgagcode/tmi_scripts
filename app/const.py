@@ -21,6 +21,13 @@ class Const(object, metaclass=MetaConst):
         raise TypeError
 
 
+class APP(Const):
+
+    NOTICE_NRM = "NORMAL"
+    NOTICE_ERR = "ERROR"
+    NOTICE_WRN = "WARN"
+
+
 class TMI_CHANNEL(Const):
 
     STATE_UNKNOWN = "STATE_UNKNOWN"

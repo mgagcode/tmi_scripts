@@ -12,7 +12,7 @@ from public.station.drivers.micropythonbrd.tmi_upybrd import TMIMicroPyBrd
 
 from pubsub import pub
 from app.const import TMI_PUB, TMI_CHANNEL
-
+from app.sys_log import pub_notice
 
 class upybrdPlayPub(threading.Thread):
     """ Creates a thread per channel that will poll the switch
@@ -140,11 +140,11 @@ class TMIHWDriver(object):
                   0 does not indicate num channels, like a shared hardware driver
                  <0 error
         """
+        sender = "{}:{}".format(__file__, __class__.__name__)
+
         ports = serial_ports()
 
-        dd = {"notice": "TMIHWDriver: Scanning for MicroPyBoards on {}".format(ports),
-              "from": "{}:{}".format(__class__.__name__, "discover_channels")}
-        pub.sendMessage(TMI_PUB.TMI_FRAME_SYSTEM_NOTICE, item_dict=dd)
+        pub_notice("TMIHWDriver: Scanning for MicroPyBoards on {}".format(ports), sender=sender)
 
         self.pybs.clear()
         pyboard = TMIMicroPyBrd(self.logger)
@@ -172,17 +172,14 @@ class TMIHWDriver(object):
             msg = "TMIHWDriver: {} -> {}".format(port, pyb[0])
 
             self.logger.info(msg)
-            dd = {"notice": msg, "from": "{}".format(__class__.__name__)}
-            pub.sendMessage(TMI_PUB.TMI_FRAME_SYSTEM_NOTICE, item_dict=dd)
+            pub_notice(msg, sender=sender)
 
         pyboard.close()
 
         self._num_chan = len(self.pybs)
         self.shared_state.add_drivers(self.DRIVER_TYPE, self.pybs)
 
-        dd = {"notice": "TMIHWDriver: Found {}!".format(self._num_chan),
-              "from": "{}".format(__class__.__name__)}
-        pub.sendMessage(TMI_PUB.TMI_FRAME_SYSTEM_NOTICE, item_dict=dd)
+        pub_notice("TMIHWDriver: Found {}!".format(self._num_chan), sender=sender)
         self.logger.info("Done")
         return self._num_chan
 
