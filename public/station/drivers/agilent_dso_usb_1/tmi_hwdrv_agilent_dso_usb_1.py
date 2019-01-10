@@ -4,6 +4,7 @@
 Martin Guthrie, copyright, all rights reserved, 2018-2019
 
 """
+import os
 import logging
 from app.const import APP
 from app.sys_log import pub_notice
@@ -27,6 +28,8 @@ class TMIHWDriver(object):
     NOTE: This driver assumes only one scope is attached to the PC via USB
           and this scope is shared among the channels
     """
+    SFN = os.path.basename(__file__)
+
     TMI_VERSION = "0.0.1"
     DRIVER_TYPE = "AGILENT_DSO_USB_1"
     QUERY_STRING = 'USB?::2391::5981::?*::?*::INSTR'  # look for USB Agilent scopes only...
@@ -34,7 +37,7 @@ class TMIHWDriver(object):
     WHITE_LIST = ["DSO7104B"]
 
     def __init__(self, shared_state):
-        self.logger = logging.getLogger("TMI.{}.{}".format(__class__.__name__, self.DRIVER_TYPE))
+        self.logger = logging.getLogger("TMI.{}.{}".format(__class__.__name__, self.SFN))
         self.logger.info("Start")
         self.shared_state = shared_state
         self.pybs = []
@@ -56,8 +59,8 @@ class TMIHWDriver(object):
                   0 does not indicate num channels, like a shared hardware driver
                  <0 error
         """
-        sender = "{}:{}".format(__file__, __class__.__name__)
-        pub_notice("TMIHWDriver: Scanning for {}".format(self.DRIVER_TYPE), sender=sender)
+        sender = "{}.{}".format(self.SFN, __class__.__name__)
+        pub_notice("TMIHWDriver:{}: Scanning for {}".format(self.SFN, self.DRIVER_TYPE), sender=sender)
 
         rm = visa.ResourceManager()
         dso_agilent_usb_list = rm.list_resources(query=self.QUERY_STRING)
@@ -80,7 +83,7 @@ class TMIHWDriver(object):
 
         if not found:
             self.logger.error("No matching {} VISA instrument found".format(self.QUERY_STRING))
-            pub_notice("TMIHWDriver: Error none found", sender=sender, type=APP.NOTICE_ERR)
+            pub_notice("TMIHWDriver:{}: Error none found".format(self.SFN), sender=sender, type=APP.NOTICE_ERR)
 
             # if no scope is found, the test fixture cannot operate, returning
             # an error here will indicate a system fail and won't proceed to testing
@@ -99,7 +102,7 @@ class TMIHWDriver(object):
 
         self.shared_state.add_drivers(self.DRIVER_TYPE, [d], shared=True)
 
-        pub_notice("TMIHWDriver: Found {}!".format(instr), sender=sender)
+        pub_notice("TMIHWDriver:{}: Found {}!".format(self.SFN, instr), sender=sender)
         self.logger.info("Done")
 
         # by returning 0, it means this return values DOES not represent number of channels
@@ -112,4 +115,4 @@ class TMIHWDriver(object):
         """ Function to instantiate a class/thread to trigger PLAY of script
         - this is called right after discover_channels
         """
-        self.logger.info("{} does not support 'play' messaging".format(self.DRIVER_TYPE))
+        self.logger.info("TMIHWDriver:{}: does not support 'play' messaging".format(self.SFN))

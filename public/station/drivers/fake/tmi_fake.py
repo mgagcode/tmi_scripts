@@ -4,6 +4,7 @@
 Martin Guthrie, copyright, all rights reserved, 2018
 
 """
+import os
 import logging
 import argparse
 from app.sys_log import pub_notice
@@ -30,9 +31,10 @@ class TMIHWDriver(object):
 
     This is a fake HW driver to simulate and show what a TMIHWDriver is required to do.
     """
+    SFN = os.path.basename(__file__)
 
     def __init__(self, shared_state):
-        self.logger = logging.getLogger("TMI.{}".format(__class__.__name__))
+        self.logger = logging.getLogger("TMI.{}.{}".format(__class__.__name__, self.SFN))
         self.logger.info("Start")
         self.shared_state = shared_state
 
@@ -63,7 +65,8 @@ class TMIHWDriver(object):
             # close field is a method called when channel is torn down
             drivers.append({'id': i, "version": TMI_VERSION, "close": False})
 
-            pub_notice("TMIHWDriver: Found channel {}".format(i), sender="tmi_fake.{}".format(__class__.__name__))
+            pub_notice("TMIHWDriver:{}: Found channel {}".format(self.SFN, i),
+                       sender="{}.{}".format(self.SFN, __class__.__name__))
 
         self.shared_state.add_drivers("TMIFake", drivers)
         self._num_chan = NUM_CHANNELS
@@ -77,7 +80,7 @@ class TMIHWDriver(object):
         """ Function to instantiate a class/thread to trigger PLAY of script
         - this is called right after discover_channels
         """
-        self.logger.info("TMIFake does not support 'play' messaging")
+        self.logger.info("TMIHWDriver:{}: does not support 'play' messaging".format(self.SFN))
 
     def close(self):
         self.logger.info("closed")

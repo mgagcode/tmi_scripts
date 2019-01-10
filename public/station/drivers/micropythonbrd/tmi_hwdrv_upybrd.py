@@ -4,6 +4,7 @@
 Martin Guthrie, copyright, all rights reserved, 2018-2019
 
 """
+import os
 import logging
 import threading
 import time
@@ -110,11 +111,12 @@ class TMIHWDriver(object):
     Determine MicroPyBoards attached to the system, and report them to
     the system shared state.
     """
+    SFN = os.path.basename(__file__)
 
     DRIVER_TYPE = "TMIMicroPyBrd"
 
     def __init__(self, shared_state):
-        self.logger = logging.getLogger("TMI.{}".format(__class__.__name__))
+        self.logger = logging.getLogger("TMI.{}.{}".format(__class__.__name__, self.SFN))
         self.logger.info("Start")
         self.shared_state = shared_state
         self.pybs = []
@@ -140,7 +142,7 @@ class TMIHWDriver(object):
                   0 does not indicate num channels, like a shared hardware driver
                  <0 error
         """
-        sender = "{}:{}".format(__file__, __class__.__name__)
+        sender = "{}.{}".format(self.SFN, __class__.__name__)
 
         ports = serial_ports()
 
@@ -157,11 +159,11 @@ class TMIHWDriver(object):
             # TODO: could not set port, and get the list of ports in one go...
 
             if not pyb:
-                self.logger.info("TMIHWDriver: port {} -> Nothing found".format(port))
+                self.logger.info("port {} -> Nothing found".format(port))
                 continue
 
             if pyb[0].get('id', None) is None:
-                self.logger.info("TMIHWDriver: port {} -> Missing ID".format(port))
+                self.logger.info("port {} -> Missing ID".format(port))
                 continue
 
             # divers can register a close() method which is called on channel destroy.
@@ -169,7 +171,7 @@ class TMIHWDriver(object):
             pyb[0]["close"] = False
 
             self.pybs.append(pyb[0])
-            msg = "TMIHWDriver: {} -> {}".format(port, pyb[0])
+            msg = "TMIHWDriver:{}: {} -> {}".format(self.SFN, port, pyb[0])
 
             self.logger.info(msg)
             pub_notice(msg, sender=sender)
@@ -179,8 +181,8 @@ class TMIHWDriver(object):
         self._num_chan = len(self.pybs)
         self.shared_state.add_drivers(self.DRIVER_TYPE, self.pybs)
 
-        pub_notice("TMIHWDriver: Found {}!".format(self._num_chan), sender=sender)
-        self.logger.info("Done")
+        pub_notice("TMIHWDriver:{}: Found {}!".format(self.SFN, self._num_chan), sender=sender)
+        self.logger.info("Done: {} channels".format(self._num_chan))
         return self._num_chan
 
     def num_channels(self):
@@ -199,6 +201,7 @@ class TMIHWDriver(object):
         for ch in range(self._num_chan):
             drivers = self.shared_state.get_drivers(ch, type=self.DRIVER_TYPE)
             # there should only be one driver of our type!
+            # TODO: move this check to shared_state
             if len(drivers) > 1:
                 self.logger.error("Unexpected number of drivers: {}".format(drivers))
                 continue
