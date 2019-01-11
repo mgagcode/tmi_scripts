@@ -6,7 +6,6 @@ Martin Guthrie, copyright, all rights reserved, 2018-2019
 
 """
 from app.const import APP
-from app.urls import *
 
 
 def pub_notice(notice, sender, type=APP.NOTICE_NRM, on_change_only=False, replace=False):
