@@ -23,3 +23,15 @@
   * PLAY driven from the hardware
   * ADC measurements
   * etc 
+
+# Advanced Notes
+* Record Types
+    * A record type defines the result JSON file and the backend server database
+    * ResultBaseKeysV1
+        * An example of how to extend the base record type
+        * This extension is used for the Demo scripts
+        * It extends the base class be adding 4 "keys" to the JSON result which end up as entries in the backend DB
+        * Extending the base record type requires backend (TMIServer) programming, don't extend the record type unless you have contacted TMI for backend support
+    * The TMIServer separates results/records by the Record Type
+      * All products could use the same Record Type       
+

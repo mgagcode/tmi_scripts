@@ -6,9 +6,9 @@
 * Write Python scripts to control measurement equipment and other fixtures
 * APIs for recording measurements, setting Pass/Fail, locking resources, etc
 * Server dashboard to monitor production yield, rate, etc
-* Check out the PDF slide deck for more information
+* Check out the [PDF](https://github.com/mgagcode/tmi_scripts/blob/master/TMISystem_Overview_06.pdf) slide deck for more information
 * postgresql backend
-* deployed as Docker containers for easy deployment
+* deployed as Docker containers for easy installation
 
 # Screenshots
 ![TMIStation_1](app/test_view_4.png)
@@ -162,17 +162,13 @@ retain these files between runs (meaning you lose all your data), and you cannot
     mkdir ~/git/tmistation
     cd ~/git/tmistation
     git clone https://github.com/mgagcode/tmi_scripts.git
-    cd ~/git/tmistation/tmi_scripts/public
+    cd ~/git/tmistation/tmi_scripts
 
 * Run this command to test if everything is working,
 
     `python3 tmidev.py --script public/station/scripts/prod_v0/prod_0.tmiscr`
     
-# Advanced Notes
-* Record Types
-    * A record type defines the result JSON file and the backend server database
-    * ResultBaseKeysV1
-        * An example of how to extend the base record type
-        * This extension is used for the Demo scripts
-        * It extends the base class be adding 4 "keys" to the JSON result which end up as entries in the backend DB
-        * Extending the base record type requires backend programming, don't extend the record type unless you have contacted TMI for backend support
+* The same source code that runs in the console, also runs in the web GUI.  Its much faster to develop code in the console, using your fav Python IDE.
+    
+# Contact
+* email: `martin.guthrie.code@gmail.com`
