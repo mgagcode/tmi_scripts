@@ -51,6 +51,8 @@
          http://127.0.0.1:6800 
 
     * TMIStation login user/password is admin/admin
+    * To **update** tmistation use `docker pull mgagcode/tmistation` before running it.
+    
   * Run your first script
     * Select pulldown menu item 'Test Config'
     * Select script 'prod_0.tmiscr'
@@ -88,7 +90,9 @@
       
            http://127.0.0.1:6600 
 
-  * TMIServer login user/password is admin/admin
+    * TMIServer login user/password is admin/admin
+    * To **update** tmiserver use `docker pull mgagcode/tmiserver` before running it.
+    
 
 * NON-PURE-DEMO mode
   * In Pure DEMO mode above, any files created by TMIStation/Server are stored in the container, and Docker containers do not
