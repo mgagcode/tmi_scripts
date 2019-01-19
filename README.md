@@ -33,6 +33,12 @@
   * The system was developed on both Windows 10 and Ubuntu 18.04
   * Most testing occurs on Ubuntu given its the expected OS used in the factory because of cost (its free)
   * All these instructions are for Ubuntu
+    * You should remove modemmanager as it seems to interfere with serial ports
+    
+      `sudo apt-get purge modemmanager`
+      
+    * see for granting Visa access to USB devices, https://stackoverflow.com/questions/52256123
+      
 * Outside Software Requirements (its all free)
   * Google Chrome browser (other browsers are not tested)
   * install Docker (https://docs.docker.com/install/linux/docker-ce/ubuntu/)
@@ -69,7 +75,7 @@
         mkdir datadir
         docker run -p 5432:5432 -v $(pwd)/datadir:/var/lib/postgresql/data -e POSTGRES_PASSWORD=qwerty -d postgres:11
         ```
-        * now create the required databases - you only need to do this *ONCE*
+        * now create the required databases - you only need to do this **ONCE**
             ```
             docker exec -it tmi-postgres bash
             psql -U postgres
