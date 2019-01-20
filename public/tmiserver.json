@@ -1,0 +1,17 @@
+{
+  # comments are allowed
+  "config": {
+  },
+  "postgres": {
+    "ResultBaseV1": {
+      "user": "postgres",
+      "pw": "qwerty",
+      "ip": "tmidb"
+    },
+    "ResultBaseKeysV1": {
+      "user": "postgres",
+      "pw": "qwerty",
+      "ip": "tmidb"
+    }
+  }
+}
