@@ -1,0 +1,170 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Demo &#8212; TMI 0.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to TMI’s documentation!" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to TMI’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TMI 0.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="demo">
+<h1>Demo<a class="headerlink" href="#demo" title="Permalink to this headline">¶</a></h1>
+<p>There are 3 components to the system</p>
+<ul class="simple">
+<li><strong>TMIStation</strong><ul>
+<li>This is the program that production operators would use</li>
+<li>There can be many TMIStations on a LAN</li>
+</ul>
+</li>
+<li><strong>TMIServer</strong><ul>
+<li>There should only be one of these per LAN</li>
+<li>Should have a fixed IP address</li>
+</ul>
+</li>
+<li>postgresql backend<ul>
+<li>There should only be one of these per LAN</li>
+<li>Should have a fixed IP address</li>
+</ul>
+</li>
+<li>Its possible that ONE PC can host all three components, and thats how these DEMO instructions are applied<ul>
+<li>more distributed architectures are recommended for real production</li>
+<li>ONE computer is just easier for a demo</li>
+</ul>
+</li>
+</ul>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Operating System<ul>
+<li>The system was developed on both Windows 10 and Ubuntu 18.04</li>
+<li>Most testing occurs on Ubuntu given its the expected OS used in the factory because of cost (its free)</li>
+<li>All these instructions are for Ubuntu 18.04</li>
+</ul>
+</li>
+<li>Outside Software Requirements<ul>
+<li>Google Chrome browser (other browsers are not tested)</li>
+<li>install Docker (<a class="reference external" href="https://docs.docker.com/install/linux/docker-ce/ubuntu/">https://docs.docker.com/install/linux/docker-ce/ubuntu/</a>)</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>TMI programs are deployed as Docker containers, which allows the programs to run in a virtual
+environment, and be independent of your host operating system.  This means, for example, that you don’t have
+to worry about python packages, versions of modules, etc</p>
+<p>The easiest demo to load and play with is the TMIStation demo.</p>
+<div class="section" id="tmistation">
+<h3>TMIStation<a class="headerlink" href="#tmistation" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul>
+<li><p class="first">Run <strong>`tmistation`</strong> container:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">ti</span> <span class="o">-</span><span class="n">p</span> <span class="mi">6800</span><span class="p">:</span><span class="mi">6800</span> <span class="n">mgagcode</span><span class="o">/</span><span class="n">tmistation</span>
+</pre></div>
+</div>
+<ul>
+<li><p class="first">Open Google Chrome to</p>
+<blockquote>
+<div><p><a class="reference external" href="http://127.0.0.1:6800">http://127.0.0.1:6800</a></p>
+</div></blockquote>
+</li>
+<li><p class="first">TMIStation login user/password is admin/admin</p>
+</li>
+<li><p class="first">Other users passwords are <cite>qwerty</cite></p>
+</li>
+<li><p class="first">To <strong>update</strong> tmistation use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">pull</span> <span class="n">mgagcode</span><span class="o">/</span><span class="n">tmistation</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p class="first">Run your first script</p>
+<ul class="simple">
+<li>Select pulldown menu item <cite>Test Config</cite></li>
+<li>Select script <cite>prod_0.tmiscr</cite></li>
+<li>Press button <cite>Submit</cite></li>
+<li>If everything checked out, the <cite>Test</cite> button will turn Green, press it, and you should be on the test screen, press Play to test</li>
+<li><strong>Note:</strong> The tests have delays in them for demo effect.  The delays are not needed.</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to TMI’s documentation!</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to TMI’s documentation!"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TMI 0.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Martin Guthrie.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>
