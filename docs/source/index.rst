@@ -10,8 +10,8 @@ infrastructure to manage the data, scripts, users, roles, reporting and other mu
    :maxdepth: 3
    :caption: Contents:
 
-   basic_demo
-   full_demo
+   tmistation_demo
+
 
 Indices and tables
 ==================

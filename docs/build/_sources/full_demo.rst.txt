@@ -1,0 +1,49 @@
+Full Demo
+==========
+
+The Full Demo assume you have followed the instructions for the :doc:`basic_demo`.
+
+The Full Demo works by creating a local file structure and telling the ``tmistation`` Docker container to use that
+local file system.  This requires a more advanced ``docker run`` command.
+
+Additional Requirements
+-----------------------
+
+* install git::
+
+    sudo apt update
+    sudo apt install git
+
+  * if you are unfamiliar with ``git``, in short it is a free cloud based software version control platform
+  * ``git`` is an advanced tool, and although widely used, it can be an complicated tool to use.  There are
+    GUI programs that try and make ``git`` easier to use, and a quick google can point you to some for your host operating system.
+  * TMI instructions (attempt to) only use the simple basic commands of ``git``
+
+
+Clone TMIScripts
+----------------
+
+* There is a prescriptive directory structure to use, and that is stored on ``github`` in a project called ``tmi_scripts``
+* This github repo is where you would ultimately store and version control your own scripts
+
+  * Instead of cloning the repo, you would fork [1]_ (copy) it, making it your own, and then add your own code
+* The instructions below will create a folder called *git/tmistation* which git will copy the required files into
+
+* Clone ``tmi_scripts``::
+
+    mkdir ~/git
+    mkdir ~/git/tmistation
+    cd ~/git/tmistation
+    git clone https://github.com/mgagcode/tmi_scripts.git
+
+* Run TMIStation::
+
+    cd ~/git/tmistation/tmi_scripts/public
+    docker run -ti -p 6800:6800 -v $(pwd):/app/public tmistation
+
+* Open Google Chrome to
+
+        http://127.0.0.1:6800
+
+
+.. [1] This is covered in section TBD
