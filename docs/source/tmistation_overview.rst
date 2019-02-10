@@ -121,6 +121,31 @@ Here is a full example of what `subs` section could look like,
 info
 ----
 
+This section is a list of fields that correspond to fields that exist in the backend database and are typically
+used for database searches.
+
+You cannot add or delete fields from this section.  If there are missing fields, an error will occur downstream as the
+result record is check to have these fields.  New fields can be added, but that requires a request to customize
+the backend database.  See TBD.
+
+Note that the example here, two fields are using the `subs` section to get their values from the Operator
+in the Test Config view.
+
+::
+
+  "info": {
+    "product": "widget_1",
+    "bom": "B00012-001",
+    # list fields present user choice or fill in
+    "lot": "%%Lot",
+    "location": "%%Loc"
+  },
+
+``product``, ``bom``, ``lot``, ``location`` are fields that you define a meaning specific to your operation.
+
+Defining rules and a naming convention for these fields will help you later when you need to make database searches
+for specific sets of results.  This is important.
+
 config
 ------
 

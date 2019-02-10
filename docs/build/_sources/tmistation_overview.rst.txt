@@ -50,7 +50,7 @@ limit that could have two values, the values can be listed as a `subs` field and
 
 Obviously, in a production environment, typically operators are not allowed to arbitrarily change values of test
 limits or any other setup.  However, in an engineering lab, or new product ramp environment, having an easy method
-to change some parameters might be useful.  This fearture does not have to be used.
+to change some parameters might be useful.  This feature does not have to be used.
 
 `subs` are also useful for generating :ref:`Travellers`.
 
@@ -114,8 +114,37 @@ Here is a full example of what `subs` section could look like,
 * used to validate the Operator entered correct information
 * this is optional field
 
+``default``
+
+* sets the default value for `textinput` ``widget``
+
 info
 ----
+
+This section is a list of fields that correspond to fields that exist in the backend database and are typically
+used for database searches.
+
+You cannot add or delete fields from this section.  If there are missing fields, an error will occur downstream as the
+result record is check to have these fields.  New fields can be added, but that requires a request to customize
+the backend database.  See TBD.
+
+Note that the example here, two fields are using the `subs` section to get their values from the Operator
+in the Test Config view.
+
+::
+
+  "info": {
+    "product": "widget_1",
+    "bom": "B00012-001",
+    # list fields present user choice or fill in
+    "lot": "%%Lot",
+    "location": "%%Loc"
+  },
+
+``product``, ``bom``, ``lot``, ``location`` are fields that you define a meaning specific to your operation.
+
+Defining rules and a naming convention for these fields will help you later when you need to make database searches
+for specific sets of results.  This is important.
 
 config
 ------

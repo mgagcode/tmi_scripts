@@ -84,7 +84,7 @@ the script to be documented</li>
 limit that could have two values, the values can be listed as a <cite>subs</cite> field and the user can select which one to use.</p>
 <p>Obviously, in a production environment, typically operators are not allowed to arbitrarily change values of test
 limits or any other setup.  However, in an engineering lab, or new product ramp environment, having an easy method
-to change some parameters might be useful.  This fearture does not have to be used.</p>
+to change some parameters might be useful.  This feature does not have to be used.</p>
 <p><cite>subs</cite> are also useful for generating <a class="reference internal" href="tmistation_travellers.html#travellers"><span class="std std-ref">Travellers</span></a>.</p>
 <p>Here is a full example of what <cite>subs</cite> section could look like,</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;subs&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -145,9 +145,32 @@ the <code class="docutils literal notranslate"><span class="pre">info</span></co
 <li>used to validate the Operator entered correct information</li>
 <li>this is optional field</li>
 </ul>
+<p><code class="docutils literal notranslate"><span class="pre">default</span></code></p>
+<ul class="simple">
+<li>sets the default value for <cite>textinput</cite> <code class="docutils literal notranslate"><span class="pre">widget</span></code></li>
+</ul>
 </div>
 <div class="section" id="info">
 <h4>info<a class="headerlink" href="#info" title="Permalink to this headline">¶</a></h4>
+<p>This section is a list of fields that correspond to fields that exist in the backend database and are typically
+used for database searches.</p>
+<p>You cannot add or delete fields from this section.  If there are missing fields, an error will occur downstream as the
+result record is check to have these fields.  New fields can be added, but that requires a request to customize
+the backend database.  See TBD.</p>
+<p>Note that the example here, two fields are using the <cite>subs</cite> section to get their values from the Operator
+in the Test Config view.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;info&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">&quot;product&quot;</span><span class="p">:</span> <span class="s2">&quot;widget_1&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;bom&quot;</span><span class="p">:</span> <span class="s2">&quot;B00012-001&quot;</span><span class="p">,</span>
+  <span class="c1"># list fields present user choice or fill in</span>
+  <span class="s2">&quot;lot&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">%%</span><span class="s2">Lot&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">%%</span><span class="s2">Loc&quot;</span>
+<span class="p">},</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">product</span></code>, <code class="docutils literal notranslate"><span class="pre">bom</span></code>, <code class="docutils literal notranslate"><span class="pre">lot</span></code>, <code class="docutils literal notranslate"><span class="pre">location</span></code> are fields that you define a meaning specific to your operation.</p>
+<p>Defining rules and a naming convention for these fields will help you later when you need to make database searches
+for specific sets of results.  This is important.</p>
 </div>
 <div class="section" id="config">
 <h4>config<a class="headerlink" href="#config" title="Permalink to this headline">¶</a></h4>
