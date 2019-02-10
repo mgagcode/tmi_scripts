@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Welcome to TMI’s documentation! &#8212; TMI 0.1.0 documentation</title>
+    <title>TMIStation Screenshots &#8212; TMI 0.1.0 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
@@ -18,7 +18,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="TMIStation Demo" href="tmistation_demo.html" /> 
+    <link rel="prev" title="TMIStation Demo" href="tmistation_demo.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -28,8 +28,8 @@
              accesskey="I">index</a></li>
         <li class="right" >
           <a href="tmistation_demo.html" title="TMIStation Demo"
-             accesskey="N">next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">TMI 0.1.0 documentation</a> &#187;</li> 
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TMI 0.1.0 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -38,36 +38,46 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="welcome-to-tmi-s-documentation">
-<h1>Welcome to TMI’s documentation!<a class="headerlink" href="#welcome-to-tmi-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p>The TMI platform is a manufacturing test system that provides a framework for creating
-test programs to test your product, and a backend dashboard to monitor production.  The
-platform is intended to allow you to focus on testing your product, rather than the
-infrastructure to manage the data, scripts, users, roles, reporting and other mundane stuff.</p>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="tmistation_demo.html">TMIStation Demo</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tmistation_demo.html#basic">Basic</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tmistation_demo.html#full">Full</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="tmistation_screenshots.html">TMIStation Screenshots</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tmistation_screenshots.html#main-view">Main view</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tmistation_screenshots.html#test-config-view">Test Config view</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tmistation_screenshots.html#test-view">Test View</a></li>
-</ul>
-</li>
-</ul>
+  <div class="section" id="tmistation-screenshots">
+<h1>TMIStation Screenshots<a class="headerlink" href="#tmistation-screenshots" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="main-view">
+<h2>Main view<a class="headerlink" href="#main-view" title="Permalink to this headline">¶</a></h2>
+<p>Shows a log of TMIStation status, the Software License, and the menu options for Admin user.</p>
+<img alt="_images/Screenshot_main_01.png" src="_images/Screenshot_main_01.png" />
 </div>
-</div>
-<div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="test-config-view">
+<h2>Test Config view<a class="headerlink" href="#test-config-view" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="simple-no-variables-script">
+<h3>Simple (No Variables) Script<a class="headerlink" href="#simple-no-variables-script" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
-<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
-<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+<li>A pull down dialog box allows the user to pick which script to run</li>
+<li>The script is shown on the left.  The script cannot be modified with <cite>TMIStation</cite></li>
+<li>The script is a JSON format text file, with the exception that lines begining with <cite>#</cite> are comment lines</li>
+<li>This script example has no user configurable variables</li>
 </ul>
+<img alt="_images/Screenshot_test_config_01.png" src="_images/Screenshot_test_config_01.png" />
+</div>
+<div class="section" id="variables-script">
+<h3>Variables Script<a class="headerlink" href="#variables-script" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>This script is an example of a script with user configurable variables</li>
+<li>On the right side, there are (red) fields which need to be filled in</li>
+<li>The fields are validated by pattern checking<ul>
+<li>fields can be text input</li>
+<li>fields can be pull down selections</li>
+</ul>
+</li>
+</ul>
+<img alt="_images/Screenshot_test_config_02.png" src="_images/Screenshot_test_config_02.png" />
+</div>
+</div>
+<div class="section" id="test-view">
+<h2>Test View<a class="headerlink" href="#test-view" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>The result after 4 channels of the demo script have finished</li>
+</ul>
+<img alt="_images/Screenshot_test_01.png" src="_images/Screenshot_test_01.png" />
+</div>
 </div>
 
 
@@ -76,9 +86,9 @@ infrastructure to manage the data, scripts, users, roles, reporting and other mu
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>Next topic</h4>
+  <h4>Previous topic</h4>
   <p class="topless"><a href="tmistation_demo.html"
-                        title="next chapter">TMIStation Demo</a></p>
+                        title="previous chapter">TMIStation Demo</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <div class="searchformwrapper">
@@ -103,8 +113,8 @@ infrastructure to manage the data, scripts, users, roles, reporting and other mu
              >index</a></li>
         <li class="right" >
           <a href="tmistation_demo.html" title="TMIStation Demo"
-             >next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">TMI 0.1.0 documentation</a> &#187;</li> 
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TMI 0.1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

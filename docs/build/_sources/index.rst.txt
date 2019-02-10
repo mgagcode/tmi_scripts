@@ -7,10 +7,11 @@ platform is intended to allow you to focus on testing your product, rather than 
 infrastructure to manage the data, scripts, users, roles, reporting and other mundane stuff.
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
    :caption: Contents:
 
    tmistation_demo
+   tmistation_screenshots
 
 
 Indices and tables
