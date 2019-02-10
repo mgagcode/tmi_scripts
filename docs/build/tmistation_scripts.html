@@ -75,7 +75,7 @@ limit that could have two values, the values can be listed as a <cite>subs</cite
 <p>Obviously, in a production environment, typically operators are not allowed to arbitrarily change values of test
 limits or any other setup.  However, in an engineering lab, or new product ramp environment, having an easy method
 to change some parameters might be useful.  This feature does not have to be used.</p>
-<p><cite>subs</cite> are also useful for generating <a class="reference internal" href="tmistation_travellers.html#travellers"><span class="std std-ref">Travellers</span></a>.</p>
+<p><cite>subs</cite> are also useful for generating <span class="xref std std-ref">Travellers</span>.</p>
 <p>Here is a full example of what <cite>subs</cite> section could look like,</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;subs&quot;</span><span class="p">:</span> <span class="p">{</span>
   <span class="c1"># Each item here is described by,</span>
@@ -190,7 +190,9 @@ words, here it has the least priority</li>
 <ul class="simple">
 <li>this is a list of <code class="docutils literal notranslate"><span class="pre">drivers</span></code> to start when the script it loaded</li>
 <li>the dot notation is specifying a directory path to the python file to read</li>
-<li>See <a class="reference internal" href="tmistation_drivers.html#drivers"><span class="std std-ref">Drivers</span></a></li>
+<li>every script must have a driver.  A fake driver is available in the case where you don’t want/need a real driver,
+for example, in development of code</li>
+<li>See <span class="xref std std-ref">Drivers</span></li>
 </ul>
 </div>
 <div class="section" id="tests">

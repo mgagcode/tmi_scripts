@@ -103,13 +103,13 @@ class ResultBaseClass(object):
 
     def measurement(self, name, value, unit, min=None, max=None):
         """
-        :param name:
-        :param min:
-        :param max:
-        :param value:
+        :param name: name of measurement
+        :param min: minimum value, None for ignore
+        :param max: maximum value, None for ignore
+        :param value: value
         :param unit: one of self.UNIT_*
-        :return: True if value within limits, otherwise False
-                 string, string of test
+        :return: True if value within min/max limits, otherwise False
+                 string, string of measurement result
         """
         _pass = ResultAPI.RECORD_RESULT_UNKNOWN
 

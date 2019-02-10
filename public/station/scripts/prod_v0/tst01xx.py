@@ -22,13 +22,13 @@ class tst01xx(TestItem):
         self.logger = logging.getLogger("TMI.{}.{}".format(__name__, self.chan))
 
     def TST1xxSETUP(self):
-        context = self.item_start()  # always first line of test
+        ctx = self.item_start()  # always first line of test
         time.sleep(self.DEMO_TIME_DELAY * random() * self.DEMO_TIME_RND_ENABLE)
 
         self.item_end() # always last line of test
 
     def TST1xxTRDN(self):
-        context = self.item_start()  # always first line of test
+        ctx = self.item_start()  # always first line of test
         time.sleep(self.DEMO_TIME_DELAY * random() * self.DEMO_TIME_RND_ENABLE)
         self.item_end() # always last line of test
 

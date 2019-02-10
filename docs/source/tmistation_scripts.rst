@@ -163,6 +163,8 @@ This section sets required variables that TMIStation uses to drive the test scri
 
 * this is a list of ``drivers`` to start when the script it loaded
 * the dot notation is specifying a directory path to the python file to read
+* every script must have a driver.  A fake driver is available in the case where you don't want/need a real driver,
+  for example, in development of code
 * See :ref:`Drivers`
 
 tests
