@@ -1,0 +1,216 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Overview &#8212; TMI 0.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Travellers" href="tmistation_travellers.html" />
+    <link rel="prev" title="TMIStation Screenshots" href="tmistation_screenshots.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tmistation_travellers.html" title="Travellers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tmistation_screenshots.html" title="TMIStation Screenshots"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TMI 0.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+<p>This is an overview of how TMIStation is structured.</p>
+<div class="section" id="scripts-and-programs">
+<h2>Scripts and Programs<a class="headerlink" href="#scripts-and-programs" title="Permalink to this headline">¶</a></h2>
+<p>TMIStation tests are driven by two things, <code class="docutils literal notranslate"><span class="pre">scripts</span></code> and <code class="docutils literal notranslate"><span class="pre">programs</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Scripts</span></code></p>
+<ul class="simple">
+<li>define the test sequence and operating modes of the test being run</li>
+<li>are in human readable JSON file format<ul>
+<li>JSON is used so that non-programmers may be able to read/edit <a class="footnote-reference" href="#id2" id="id1">[1]</a> the script without requiring a
+programming background.  This is useful in development or emergency situations.</li>
+</ul>
+</li>
+<li>extend JSON a little bit, by allowing comments, any line begining with <cite>#</cite> is a comment.  This allows
+the script to be documented</li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">Programs</span></code></p>
+<ul class="simple">
+<li>written in Python (3.6)</li>
+</ul>
+<div class="section" id="scripts">
+<h3>Scripts<a class="headerlink" href="#scripts" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Scripts</span></code> are a JSON file and are what is used to drive a test.  The <code class="docutils literal notranslate"><span class="pre">script</span></code> has the following sections,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;subs&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;info&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;config&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;tests&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="subs">
+<h4>subs<a class="headerlink" href="#subs" title="Permalink to this headline">¶</a></h4>
+<p>This is a section of User configurable substitutions for variables in the script.  For example, if there was a test
+limit that could have two values, the values can be listed as a <cite>subs</cite> field and the user can select which one to use.</p>
+<p>Obviously, in a production environment, typically operators are not allowed to arbitrarily change values of test
+limits or any other setup.  However, in an engineering lab, or new product ramp environment, having an easy method
+to change some parameters might be useful.  This fearture does not have to be used.</p>
+<p><cite>subs</cite> are also useful for generating <a class="reference internal" href="tmistation_travellers.html#travellers"><span class="std std-ref">Travellers</span></a>.</p>
+<p>Here is a full example of what <cite>subs</cite> section could look like,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;subs&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="c1"># Each item here is described by,</span>
+  <span class="c1"># &quot;key&quot;:</span>
+  <span class="c1">#   &quot;title&quot;: &quot;&lt;title&gt;&quot;,</span>
+  <span class="c1">#   &quot;type&quot; : &quot;&lt;str|num&gt;&quot;, &quot;widget&quot;: &quot;&lt;textinput|select&gt;&quot;,</span>
+  <span class="c1">#   &quot;regex&quot;: &lt;&quot;regex&quot;|null|omit&gt;, &quot;default&quot;: &lt;default&gt;</span>
+  <span class="c1">#</span>
+  <span class="c1"># Rules:</span>
+  <span class="c1"># 1. key must not have any spaces or special characters</span>
+  <span class="c1"># 2. regex can be omitted if not applicable</span>
+  <span class="c1">#</span>
+  <span class="s2">&quot;Lot&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Lot (format #####)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span> <span class="s2">&quot;widget&quot;</span><span class="p">:</span> <span class="s2">&quot;textinput&quot;</span><span class="p">,</span> <span class="s2">&quot;regex&quot;</span><span class="p">:</span> <span class="s2">&quot;^</span><span class="se">\\</span><span class="s2">d</span><span class="si">{5}</span><span class="s2">$&quot;</span><span class="p">,</span> <span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="s2">&quot;95035&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;Loc&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Location&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span> <span class="s2">&quot;widget&quot;</span><span class="p">:</span> <span class="s2">&quot;select&quot;</span><span class="p">,</span> <span class="s2">&quot;choices&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;canada/ontario/milton&quot;</span><span class="p">,</span> <span class="s2">&quot;us/newyork/bufalo&quot;</span><span class="p">]</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;TST000Max&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;TST000 Max Attenuation (db)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;num&quot;</span><span class="p">,</span> <span class="s2">&quot;widget&quot;</span><span class="p">:</span> <span class="s2">&quot;select&quot;</span><span class="p">,</span> <span class="s2">&quot;choices&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">},</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">key</span></code></p>
+<ul class="simple">
+<li>the name of the variable to be replaced somewhere else in the script, for example, the variable could be in
+the <code class="docutils literal notranslate"><span class="pre">info</span></code> section<ul>
+<li>the variable in other sections, would be named <code class="docutils literal notranslate"><span class="pre">&quot;%%key&quot;</span></code></li>
+<li>the variable would be listed with double quotes, regardless of the variable type</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">key</span></code> should not have any special characters in it, else bad things happen</li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">title</span></code></p>
+<ul class="simple">
+<li>this is the title of the field to be presented to the Operator in the Test Config view</li>
+<li>if there is a specific format of the variable expected, that should be indicated in the <code class="docutils literal notranslate"><span class="pre">title</span></code></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">type</span></code></p>
+<ul class="simple">
+<li>indicates type of variable that is ultimately required in the final JSON version of the script</li>
+<li>string (<cite>str</cite>) and number (<cite>num</cite>) (covers float and ints) are the only options</li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">widget</span></code></p>
+<ul class="simple">
+<li>the type of GUI widget to present to the Operator in the Test Config view</li>
+<li><cite>textinput</cite> is a generic text input box, which will be populated by the <code class="docutils literal notranslate"><span class="pre">default</span></code> field</li>
+<li><cite>select</cite> is a drop down selection menu</li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">regex</span></code></p>
+<ul class="simple">
+<li>used only for <cite>textinput</cite> <code class="docutils literal notranslate"><span class="pre">widget</span></code></li>
+<li>used to validate the Operator entered correct information</li>
+<li>this is optional field</li>
+</ul>
+</div>
+<div class="section" id="info">
+<h4>info<a class="headerlink" href="#info" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="config">
+<h4>config<a class="headerlink" href="#config" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="tests">
+<h4>tests<a class="headerlink" href="#tests" title="Permalink to this headline">¶</a></h4>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td><code class="docutils literal notranslate"><span class="pre">Scripts</span></code> CAN BE LOCKED DOWN so that a production user cannot change them.  Locking down the TMIStation is covered TBD.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tmistation_screenshots.html"
+                        title="previous chapter">TMIStation Screenshots</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tmistation_travellers.html"
+                        title="next chapter">Travellers</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tmistation_travellers.html" title="Travellers"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tmistation_screenshots.html" title="TMIStation Screenshots"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TMI 0.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Martin Guthrie.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

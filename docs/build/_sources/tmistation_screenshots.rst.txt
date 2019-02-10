@@ -36,6 +36,7 @@ Test View
 *********
 
 * The result after 4 channels of the demo script have finished
+* For each channel a log table is shown
 
 .. image:: _static/Screenshot_test_01.png
 

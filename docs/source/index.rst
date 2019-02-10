@@ -12,6 +12,8 @@ infrastructure to manage the data, scripts, users, roles, reporting and other mu
 
    tmistation_demo
    tmistation_screenshots
+   tmistation_overview
+   tmistation_travellers
 
 
 Indices and tables
