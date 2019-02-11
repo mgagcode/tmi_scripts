@@ -565,15 +565,30 @@ Example of measurement API is show in the example above, but are reviewed here i
         :param max: maximum value, None for ignore
         :param value: value
         :param unit: one of self.UNIT_*
-        :return: True if value within min/max limits, otherwise False
-                 string, string of measurement result
+        :return: result, msg
+            where:
+                result: one of <ResultAPI.RECORD_*>
+                msg: string, string of measurement result, suitable for humans
         """
 
-And units are from,
+``name`` - this will be appended to the full name of the test, which is the path to the python
+program, the program filename, the class method, and finally this name.  As such the final test
+name is a unique identifier
+
+``units`` - from,
 
 ::
 
     class ResultAPI(Const):
+
+        RECORD_RESULT_UNKNOWN = "UNKNOWN" # this is an error if not changed
+        RECORD_RESULT_PASS = "PASS"
+        RECORD_RESULT_FAIL = "FAIL"
+        RECORD_RESULT_TIMEOUT = "TIMEOUT"
+        RECORD_RESULT_INCOMPLETE = "INC"
+        RECORD_RESULT_INTERNAL_ERROR = "INTERNAL_ERROR"
+        RECORD_RESULT_SKIP = "SKIP"
+        RECORD_RESULT_DISABLED = "DISABLED"
 
         UNIT_OHMS = "Ohms"
         UNIT_DB = "dB"
@@ -585,20 +600,119 @@ And units are from,
         UNIT_CELCIUS = "Celcius"
         UNIT_NONE = "None"
 
-Measurements are usually called like this,
+        TESTITEM_TIMEOUT = 10.0
+
+Measurements are called thru the ``ctx.record.measurement()`` API like this,
 
 ::
 
-    value = <some_value_from_test_equipment>
-    _result, _bullet = ctx.record.measurement("apples",
-                                              value,
-                                              ResultAPI.UNIT_DB,
-                                              ctx.item.args.min,
-                                              ctx.item.args.max)
-    self.log_bullet(_bullet)
+    def myTest(self):
+        ctx = self.item_start()   # always first line of test
+
+        value = <some_value_from_test_equipment>
+        _result, _bullet = ctx.record.measurement("apples",
+                                                  value,
+                                                  ResultAPI.UNIT_DB,
+                                                  ctx.item.args.min,
+                                                  ctx.item.args.max)
+        self.log_bullet(_bullet)
+        self.item_end(_result)  # always last line of test
+
+* two results are returned, shown above as ``_result, _bullet``
+* ``_bullet`` string (second variable returned) is suitable for printing to the log via ``self.log_bullet()``
+* ``_result`` is meant to be sent to ``self.item_end()`` as shown and thus the state of the test is set (Pass or Fail)
+* ``_result`` may cause the program to take different action and not affect the state of the test item simply
+  by not sending the result to ``self.item_end()``
+* calling ``ctx.record.measurement()`` means that this value will be in the backend database
 
 
+Binning Failures
+----------------
 
-Directory Structure
--------------------
+When a failure occurs in production, typically the DUTs are "binned" according to the failure type.  Then the
+"bin" is bulk processed at a later time.  Given this typical process, TMIStation provides a means of indicating
+a "binning code" when a failure occurs.
+
+The "binning mechanism" is provided by the ``fail`` field for the test item in the script.  There is a list
+of binning failure IDs (``fid``) with a corresponding ``msg`` for the user in the script.  This is shown in the
+example ``TST000_Meas`` above.  Repeated here.
+
+Example Notes:
+
+* Two measurements are taken
+* The measurement results are stored in a list, ``measurement_results``.  This list will be passed
+  to ``self.item_end()`` so that all the results are considered by the system.  If any one of these results
+  is a FAIL, the test item will FAIL.
+* There is a co-operation between the test script and the test code as per the index to the type of failure.
+  This is coded in the constants ``FAIL_APPLE`` and ``FAIL_BANANNA``
+* ``ctx.record.fail_msg()`` is used to set the user facing "binning" message
+* The ``fid`` text represents the "binning" code
+* The ``msg`` is there to provide a hint to the test engineer of where the problem might be
+
+::
+
+    {"id": "TST000_Meas",  "enable": true, "args": {"min": 0, "max": 10},
+                           # fail: this is a list of 'fid' and 'msg' that get displayed and
+                           #       recorded with the test record.  The python code for this
+                           #       test item assigns which item in the list best represents
+                           #       the failure mode.  This information is to assist repair.
+                           "fail": [ {"fid": "TST000-0", "msg": "Component apple R1"},
+                                     {"fid": "TST000-1", "msg": "Component banana R1"}] },
+
+Program code,
+
+::
+
+    def TST000_Meas(self):
+        """ Measurement example, with multiple failure messages
+        - example of taking multiple measurements, and sending as a list of results
+        - if any test fails, this test item fails
+
+            {"id": "TST000_Meas",    "enable": true, "args": {"min": 0, "max": 10},
+                                     "fail": [ {"fid": "TST000-0", "msg": "Component apple R1"},
+                                               {"fid": "TST000-1", "msg": "Component banana R1"}] },
+        """
+        ctx = self.item_start()   # always first line of test
+
+        time.sleep(self.DEMO_TIME_DELAY * random() * self.DEMO_TIME_RND_ENABLE)
+
+        FAIL_APPLE   = 0  # indexes into the "fail" list, just for code readability
+        FAIL_BANANNA = 1
+
+        measurement_results = []  # list for all the coming measurements...
+
+        # Apples measurement...
+        _result, _bullet = ctx.record.measurement("apples",
+                                                  randint(0, 10),
+                                                  ResultAPI.UNIT_DB,
+                                                  ctx.item.args.min,
+                                                  ctx.item.args.max)
+        # if failed, there is a msg in script to attach to the record, for repair purposes
+        if _result == ResultAPI.RECORD_RESULT_FAIL:
+            msg = ctx.item.fail[FAIL_APPLE]
+            ctx.record.fail_msg(msg)
+
+        self.log_bullet(_bullet)
+        measurement_results.append(_result)
+
+        # Bananas measurement...
+        _result, _bullet = ctx.record.measurement("bananas",
+                                                  randint(0, 10),
+                                                  ResultAPI.UNIT_DB,
+                                                  ctx.item.args.min,
+                                                  ctx.item.args.max)
+
+        # if failed, there is a msg in script to attach to the record, for repair purposes
+        if _result == ResultAPI.RECORD_RESULT_FAIL:
+            msg = ctx.item.fail[FAIL_BANANNA]
+            ctx.record.fail_msg(msg)
+
+        self.log_bullet(_bullet)
+        measurement_results.append(_result)
+
+        # Note that we can send a list of measurements
+        self.item_end(item_result_state=measurement_results)  # always last line of test
+
+The idea is that over time, the failure codes and messages can become more accurate and meaningful as
+production failures become understood.
 

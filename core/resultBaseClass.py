@@ -108,8 +108,10 @@ class ResultBaseClass(object):
         :param max: maximum value, None for ignore
         :param value: value
         :param unit: one of self.UNIT_*
-        :return: True if value within min/max limits, otherwise False
-                 string, string of measurement result
+        :return: result, msg
+            where:
+                result: one of <ResultAPI.RECORD_*>
+                msg: string, string of measurement result, suitable for humans
         """
         _pass = ResultAPI.RECORD_RESULT_UNKNOWN
 
