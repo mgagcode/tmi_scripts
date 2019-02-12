@@ -1,5 +1,5 @@
-Demo
-####
+TMIStation Demo
+###############
 
 **TMIStation**
 
@@ -15,14 +15,12 @@ The instructions are split into two catagories,
 
   * Uses `git` to clone a prescriptive directory structure used by `TMIStation`
 
-Basic
-*****
+.. contents::
+   :local:
 
-The Basic Demo is the easiest and fastest way to try out TMIStation.  However you will not be able to
-edit or create new scripts.
 
 Requirements
-============
+************
 
 * Operating System
 
@@ -35,15 +33,23 @@ Requirements
   * Google Chrome browser (other browsers are not tested)
   * install Docker CE (https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 
+Basic
+*****
 
-Installation
-============
+The Basic Demo is the easiest and fastest way to try out TMIStation.  However you will not be able to
+edit or create new scripts.
+
+
+Run Basic
+=========
 
 TMI programs are deployed as Docker containers, which allows the programs to run in a virtual
 environment, and be independent of your host operating system.  This means, for example, that you don't have
 to worry about python packages, versions of modules, etc
 
-* Run **tmistation** container::
+* Run **tmistation** container - it doesn't matter which directory you are in
+
+::
 
     docker run -ti -p 6800:6800 mgagcode/tmistation
 
@@ -52,10 +58,12 @@ to worry about python packages, versions of modules, etc
     http://127.0.0.1:6800
 
 * TMIStation login user/password is admin/admin
+
   * Other users passwords are `qwerty`
   * To **update** `tmistation` container use::
 
-    docker pull mgagcode/tmistation
+        docker pull mgagcode/tmistation
+
 
 * Run your first script
 
@@ -74,7 +82,6 @@ The Full Demo works by creating a local file structure and telling the ``tmistat
 local file system.  This requires a more advanced `docker run` command.
 
 `Git <https://git-scm.com/>`_ and `Github <http://www.github.com>`_ are used.
-
 
 Additional Requirements
 =======================
@@ -106,8 +113,8 @@ Clone TMIScripts
     cd ~/git/tmistation
     git clone https://github.com/mgagcode/tmi_scripts.git
 
-Run
-===
+Run Full
+========
 
 * Run TMIStation::
 

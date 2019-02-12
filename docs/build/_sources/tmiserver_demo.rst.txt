@@ -17,8 +17,16 @@ The instructions are split into two catagories,
 
   * Uses `git` to clone a prescriptive directory structure used by `TMIServer`
 
+TMI programs are deployed as Docker containers, which allows the programs to run in a virtual
+environment, and be independent of your host operating system.  This means, for example, that you don't have
+to worry about python packages, versions of modules, etc
+
+.. contents::
+   :local:
+
+
 Requirements
-============
+************
 
 * Operating System
 
@@ -32,12 +40,8 @@ Requirements
   * install Docker CE (https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 
 
-Installation
-============
-
-TMI programs are deployed as Docker containers, which allows the programs to run in a virtual
-environment, and be independent of your host operating system.  This means, for example, that you don't have
-to worry about python packages, versions of modules, etc
+Postgres
+********
 
 TMIServer needs a postgresql backend to be running in order to work, which will be installed first.
 
@@ -66,8 +70,10 @@ TMIServer needs a postgresql backend to be running in order to work, which will 
 Basic
 *****
 
+Run Basic
+=========
 
-* Run "tmiserver" container
+* Run **tmiserver** container - it doesn't matter which directory you are in
 
 ::
 
@@ -114,8 +120,8 @@ Clone TMIScripts
     git clone https://github.com/mgagcode/tmi_scripts.git
 
 
-Run
-===
+Run Full
+========
 
 * Run TMIStation::
 

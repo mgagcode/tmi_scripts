@@ -18,6 +18,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Screenshots" href="tmiserver_screenshots.html" />
     <link rel="prev" title="TMIServer" href="tmiserver_main.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -26,6 +27,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tmiserver_screenshots.html" title="Screenshots"
+             accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="tmiserver_main.html" title="TMIServer"
              accesskey="P">previous</a> |</li>
@@ -55,8 +59,26 @@
 </ul>
 </li>
 </ul>
+<p>TMI programs are deployed as Docker containers, which allows the programs to run in a virtual
+environment, and be independent of your host operating system.  This means, for example, that you don’t have
+to worry about python packages, versions of modules, etc</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#requirements" id="id3">Requirements</a></li>
+<li><a class="reference internal" href="#postgres" id="id4">Postgres</a></li>
+<li><a class="reference internal" href="#basic" id="id5">Basic</a><ul>
+<li><a class="reference internal" href="#run-basic" id="id6">Run Basic</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#full" id="id7">Full</a><ul>
+<li><a class="reference internal" href="#clone-tmiscripts" id="id8">Clone TMIScripts</a></li>
+<li><a class="reference internal" href="#run-full" id="id9">Run Full</a></li>
+</ul>
+</li>
+</ul>
+</div>
 <div class="section" id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id3">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Operating System<ul>
 <li>The system was developed on both Windows 10 and Ubuntu 18.04</li>
@@ -71,11 +93,8 @@
 </li>
 </ul>
 </div>
-<div class="section" id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p>TMI programs are deployed as Docker containers, which allows the programs to run in a virtual
-environment, and be independent of your host operating system.  This means, for example, that you don’t have
-to worry about python packages, versions of modules, etc</p>
+<div class="section" id="postgres">
+<h2><a class="toc-backref" href="#id4">Postgres</a><a class="headerlink" href="#postgres" title="Permalink to this headline">¶</a></h2>
 <p>TMIServer needs a postgresql backend to be running in order to work, which will be installed first.</p>
 <ul class="simple">
 <li>postgresql server<ul>
@@ -98,10 +117,13 @@ docker run --net tminet --name tmidb -v $(pwd)/datadir:/var/lib/postgresql/data 
 <span class="n">docker</span> <span class="n">exec</span> <span class="o">-</span><span class="n">it</span> <span class="n">tmidb</span> <span class="n">createdb</span> <span class="o">-</span><span class="n">U</span> <span class="n">postgres</span> <span class="n">resultbasekeysv1</span>
 </pre></div>
 </div>
+</div>
 <div class="section" id="basic">
-<h3>Basic<a class="headerlink" href="#basic" title="Permalink to this headline">¶</a></h3>
+<h2><a class="toc-backref" href="#id5">Basic</a><a class="headerlink" href="#basic" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="run-basic">
+<h3><a class="toc-backref" href="#id6">Run Basic</a><a class="headerlink" href="#run-basic" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Run “tmiserver” container</li>
+<li>Run <strong>tmiserver</strong> container - it doesn’t matter which directory you are in</li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">--</span><span class="n">net</span> <span class="n">tminet</span> <span class="o">-</span><span class="n">ti</span> <span class="o">-</span><span class="n">p</span> <span class="mi">6600</span><span class="p">:</span><span class="mi">6600</span> <span class="n">mgagcode</span><span class="o">/</span><span class="n">tmiserver</span>
 </pre></div>
@@ -119,8 +141,9 @@ docker run --net tminet --name tmidb -v $(pwd)/datadir:/var/lib/postgresql/data 
 </li>
 </ul>
 </div>
+</div>
 <div class="section" id="full">
-<h3>Full<a class="headerlink" href="#full" title="Permalink to this headline">¶</a></h3>
+<h2><a class="toc-backref" href="#id7">Full</a><a class="headerlink" href="#full" title="Permalink to this headline">¶</a></h2>
 <p>The Full Demo assume you have followed the instructions for the <a class="reference internal" href="#basic">basic</a> demo.</p>
 <p>The Full Demo works by creating a local file structure and telling the <code class="docutils literal notranslate"><span class="pre">tmiserver</span></code> Docker container to use that
 local file system.  This requires a more advanced <cite>docker run</cite> command.</p>
@@ -128,10 +151,8 @@ local file system.  This requires a more advanced <cite>docker run</cite> comman
 <ul class="simple">
 <li>Follow these instructions <a class="reference internal" href="tmistation_demo.html#additional-requirements"><span class="std std-ref">Additional Requirements</span></a></li>
 </ul>
-</div>
-</div>
 <div class="section" id="clone-tmiscripts">
-<h2>Clone TMIScripts<a class="headerlink" href="#clone-tmiscripts" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id8">Clone TMIScripts</a><a class="headerlink" href="#clone-tmiscripts" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p class="first">There is a prescriptive directory structure to use, and that is stored on <cite>github</cite> in a project called <code class="docutils literal notranslate"><span class="pre">tmi_scripts</span></code></p>
 </li>
@@ -152,8 +173,8 @@ local file system.  This requires a more advanced <cite>docker run</cite> comman
 </li>
 </ul>
 </div>
-<div class="section" id="run">
-<h2>Run<a class="headerlink" href="#run" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="run-full">
+<h3><a class="toc-backref" href="#id9">Run Full</a><a class="headerlink" href="#run-full" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p class="first">Run TMIStation:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cd ~/git/tmiserver/tmi_scripts/public
@@ -175,6 +196,7 @@ docker run --net tminet -ti -p 6600:6600 -v $(pwd):/app/public mgagcode/tmiserve
 </table>
 </div>
 </div>
+</div>
 
 
           </div>
@@ -185,6 +207,9 @@ docker run --net tminet -ti -p 6600:6600 -v $(pwd):/app/public mgagcode/tmiserve
   <h4>Previous topic</h4>
   <p class="topless"><a href="tmiserver_main.html"
                         title="previous chapter">TMIServer</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tmiserver_screenshots.html"
+                        title="next chapter">Screenshots</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <div class="searchformwrapper">
@@ -207,6 +232,9 @@ docker run --net tminet -ti -p 6600:6600 -v $(pwd):/app/public mgagcode/tmiserve
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="tmiserver_screenshots.html" title="Screenshots"
+             >next</a> |</li>
         <li class="right" >
           <a href="tmiserver_main.html" title="TMIServer"
              >previous</a> |</li>
