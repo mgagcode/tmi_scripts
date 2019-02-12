@@ -6,12 +6,15 @@ test programs to test your product, and a backend dashboard to monitor productio
 platform is intended to allow you to focus on testing your product, rather than the
 infrastructure to manage the data, scripts, users, roles, reporting and other mundane stuff.
 
+.. image:: _static/tmi_main_splash.png
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
    tmistation_main
    tmiserver_main
+   tmi_system
 
 
 Indices and tables
