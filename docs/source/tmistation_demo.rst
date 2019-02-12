@@ -1,19 +1,19 @@
-TMIStation Demo
-###############
+Demo
+####
 
 **TMIStation**
 
 This is the program that production operators would use, interfaces with test equipment and the Device Under Test (DUT)
 
-* The instructions are split into two catagories,
+The instructions are split into two catagories,
 
-  * Basic
+* Basic
 
-    * Simplest and fastest way to see `TMIStation`
+  * Simplest and fastest way to see `TMIStation`
 
-  * Full
+* Full
 
-    * Uses `git` to clone a prescriptive directory structure used by `TMIStation`
+  * Uses `git` to clone a prescriptive directory structure used by `TMIStation`
 
 Basic
 *****

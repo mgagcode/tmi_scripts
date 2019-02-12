@@ -10,14 +10,8 @@ infrastructure to manage the data, scripts, users, roles, reporting and other mu
    :maxdepth: 2
    :caption: Contents:
 
-   tmistation_demo
-   tmistation_screenshots
-   tmistation_overview
-   tmistation_scripts
-   tmistation_programs
-   tmistation_fileorg
-   tmistation_drivers
-   tmistation_travellers
+   tmistation_main
+   tmiserver_main
 
 
 Indices and tables

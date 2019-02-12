@@ -1,5 +1,5 @@
-TMIStation Screenshots
-######################
+Screenshots
+###########
 
 Main view
 *********
