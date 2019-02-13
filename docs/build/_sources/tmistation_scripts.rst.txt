@@ -34,7 +34,7 @@ subs
 This is a section of User configurable substitutions for variables in the script.  For example, if there was a test
 limit that could have two values, the values can be listed as a `subs` field and the user can select which one to use.
 
-Obviously, in a production environment, typically operators are not allowed to arbitrarily change values of test
+Obviously, in a production environment, operators are not typically allowed to arbitrarily change values of test
 limits or any other setup.  However, in an engineering lab, or new product ramp environment, having an easy method
 to change some parameters might be useful.  This feature does not have to be used.
 
