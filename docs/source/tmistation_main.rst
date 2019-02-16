@@ -13,4 +13,5 @@ TMIStation is the production floor prgram that runs your scripts and tests your 
    tmistation_scripts
    tmistation_programs
    tmistation_drivers
+   tmistation_accounts
    tmistation_travellers
