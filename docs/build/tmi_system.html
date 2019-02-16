@@ -18,6 +18,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Production Planning" href="tmi_prodplan.html" />
     <link rel="prev" title="Screenshots" href="tmiserver_screenshots.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -26,6 +27,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tmi_prodplan.html" title="Production Planning"
+             accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="tmiserver_screenshots.html" title="Screenshots"
              accesskey="P">previous</a> |</li>
@@ -45,13 +49,16 @@ TMIStation and TMIServer.</p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><a class="reference internal" href="#architecture" id="id1">Architecture</a><ul>
-<li><a class="reference internal" href="#definitions" id="id2">Definitions</a></li>
+<li><a class="reference internal" href="#results-flow" id="id2">Results Flow</a></li>
+<li><a class="reference internal" href="#definitions" id="id3">Definitions</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="section" id="architecture">
 <h2><a class="toc-backref" href="#id1">Architecture</a><a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
+<p>This is a typical TMI system architecture layout.  More complex systems are possible and
+shown later in this section.</p>
 <img alt="_images/Screenshot_system_network_01.png" src="_images/Screenshot_system_network_01.png" />
 <p>Notes:</p>
 <ul class="simple">
@@ -82,7 +89,7 @@ to look for the TMIServer</li>
 <li>TMIServer can be run in the cloud<ul>
 <li>Local TMIServers can be configured to send their results upstream to a cloud
 based TMIServer, thus all you results can end up in one place</li>
-<li>As noted above, you donj’t want to have your production LAN connected to the
+<li>As noted above, you don’t want to have your production LAN connected to the
 internet for security and reliablity reasons, therefore, at some regular
 interval you will remove a local TMIServer from the production LAN and connect it
 to the internet so it can find the upstream TMIServer and upload results to it</li>
@@ -91,8 +98,66 @@ to the internet so it can find the upstream TMIServer and upload results to it</
 </ul>
 </li>
 </ul>
+<p>This is a more sophisticated TMI system plan.</p>
+<img alt="_images/Screenshot_system_network_03.png" src="_images/Screenshot_system_network_03.png" />
+<p>Here two remote factories send their data to a cloud TMIServer so that Head Office can
+monitor all Result data.</p>
+<p>Note in Factory 1 there are three production lines.  Line 1 and 2 have their own local
+TMIServer and a monitoring station for viewing the dashboard.  Line 3 does not have a
+local TMIServer and is using the factory TMIServer.</p>
+<div class="section" id="results-flow">
+<h3><a class="toc-backref" href="#id2">Results Flow</a><a class="headerlink" href="#results-flow" title="Permalink to this headline">¶</a></h3>
+<p>This diagram also shows a possible architecture of a TMI system.  In this diagram the focus
+is on what happens to DUT results.</p>
+<p>This architecture shows how TMIServers can be stacked
+on top of each other.  Each TMIServer is aggregating more results that come from below it.  In
+this case, two factories are supplying results to a central TMIServer.</p>
+<img alt="_images/Screenshot_system_network_02.png" src="_images/Screenshot_system_network_02.png" />
+<p>What follows is a description of lables A-F…</p>
+<ul class="simple">
+<li>A<ul>
+<li>Result JSON is created at the TMIStation and saved locally to a <cite>stage</cite> directory</li>
+</ul>
+</li>
+<li>B<ul>
+<li>At some point, TMIStation will attempt to contact a TMIServer and send the result
+JSON to it.</li>
+<li>If TMIServer is not connected/reachable, the file remains in <cite>stage</cite>.</li>
+</ul>
+</li>
+<li>C<ul>
+<li>If TMIServer indicates the file was received successfully, TMIStation result is moved from
+<cite>stage</cite> to the <cite>bkup</cite> folder.</li>
+</ul>
+</li>
+<li>D<ul>
+<li>TMIServer processes the result JSON into its (postgres) database.</li>
+</ul>
+</li>
+<li>Derr<ul>
+<li>If there was a processing error, the result JSON is stored in <cite>quarantine</cite> folder.</li>
+</ul>
+</li>
+<li>E<ul>
+<li>result JSON is stored in <cite>bkup</cite> folder if it was processed without error.</li>
+</ul>
+</li>
+<li>F<ul>
+<li>if this TMIServer is configured to have an upstream TMIServer, the result JSON is stored
+in <cite>stage</cite> folder</li>
+</ul>
+</li>
+<li>At this point, the process B-F repeats itself.</li>
+</ul>
+<p>Notes:</p>
+<ol class="arabic simple">
+<li>The Result JSON is backed up at each level.  These backups can be turned off if desired.</li>
+<li>Any TMIServer dashboard can be accessed with web browser.  The results that can be seen
+will be that which is local to that TMIServer.</li>
+</ol>
+</div>
 <div class="section" id="definitions">
-<h3><a class="toc-backref" href="#id2">Definitions</a><a class="headerlink" href="#definitions" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id3">Definitions</a><a class="headerlink" href="#definitions" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">Test</span> <span class="pre">Jigs</span></code></p>
 <ul class="simple">
 <li>These are custom designed fixtures that interface your product (Device Under Test (DUT))
@@ -136,6 +201,9 @@ it can be a daughter card that plugs into an <code class="docutils literal notra
   <h4>Previous topic</h4>
   <p class="topless"><a href="tmiserver_screenshots.html"
                         title="previous chapter">Screenshots</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tmi_prodplan.html"
+                        title="next chapter">Production Planning</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <div class="searchformwrapper">
@@ -158,6 +226,9 @@ it can be a daughter card that plugs into an <code class="docutils literal notra
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="tmi_prodplan.html" title="Production Planning"
+             >next</a> |</li>
         <li class="right" >
           <a href="tmiserver_screenshots.html" title="Screenshots"
              >previous</a> |</li>

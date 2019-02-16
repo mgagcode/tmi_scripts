@@ -11,6 +11,9 @@ TMIStation and TMIServer.
 Architecture
 ************
 
+This is a typical TMI system architecture layout.  More complex systems are possible and
+shown later in this section.
+
 .. image:: _static/Screenshot_system_network_01.png
 
 Notes:
@@ -43,10 +46,70 @@ Notes:
 
     * Local TMIServers can be configured to send their results upstream to a cloud
       based TMIServer, thus all you results can end up in one place
-    * As noted above, you donj't want to have your production LAN connected to the
+    * As noted above, you don't want to have your production LAN connected to the
       internet for security and reliablity reasons, therefore, at some regular
       interval you will remove a local TMIServer from the production LAN and connect it
       to the internet so it can find the upstream TMIServer and upload results to it
+
+
+This is a more sophisticated TMI system plan.
+
+.. image:: _static/Screenshot_system_network_03.png
+
+Here two remote factories send their data to a cloud TMIServer so that Head Office can
+monitor all Result data.
+
+Note in Factory 1 there are three production lines.  Line 1 and 2 have their own local
+TMIServer and a monitoring station for viewing the dashboard.  Line 3 does not have a
+local TMIServer and is using the factory TMIServer.
+
+Results Flow
+============
+
+This diagram also shows a possible architecture of a TMI system.  In this diagram the focus
+is on what happens to DUT results.
+
+This architecture shows how TMIServers can be stacked
+on top of each other.  Each TMIServer is aggregating more results that come from below it.  In
+this case, two factories are supplying results to a central TMIServer.
+
+.. image:: _static/Screenshot_system_network_02.png
+
+What follows is a description of lables A-F...
+
+* A
+
+  * Result JSON is created at the TMIStation and saved locally to a `stage` directory
+* B
+
+  * At some point, TMIStation will attempt to contact a TMIServer and send the result
+    JSON to it.
+  * If TMIServer is not connected/reachable, the file remains in `stage`.
+* C
+
+  * If TMIServer indicates the file was received successfully, TMIStation result is moved from
+    `stage` to the `bkup` folder.
+* D
+
+  * TMIServer processes the result JSON into its (postgres) database.
+* Derr
+
+  * If there was a processing error, the result JSON is stored in `quarantine` folder.
+* E
+
+  * result JSON is stored in `bkup` folder if it was processed without error.
+* F
+
+  * if this TMIServer is configured to have an upstream TMIServer, the result JSON is stored
+    in `stage` folder
+
+* At this point, the process B-F repeats itself.
+
+Notes:
+
+#. The Result JSON is backed up at each level.  These backups can be turned off if desired.
+#. Any TMIServer dashboard can be accessed with web browser.  The results that can be seen
+   will be that which is local to that TMIServer.
 
 
 Definitions

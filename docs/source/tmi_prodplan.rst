@@ -103,12 +103,18 @@ This is a lot to wrap your head around, so to avoid future confusion, a proposal
 Proposal
 ********
 
+All of these naming conventions, versions, will end up in the results file, in that way, you precisely know
+by which scripts, programs, and methods a test was done.
+
 Product naming
 
 * P###mm
 
   * ### => 000, 001, etc, represents a class of product
   * mm => 00, 01, etc, model or version of the product
+
+* In a spreadsheet (or other tool) keep a list of P### that correspond to internal project names,
+  or actual BOM numbers, etc.
 
 Test Script naming
 
