@@ -18,7 +18,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Drivers" href="tmistation_drivers.html" /> 
+    <link rel="next" title="TMIServer" href="tmiserver_main.html" />
+    <link rel="prev" title="Accounts" href="tmistation_accounts.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -27,9 +28,13 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="tmistation_drivers.html" title="Drivers"
+          <a href="tmiserver_main.html" title="TMIServer"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tmistation_accounts.html" title="Accounts"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">TMI 0.1.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">TMI 0.1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="tmistation_main.html" accesskey="U">TMIStation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -40,7 +45,31 @@
             
   <div class="section" id="travellers">
 <h1>Travellers<a class="headerlink" href="#travellers" title="Permalink to this headline">¶</a></h1>
-<p>TBD</p>
+<p>Travellers are 2D bar codes printed on paper than can configure TMIStation
+to run a script with certain substitution parameters.</p>
+<p>Travellers are used to simplify setting up and operating TMIStation by any
+User (operator) that may not be familiar with the production process.</p>
+<p>Travellers can only be created by users with the <cite>ConfigMan</cite> role.</p>
+<p>The image below shows the <cite>Test Config</cite> view, a script has been selected and
+the parameters selected, at this point the <cite>Traveller</cite> button turns Green
+indicating it can now be pressed.</p>
+<img alt="_images/Screenshot_traveller_01.png" src="_images/Screenshot_traveller_01.png" />
+<p>Pressing the <cite>Traveller</cite> button will pop up a new tab in the browser, similiar
+to the following,</p>
+<img alt="_images/Screenshot_traveller_02.png" src="_images/Screenshot_traveller_02.png" />
+<p>The traveller shows the User that created it, the time and date, and the parameters
+used when it was created.</p>
+<p>This is a PDF document.
+Use the browser functions to either Print or Save this document and pass
+it along to the production floor.</p>
+<div class="section" id="scanning">
+<h2>Scanning<a class="headerlink" href="#scanning" title="Permalink to this headline">¶</a></h2>
+<p>Travellers are scanned by the operator using most any bar code scanner set
+to emulate the keyboard.</p>
+<img alt="_images/Screenshot_traveller_03.png" src="_images/Screenshot_traveller_03.png" />
+<p>Once the image is scanned, you <cite>Apply</cite>, <cite>Submit</cite> and the <cite>Test</cite> to proceed
+to the Test View.</p>
+</div>
 </div>
 
 
@@ -50,8 +79,11 @@
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="tmistation_drivers.html"
-                        title="previous chapter">Drivers</a></p>
+  <p class="topless"><a href="tmistation_accounts.html"
+                        title="previous chapter">Accounts</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tmiserver_main.html"
+                        title="next chapter">TMIServer</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <div class="searchformwrapper">
@@ -75,9 +107,13 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="tmistation_drivers.html" title="Drivers"
+          <a href="tmiserver_main.html" title="TMIServer"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tmistation_accounts.html" title="Accounts"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">TMI 0.1.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">TMI 0.1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="tmistation_main.html" >TMIStation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
