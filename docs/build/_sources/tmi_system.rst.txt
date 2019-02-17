@@ -110,37 +110,3 @@ Notes:
 #. The Result JSON is backed up at each level.  These backups can be turned off if desired.
 #. Any TMIServer dashboard can be accessed with web browser.  The results that can be seen
    will be that which is local to that TMIServer.
-
-
-Definitions
-===========
-
-``Test Jigs``
-
-* These are custom designed fixtures that interface your product (Device Under Test (DUT))
-  to the TMIStation programs
-
-* ``Test Jigs``
-
-  * have ``Interface Boards`` (see defintion)
-  * have a nest where your DUT PCB is located and aligned to the spring probes
-
-``Interface Board``
-
-* A Printed Circuit Board (PCB) that has spring probes and some type of controller that
-  the TMIStation can talk to, to take measurements, and otherwise control the stimulus to the DUT.
-* Are custom developed depending on the DUT requirements
-
-  * TMI has developed a reference design based on MicroPython board, see TBD
-
-``Interface Controller``
-
-* A device with USB connectivity and a processor in which TMIStation can control and
-  otherwise interface to
-* Examples that could be used, Arduino, MicroPython, RaspBerry Pi, etc
-* An ``Interface Controller`` may be designed into the ``Interface Board`` or
-  it can be a daughter card that plugs into an ``Interface Board``
-
-  * TMI has developed a reference design based on MicroPython board, see TBD
-
-

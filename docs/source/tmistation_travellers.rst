@@ -7,7 +7,7 @@ to run a script with certain substitution parameters.
 Travellers are used to simplify setting up and operating TMIStation by any
 User (operator) that may not be familiar with the production process.
 
-Travellers can only be created by users with the `ConfigMan` role.
+Travellers can only be created by users with the :ref:`tmistation_accounts:ConfigMan` role.
 
 The image below shows the `Test Config` view, a script has been selected and
 the parameters selected, at this point the `Traveller` button turns Green
