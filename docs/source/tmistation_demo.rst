@@ -47,6 +47,14 @@ TMI programs are deployed as Docker containers, which allows the programs to run
 environment, and be independent of your host operating system.  This means, for example, that you don't have
 to worry about python packages, versions of modules, etc
 
+* First the **tmistation** Docker container must be `pulled` from docker hub
+
+::
+
+    docker pull mgagcode/tmistation
+
+* run this pull command to check for updates to **tmistation**
+
 * Run **tmistation** container - it doesn't matter which directory you are in
 
 ::
@@ -60,9 +68,6 @@ to worry about python packages, versions of modules, etc
 * TMIStation login user/password is admin/admin
 
   * Other users passwords are `qwerty`
-  * To **update** `tmistation` container use::
-
-        docker pull mgagcode/tmistation
 
 
 * Run your first script
@@ -119,7 +124,7 @@ Run Full
 * Run TMIStation::
 
     cd ~/git/tmistation/tmi_scripts/public
-    docker run -ti -p 6800:6800 -v $(pwd):/app/public tmistation
+    docker run -ti -p 6800:6800 -v $(pwd):/app/public mgagcode/tmistation
 
 * Open Google Chrome to
 

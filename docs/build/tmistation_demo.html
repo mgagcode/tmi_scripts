@@ -99,6 +99,13 @@ edit or create new scripts.</p>
 environment, and be independent of your host operating system.  This means, for example, that you don’t have
 to worry about python packages, versions of modules, etc</p>
 <ul class="simple">
+<li>First the <strong>tmistation</strong> Docker container must be <cite>pulled</cite> from docker hub</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">pull</span> <span class="n">mgagcode</span><span class="o">/</span><span class="n">tmistation</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>run this pull command to check for updates to <strong>tmistation</strong></li>
 <li>Run <strong>tmistation</strong> container - it doesn’t matter which directory you are in</li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">ti</span> <span class="o">-</span><span class="n">p</span> <span class="mi">6800</span><span class="p">:</span><span class="mi">6800</span> <span class="n">mgagcode</span><span class="o">/</span><span class="n">tmistation</span>
@@ -108,20 +115,12 @@ to worry about python packages, versions of modules, etc</p>
   <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">6800</span>
 </pre></div>
 </div>
-<ul>
-<li><p class="first">TMIStation login user/password is admin/admin</p>
-<ul>
-<li><p class="first">Other users passwords are <cite>qwerty</cite></p>
-</li>
-<li><p class="first">To <strong>update</strong> <cite>tmistation</cite> container use:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">pull</span> <span class="n">mgagcode</span><span class="o">/</span><span class="n">tmistation</span>
-</pre></div>
-</div>
-</li>
+<ul class="simple">
+<li>TMIStation login user/password is admin/admin<ul>
+<li>Other users passwords are <cite>qwerty</cite></li>
 </ul>
 </li>
-<li><p class="first">Run your first script</p>
-<ul class="simple">
+<li>Run your first script<ul>
 <li>Select pulldown menu item <cite>Test Config</cite></li>
 <li>Select script <cite>prod_0.tmiscr</cite></li>
 <li>Press button <cite>Submit</cite></li>
@@ -182,7 +181,7 @@ GUI programs that try and make <cite>git</cite> easier for the novice user, and 
 <ul>
 <li><p class="first">Run TMIStation:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cd ~/git/tmistation/tmi_scripts/public
-docker run -ti -p 6800:6800 -v $(pwd):/app/public tmistation
+docker run -ti -p 6800:6800 -v $(pwd):/app/public mgagcode/tmistation
 </pre></div>
 </div>
 </li>
