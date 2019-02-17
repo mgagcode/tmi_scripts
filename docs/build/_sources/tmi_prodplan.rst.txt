@@ -100,8 +100,8 @@ TMIStation needs the names of the following,
 
 This is a lot to wrap your head around, so to avoid future confusion, a proposal for structure is presented.
 
-Proposal
-********
+Naming Proposal
+***************
 
 All of these naming conventions, versions, will end up in the results file, in that way, you precisely know
 by which scripts, programs, and methods a test was done.
@@ -264,3 +264,52 @@ Example program P00100_T0100_SmokeTests,
             ...
             self.item_end() # always last line of test
 
+
+IP Addressing
+*************
+
+What follows is a simple design for allocating the IP addresses of TMIStation and TMIServer
+computers.  You may decide to do this differently.
+
+Assumptions:
+
+* Fixed IP addresses are used
+* the LAN IP is 192.168.0.X
+
+TMIStation IPs
+==============
+
+* Label each PC what its IP address is
+* Addresses
+
+  * 192.168.0.100  (first TMIStation)
+  * 192.168.0.101
+  * 192.168.0.102
+  * etc
+
+TMISever IPs
+============
+
+* Label each PC what its IP address is
+* Addresses
+
+  * 192.168.0.10 (first TMIServer, at lowest level in hierarchy)
+  * 192.168.0.20 (second TMIServer, at next level in hierarchy)
+  * etc
+
+Example
+=======
+
+In this example there are two factories,
+
+* no computers are exchanged between the factories
+* note Factory 1 has two levels of TMIServer, and note the IP addressing
+* The IP address of TMIServer in the cloud is unknown, and is typically given to you
+
+.. image:: _static/Screenshot_system_network_04.png
+
+
+Further Work
+============
+
+Consider using hostnames for TMIServer to avoid IP addressing....

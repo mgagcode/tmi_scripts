@@ -64,7 +64,7 @@ TMIServer and a monitoring station for viewing the dashboard.  Line 3 does not h
 local TMIServer and is using the factory TMIServer.
 
 Results Flow
-============
+************
 
 This diagram also shows a possible architecture of a TMI system.  In this diagram the focus
 is on what happens to DUT results.
