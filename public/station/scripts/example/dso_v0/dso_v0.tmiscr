@@ -16,7 +16,7 @@
   },
   "tests": [
     {
-      "module": "public.station.scripts.TMIDemoRecordV1.dso_v0.pydso",
+      "module": "public.station.scripts.example.dso_v0.pydso",
       "options": {
       },
       "items": [

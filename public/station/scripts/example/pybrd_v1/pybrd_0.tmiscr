@@ -13,7 +13,7 @@
   },
   "tests": [
     {
-      "module": "public.station.scripts.pybrd_v1.pybrd00xx",
+      "module": "public.station.scripts.example.pybrd_v1.pybrd00xx",
       "options": {
       },
       "items": [

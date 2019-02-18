@@ -32,7 +32,7 @@
   },
   "tests": [
     {
-      "module": "public.station.scripts.prod_v0.tst00xx",
+      "module": "public.station.scripts.example.prod_v0.tst00xx",
       "options": {
         "fail_fast": false
       },
@@ -46,7 +46,7 @@
       ]
     },
     {
-      "module": "public.station.scripts.prod_v0.tst01xx",
+      "module": "public.station.scripts.example.prod_v0.tst01xx",
       "options": {
         "fail_fast": false
       },

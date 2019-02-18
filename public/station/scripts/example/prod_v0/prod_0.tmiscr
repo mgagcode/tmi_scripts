@@ -29,7 +29,7 @@
   "tests": [
     {
       # module is path to python code supporting this test
-      "module": "public.station.scripts.prod_v0.tst00xx",
+      "module": "public.station.scripts.example.prod_v0.tst00xx",
       "options": {
         # fail_fast: if true (default), testing will stop on first failed test, overrides config section
         "fail_fast": false
