@@ -1,7 +1,10 @@
+# NOTE: ANY changes made to this file requires the manifest to be regenerated.
+# TMIServer regenerates the manifest from the Tasks menu.
 {
   "config": {
-    # manifest, locked or unlocked, when locked Station will only
-    # operate if all files in public/station pass a hash check (are unchanged)
+    # manifest, locked or unlocked, when locked (true) TMIStation will only
+    # operate if all files in public/station pass a hash check (are unchanged),
+    # if unlocked (false) ONLY this file is checked against the manifest
     "manifest_locked": false,
 
     #, path to results waiting to be sent to TMI Server
@@ -17,6 +20,7 @@
 
     # URL of the TMI Server
     # - set to null for no server
+    # - for demo set to http://127.0.0.1:6600 (TMIServer running on same PC)
     "result_server_url": "http://127.0.0.1:6600",
 
     # How often to check for TMI Server connection, when

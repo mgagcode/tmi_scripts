@@ -123,14 +123,14 @@ Clone TMIScripts
 Run Full
 ========
 
-* Run TMIStation::
+* Run TMIServer::
 
     cd ~/git/tmiserver/tmi_scripts/public
     docker run --net tminet -ti -p 6600:6600 -v $(pwd):/app/public mgagcode/tmiserver
 
 * Open Google Chrome to
 
-        http://127.0.0.1:6800
+        http://127.0.0.1:6600
 
 
 .. [1] This is covered in section TBD
