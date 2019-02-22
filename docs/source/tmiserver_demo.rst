@@ -58,6 +58,7 @@ TMIServer needs a postgresql backend to be running in order to work, which will 
     docker network create tminet
     docker run --net tminet --name tmidb -v $(pwd)/datadir:/var/lib/postgresql/data -e POSTGRES_PASSWORD=qwerty -d postgres:11
 
+  * add `--restart=always` to the docker run command to have this container run every time the computer boots up
 
 * now create the required databases - you only need to do this **ONCE**
 
