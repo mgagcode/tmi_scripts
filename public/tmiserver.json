@@ -1,6 +1,7 @@
 {
-  # comments are allowed
   "config": {
+    # Should the result JSON files be stored as encrypted, true (default) or false
+    "results_bkup_encrypted": false
   },
   "postgres": {
     "ResultBaseV1": {

@@ -89,6 +89,13 @@ Run Basic
   * Other users passwords are `qwerty`
   * To **update** tmiserver use `docker pull mgagcode/tmiserver` before running it.
 
+* To close the container, in the terminal press CTRL-PQ, then at the prompt,
+
+::
+
+    docker ps
+    docker stop <id of tmiserver>
+
 
 Full
 ****

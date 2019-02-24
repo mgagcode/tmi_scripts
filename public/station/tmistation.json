@@ -1,5 +1,5 @@
 # NOTE: ANY changes made to this file requires the manifest to be regenerated.
-# TMIServer regenerates the manifest from the Tasks menu.
+# TMIServer regenerates the manifest from the Tasks menu, and then sync scripts.
 {
   "config": {
     # manifest, locked or unlocked, when locked (true) TMIStation will only
@@ -19,7 +19,7 @@
     "result_bkup_dir": "public/result/bkup",
 
     # URL of the TMI Server
-    # - set to null for no server
+    # - the port is always 6600
     # - for demo set to http://127.0.0.1:6600 (TMIServer running on same PC)
     "result_server_url": "http://127.0.0.1:6600",
 
@@ -28,6 +28,7 @@
     "result_server_retry_timer_sec": 10,
 
     # set result encryption (defaults to true)
+    # - a valid license file is required to encrypt results
     "result_encrypt": false
   }
 }
