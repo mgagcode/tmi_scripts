@@ -17,8 +17,8 @@ TMI_SERVERIP=$1
 RESTART=$2
 
 docker run -d \
-   --restart=${RESTART}
+   --restart=${RESTART} \
    -e TMI_SERVERIP=${TMI_SERVERIP} \
    -p 6800:6800 \
-   -name tmistation \
+   --name tmistation \
    mgagcode/tmistation

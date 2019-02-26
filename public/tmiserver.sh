@@ -16,8 +16,8 @@ RESTART=$1
 
 docker run -d \
     --net tminet \
-    --restart=${RESTART}
+    --restart=${RESTART} \
     -p 6600:6600 \
     -v $(pwd):/app/public \
-    -name tmiserver \
+    --name tmiserver \
     mgagcode/tmiserver
