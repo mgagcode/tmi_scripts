@@ -58,6 +58,7 @@ TMIServer needs a postgresql backend to be running in order to work, which will 
     docker network create tminet
     docker run --net tminet --name tmidb -v $(pwd)/datadir:/var/lib/postgresql/data -e POSTGRES_PASSWORD=qwerty -d postgres:11
 
+  * add `--restart=always` to the docker run command to have this container run every time the computer boots up
 
 * now create the required databases - you only need to do this **ONCE**
 
@@ -88,6 +89,13 @@ Run Basic
   * Other users passwords are `qwerty`
   * To **update** tmiserver use `docker pull mgagcode/tmiserver` before running it.
 
+* To close the container, in the terminal press CTRL-PQ, then at the prompt,
+
+::
+
+    docker ps
+    docker stop <id of tmiserver>
+
 
 Full
 ****
@@ -106,6 +114,7 @@ local file system.  This requires a more advanced `docker run` command.
 Clone TMIScripts
 ================
 
+* If you have already cloned ``tmi_scripts`` from the TMIStation instructions, you do not need to do this again here.
 * There is a prescriptive directory structure to use, and that is stored on `github` in a project called ``tmi_scripts``
 * This `github` repo is where you would ultimately store and version control your own scripts
 
@@ -115,22 +124,21 @@ Clone TMIScripts
 * Clone ``tmi_scripts``::
 
     mkdir ~/git
-    mkdir ~/git/tmiserver
-    cd ~/git/tmiserver
+    cd ~/git
     git clone https://github.com/mgagcode/tmi_scripts.git
 
 
 Run Full
 ========
 
-* Run TMIStation::
+* Run TMIServer::
 
-    cd ~/git/tmiserver/tmi_scripts/public
+    cd ~/git/tmi_scripts/public
     docker run --net tminet -ti -p 6600:6600 -v $(pwd):/app/public mgagcode/tmiserver
 
 * Open Google Chrome to
 
-        http://127.0.0.1:6800
+        http://127.0.0.1:6600
 
 
 .. [1] This is covered in section TBD

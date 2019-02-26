@@ -114,6 +114,7 @@ local file system.  This requires a more advanced `docker run` command.
 Clone TMIScripts
 ================
 
+* If you have already cloned ``tmi_scripts`` from the TMIStation instructions, you do not need to do this again here.
 * There is a prescriptive directory structure to use, and that is stored on `github` in a project called ``tmi_scripts``
 * This `github` repo is where you would ultimately store and version control your own scripts
 
@@ -123,8 +124,7 @@ Clone TMIScripts
 * Clone ``tmi_scripts``::
 
     mkdir ~/git
-    mkdir ~/git/tmiserver
-    cd ~/git/tmiserver
+    cd ~/git
     git clone https://github.com/mgagcode/tmi_scripts.git
 
 
@@ -133,7 +133,7 @@ Run Full
 
 * Run TMIServer::
 
-    cd ~/git/tmiserver/tmi_scripts/public
+    cd ~/git/tmi_scripts/public
     docker run --net tminet -ti -p 6600:6600 -v $(pwd):/app/public mgagcode/tmiserver
 
 * Open Google Chrome to

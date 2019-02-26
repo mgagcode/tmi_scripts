@@ -55,11 +55,16 @@ to worry about python packages, versions of modules, etc
 
 * run this pull command to check for updates to **tmistation**
 
-* Run **tmistation** container - it doesn't matter which directory you are in
+* Run **tmistation** container
+
+  * it doesn't matter which directory you are in
+  * replace '192.168.1.10' with the IP address of computer you are running this on
+
+    * do not use '127.0.0.1' or 'localhost'
 
 ::
 
-    docker run -ti -p 6800:6800 mgagcode/tmistation
+    docker run -e TMI_SERVERIP=192.168.1.10 -p 6800:6800 mgagcode/tmistation
 
   * Open Google Chrome to
 
@@ -100,6 +105,7 @@ Additional Requirements
   * `git` is an advanced tool, and although widely used, it can be an complicated tool.  There are
     GUI programs that try and make `git` easier for the novice user, and a quick google can point you to some for your host operating system.
   * TMI instructions (attempt to) only use the simple basic commands of `git`
+  * The perscriptive way to setup is described TBD
 
 
 Clone TMIScripts
@@ -114,8 +120,7 @@ Clone TMIScripts
 * Clone ``tmi_scripts``::
 
     mkdir ~/git
-    mkdir ~/git/tmistation
-    cd ~/git/tmistation
+    cd ~/git
     git clone https://github.com/mgagcode/tmi_scripts.git
 
 Run Full
@@ -123,8 +128,14 @@ Run Full
 
 * Run TMIStation::
 
-    cd ~/git/tmistation/tmi_scripts/public
-    docker run -ti -p 6800:6800 -v $(pwd):/app/public mgagcode/tmistation
+    cd ~/git/tmi_scripts/public
+    ./tmistation.sh <tmiserver_ip_address>
+
+  * You need to provide a TMIServer IP address
+
+    * If you don't have TMIServer running, use the suggested address, '192.168.1.10'
+    * If TMIserver is running on this computer, use this computer IP address, don't use
+      'localhost', or '127.0.0.1'
 
 * Open Google Chrome to
 
