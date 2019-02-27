@@ -24,8 +24,7 @@ Requirements
 
 * Operating System
 
-  * The system was developed on both Windows 10 and Ubuntu 18.04
-  * Most testing occurs on Ubuntu given its the expected OS used in the factory because of cost (its free)
+  * The system was developed and tested on Ubuntu 18.04
   * All these instructions are for Ubuntu 18.04
 
 * Outside Software Requirements
@@ -64,14 +63,15 @@ to worry about python packages, versions of modules, etc
 
 ::
 
-    docker run -e TMI_SERVERIP=192.168.1.10 -p 6800:6800 mgagcode/tmistation
+    docker run -d -e TMI_SERVERIP=192.168.1.10 -p 6800:6800 mgagcode/tmistation
 
   * Open Google Chrome to
 
     http://127.0.0.1:6800
 
-* TMIStation login user/password is admin/admin
+    * Note on slower computers, it may take 5-15 seconds for the TMIStation window to display
 
+  * TMIStation login user/password is admin/admin
   * Other users passwords are `qwerty`
 
 

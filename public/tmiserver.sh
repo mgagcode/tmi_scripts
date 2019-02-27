@@ -13,9 +13,11 @@ if [[ $1 == "--help" ]] || [[ $1 == "" ]] ; then
 fi
 
 RESTART=$1
+HOSTNAME=$(hostname)
 
 docker run -d \
     --net tminet \
+    --hostname=${HOSTNAME} \
     --restart=${RESTART} \
     -p 6600:6600 \
     -v $(pwd):/app/public \
