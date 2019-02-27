@@ -109,7 +109,9 @@ postgres command (this will pull postgres container)</li>
   docker network create tminet
   docker run --net tminet --name tmidb -v $(pwd)/datadir:/var/lib/postgresql/data -e POSTGRES_PASSWORD=qwerty -d postgres:11
 
-* add `--restart=always` to the docker run command to have this container run every time the computer boots up
+* add `--restart=always` to the docker run command to have this container run every time the computer boots up;
+  only do this if you plan on using/evaluating TMI for an extended time, otherwise rememer to issue the above docker run
+  command
 </pre></div>
 </div>
 <ul class="simple">
@@ -125,9 +127,15 @@ postgres command (this will pull postgres container)</li>
 <div class="section" id="run-basic">
 <h3><a class="toc-backref" href="#id6">Run Basic</a><a class="headerlink" href="#run-basic" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
+<li>First the <strong>tmiserver</strong> Docker container must be <cite>pulled</cite> from docker hub</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">pull</span> <span class="n">mgagcode</span><span class="o">/</span><span class="n">tmiserver</span>
+</pre></div>
+</div>
+<ul class="simple">
 <li>Run <strong>tmiserver</strong> container - it doesn’t matter which directory you are in</li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">--</span><span class="n">net</span> <span class="n">tminet</span> <span class="o">-</span><span class="n">ti</span> <span class="o">-</span><span class="n">p</span> <span class="mi">6600</span><span class="p">:</span><span class="mi">6600</span> <span class="n">mgagcode</span><span class="o">/</span><span class="n">tmiserver</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">d</span> <span class="o">--</span><span class="n">net</span> <span class="n">tminet</span> <span class="o">-</span><span class="n">p</span> <span class="mi">6600</span><span class="p">:</span><span class="mi">6600</span> <span class="n">mgagcode</span><span class="o">/</span><span class="n">tmiserver</span>
 </pre></div>
 </div>
 <ul>
@@ -136,18 +144,13 @@ postgres command (this will pull postgres container)</li>
 <div><p><a class="reference external" href="http://127.0.0.1:6600">http://127.0.0.1:6600</a></p>
 </div></blockquote>
 <ul class="simple">
+<li>Note on slower computers, it may take 5-15 seconds for the TMIServer window to display</li>
 <li>TMIServer login user/password is admin/admin</li>
 <li>Other users passwords are <cite>qwerty</cite></li>
 <li>To <strong>update</strong> tmiserver use <cite>docker pull mgagcode/tmiserver</cite> before running it.</li>
 </ul>
 </li>
-<li><p class="first">To close the container, in the terminal press CTRL-PQ, then at the prompt,</p>
-</li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">ps</span>
-<span class="n">docker</span> <span class="n">stop</span> <span class="o">&lt;</span><span class="nb">id</span> <span class="n">of</span> <span class="n">tmiserver</span><span class="o">&gt;</span>
-</pre></div>
-</div>
 </div>
 </div>
 <div class="section" id="full">

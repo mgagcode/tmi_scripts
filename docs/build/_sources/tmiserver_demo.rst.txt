@@ -58,7 +58,9 @@ TMIServer needs a postgresql backend to be running in order to work, which will 
     docker network create tminet
     docker run --net tminet --name tmidb -v $(pwd)/datadir:/var/lib/postgresql/data -e POSTGRES_PASSWORD=qwerty -d postgres:11
 
-  * add `--restart=always` to the docker run command to have this container run every time the computer boots up
+  * add `--restart=always` to the docker run command to have this container run every time the computer boots up;
+    only do this if you plan on using/evaluating TMI for an extended time, otherwise rememer to issue the above docker run
+    command
 
 * now create the required databases - you only need to do this **ONCE**
 
@@ -74,27 +76,28 @@ Basic
 Run Basic
 =========
 
+* First the **tmiserver** Docker container must be `pulled` from docker hub
+
+::
+
+    docker pull mgagcode/tmiserver
+
+
 * Run **tmiserver** container - it doesn't matter which directory you are in
 
 ::
 
-    docker run --net tminet -ti -p 6600:6600 mgagcode/tmiserver
+    docker run -d --net tminet -p 6600:6600 mgagcode/tmiserver
 
 
 * Open Google Chrome to
 
            http://127.0.0.1:6600
 
+  * Note on slower computers, it may take 5-15 seconds for the TMIServer window to display
   * TMIServer login user/password is admin/admin
   * Other users passwords are `qwerty`
   * To **update** tmiserver use `docker pull mgagcode/tmiserver` before running it.
-
-* To close the container, in the terminal press CTRL-PQ, then at the prompt,
-
-::
-
-    docker ps
-    docker stop <id of tmiserver>
 
 
 Full

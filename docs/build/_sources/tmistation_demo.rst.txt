@@ -24,8 +24,7 @@ Requirements
 
 * Operating System
 
-  * The system was developed on both Windows 10 and Ubuntu 18.04
-  * Most testing occurs on Ubuntu given its the expected OS used in the factory because of cost (its free)
+  * The system was developed and tested on Ubuntu 18.04
   * All these instructions are for Ubuntu 18.04
 
 * Outside Software Requirements
@@ -53,6 +52,7 @@ to worry about python packages, versions of modules, etc
 
     docker pull mgagcode/tmistation
 
+
 * run this pull command to check for updates to **tmistation**
 
 * Run **tmistation** container
@@ -64,14 +64,15 @@ to worry about python packages, versions of modules, etc
 
 ::
 
-    docker run -e TMI_SERVERIP=192.168.1.10 -p 6800:6800 mgagcode/tmistation
+    docker run -d -e TMI_SERVERIP=192.168.1.10 -p 6800:6800 mgagcode/tmistation
 
-  * Open Google Chrome to
+* Open Google Chrome to
 
     http://127.0.0.1:6800
 
-* TMIStation login user/password is admin/admin
+    * Note on slower computers, it may take 5-15 seconds for the TMIStation window to display
 
+  * TMIStation login user/password is admin/admin
   * Other users passwords are `qwerty`
 
 
@@ -115,7 +116,7 @@ Clone TMIScripts
 * This `github` repo is where you would ultimately store and version control your own scripts
 
   * Instead of cloning the repo, you would *fork* [1]_ (copy) it, making it your own, and then add your own code
-* The instructions below will create a folder called *git/tmistation* which `git` will copy the required files into
+* The instructions below will create a folder called *git/tmi_scripts* which `git` will copy the required files into
 
 * Clone ``tmi_scripts``::
 
@@ -126,16 +127,21 @@ Clone TMIScripts
 Run Full
 ========
 
-* Run TMIStation::
-
-    cd ~/git/tmi_scripts/public
-    ./tmistation.sh <tmiserver_ip_address>
+* Run TMIStation
 
   * You need to provide a TMIServer IP address
 
     * If you don't have TMIServer running, use the suggested address, '192.168.1.10'
     * If TMIserver is running on this computer, use this computer IP address, don't use
       'localhost', or '127.0.0.1'
+
+  * The last argument to the script, `no`, is for the `restart` setting.
+
+::
+
+    cd ~/git/tmi_scripts/public
+    ./tmistation.sh <tmiserver_ip_address> no
+
 
 * Open Google Chrome to
 
