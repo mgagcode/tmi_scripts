@@ -41,6 +41,7 @@ class ResultBaseClass(object):
             "errors": [],    # list of errors, for crash logs
             "html_summary": None,
         }
+
         self._item = {}
         self.logger.info("DONE")
 
@@ -58,6 +59,7 @@ class ResultBaseClass(object):
             "timestamp_start": round(time.time(), self.EPOCH_DECIMAL_PLACES),
             "timestamp_end": 0,
             "measurements": [],
+            "blobs": [],
             "fail_msg": {}  # like {"fid": "TST000-0", "msg": "Component R1"}
         }
 
@@ -101,18 +103,68 @@ class ResultBaseClass(object):
     def record_items_get(self):
         return self._record["items"]
 
-    def measurement(self, name, value, unit, min=None, max=None):
+    def blob(self, name, blob):
+        """ store a data blob
+
+        :param name: name of the blob
+        :param blob: a dict of the blob data, see RESULT.BLOB_
+        :return: True|False, None|message
+                 True - success, False - failed, msg is failure message
         """
-        :param name: name of measurement
-        :param min: minimum value, None for ignore
-        :param max: maximum value, None for ignore
-        :param value: value
+        if not isinstance(blob, dict):
+            msg = "blob must be of type dict"
+            self.logger.error(msg)
+            return False, msg
+
+        if not blob["type"] in ResultAPI.BLOB_TYPES:
+            msg = "Unknown blob type {} not in {}".format(blob["type"], ResultAPI.BLOB_TYPES)
+            self.logger.error(msg)
+            return False, msg
+
+        lname = "{}.{}".format(self._item["name"], name)
+        # check for duplicate name
+        for b in self._item["blobs"]:
+            if b["name"] == lname:
+                msg = "Duplicate blob name {}".format(b["name"])
+                self.logger.error(msg)
+                return False, msg
+
+        d = {"name": lname}
+        d.update(blob)
+
+        try:  # validate this can be turned into JSON
+            _ = json.dumps(d)
+        except Exception as e:
+            self.logger.error(e)
+            return False, e
+
+        self._item["blobs"].append(d)
+        self.logger.info("blob {} saved".format(d["name"]))
+        return True, None
+
+    def measurement(self, name, value, unit=ResultAPI.UNIT_NONE, min=None, max=None):
+        """
+        :param name:
+        :param min:
+        :param max:
+        :param value:
         :param unit: one of self.UNIT_*
-        :return: result, msg
-            where:
-                result: one of <ResultAPI.RECORD_*>
-                msg: string, string of measurement result, suitable for humans
+        :return: success, result, msg
+            success: True: measurement accepted
+                     False: a error occurred
+            result: one of ResultAPI.RECORD_RESULT_*
+                    (can be passed into self.item_end(), see examples)
+            msg: if not success, this is error message
+                 if success, this is human friendly message of the measurment
         """
+        lname = "{}.{}".format(self._item["name"], name)
+        # check for duplicate name
+        for m in self._item["measurements"]:
+            if m["name"] == lname:
+                msg = "Duplicate measurement name {}".format(m["name"])
+                self.logger.error(msg)
+                return False, ResultAPI.RECORD_RESULT_UNKNOWN, msg
+
         _pass = ResultAPI.RECORD_RESULT_UNKNOWN
 
         d = {
@@ -127,6 +179,7 @@ class ResultBaseClass(object):
             d["max"] = "{:32.16}".format(str(float(max))).rstrip()
             d["value"] = "{:64.16}".format(str(float(value))).rstrip()
             self.logger.debug("{} <= {} <= {} : {}".format(d["min"], d["value"], d["max"], _pass))
+
         elif min is None and max is None and isinstance(value, (int, float, str)):
             _pass = ResultAPI.RECORD_RESULT_PASS
             d["min"] = None
@@ -144,6 +197,13 @@ class ResultBaseClass(object):
             elif isinstance(value, str):
                 d["value"] = "{:64}".format(value).rstrip()
             self.logger.debug("{} <= {} <= {} : {}".format(d["min"], d["value"], d["max"], _pass))
+
+        elif min is None and max is None and isinstance(value, bool):
+            _pass = ResultAPI.RECORD_RESULT_PASS
+            if not value: _pass = ResultAPI.RECORD_RESULT_FAIL
+            d["value"] = value
+            self.logger.debug("{} : {}".format(d["value"], _pass))
+
         else:
             _pass = ResultAPI.RECORD_RESULT_INTERNAL_ERROR
             self.logger.error("{} <= {} <= {} : {}".format(min, value, max, _pass))
@@ -153,7 +213,7 @@ class ResultBaseClass(object):
         self._item["measurements"].append(d)
         _bullet = "{}: {} <= {} <= {} {} :: {}".format(name, d["min"], d["value"], d["max"], unit, _pass)
         self.logger.info(d)
-        return _pass, _bullet
+        return True, _pass, _bullet
 
     def fail_msg(self, fail_msg):
         if isinstance(fail_msg, dict):
@@ -181,9 +241,11 @@ class ResultBaseClass(object):
         if state is None:
             _state = ResultAPI.RECORD_RESULT_PASS
             for test in self._record["items"]:
+                # TODO: it might be easier to say if NOT in [PASS, SKIP]
                 if test["result"] in [ResultAPI.RECORD_RESULT_FAIL,
                                       ResultAPI.RECORD_RESULT_TIMEOUT,
                                       ResultAPI.RECORD_RESULT_UNKNOWN,
+                                      ResultAPI.RECORD_RESULT_INTERNAL_ERROR,
                                       ResultAPI.RECORD_RESULT_INCOMPLETE]:
                     _state = ResultAPI.RECORD_RESULT_FAIL
         else:
@@ -211,7 +273,7 @@ class ResultBaseClass(object):
         """
         self._record["html_summary"] = summary
 
-    def record_publish(self, type="result"):
+    def record_publish(self, type=TMI_RESULTHANDLER.FILE_TYPE_RESULT):
         ruid = str(uuid.uuid4())
         _file = type + "_" + ruid + ".json"
         self._record["meta"]["ruid"] = ruid

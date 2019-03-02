@@ -1,4 +1,4 @@
-# Example: Shows most of all the features of test portal UI
+# Example: Shows most of all the features of test portal UI (except subs)
 {
   "info": {
     # info is captured in the result record and can be searched/filtered
@@ -57,6 +57,8 @@
         {"id": "TST006_HWDriver",       "enable": true },
         {"id": "TST008_TextInput",      "enable": true, "timeout": 10 },
         {"id": "TST007_LogPctProgress", "enable": true, "timeout": 15 },
+        {"id": "TST009_BlobUnknown",    "enable": true },
+        {"id": "TST010_BlobXY",         "enable": true },
         {"id": "TST0xxTRDN",            "enable": true }
       ]
     }

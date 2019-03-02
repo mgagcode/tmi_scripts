@@ -46,7 +46,7 @@ class pybrd00xx(TestItem):
             return
 
         # save the id of the pyboard for the record
-        _, _bullet = ctx.record.measurement("pyboard_id", id, ResultAPI.UNIT_INT)
+        _, _, _bullet = ctx.record.measurement("pyboard_id", id, ResultAPI.UNIT_INT)
         self.log_bullet(_bullet)
 
         self.pyb = TMIMicroPyBrd(loggerIn=self.logger)
@@ -99,7 +99,7 @@ class pybrd00xx(TestItem):
         if user_select["success"]:
             b_idx = user_select["button"]
             self.log_bullet("{} was pressed!".format(buttons[b_idx]))
-            _result, _bullet = ctx.record.measurement("button", b_idx, ResultAPI.UNIT_INT, min=0, max=0)
+            _, _result, _bullet = ctx.record.measurement("button", b_idx, ResultAPI.UNIT_INT, min=0, max=0)
             self.log_bullet(_bullet)
 
         else:
@@ -191,7 +191,7 @@ class pybrd00xx(TestItem):
         result = float(sum / len(results))
         result = float(result * scale)
 
-        _result, _bullet = ctx.record.measurement("{}".format(name), result, unit, min, max)
+        _, _result, _bullet = ctx.record.measurement("{}".format(name), result, unit, min, max)
         self.log_bullet(_bullet)
 
         self.pyb.close()

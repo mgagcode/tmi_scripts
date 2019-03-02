@@ -1,13 +1,18 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Martin Guthrie, copyright, all rights reserved, 2018
+Martin Guthrie, copyright, all rights reserved, 2018-2019
 """
 
 from app.const import Const
 
 
 class ResultAPI(Const):
+
+    # More types can be created for your specific application needs
+    # These items will be in the result record and backend database
+
+    TESTITEM_TIMEOUT = 10.0  # default test item timeout in seconds
 
     RECORD_RESULT_UNKNOWN = "UNKNOWN" # this is an error if not changed
     RECORD_RESULT_PASS = "PASS"
@@ -26,6 +31,49 @@ class ResultAPI(Const):
     UNIT_INT = "Integer"
     UNIT_FLOAT = "Float"
     UNIT_CELCIUS = "Celcius"
+    UNIT_BOOLEAN = "Boolean"
     UNIT_NONE = "None"
 
-    TESTITEM_TIMEOUT = 10.0
+    # ===================================================================================
+    # BLOB data types
+    #
+    # BLOB_UNKNOWN
+    # - unknown type of blob
+    # - TMI will not try and plot/analyse blobs of this type, they are unknown
+    BLOB_UNKNOWN = {
+        "type": "BLOB_UNKNOWN",
+        "data": None,              # replace with your data, must be JSON serializable
+    }
+
+    # Blobs that can be plotted
+    # - TMI can plot blob data given the blob data type
+    # - blobs that can be plotted, use BLOB_BOKEH_* dicts to define the plot
+    # - there are a billion options to plotting with Bokeh, TMI only does bare minimum
+    BLOB_BOKEH_FIGURE = {
+        "title": "Title",
+        "x_axis_type": "auto",  # auto, linear, log, datetime, mercator
+        "x_axis_label": "X-Axis",
+        "y_axis_type": "auto",  # auto, linear, log, datetime, mercator
+        "y_axis_label": "Y-Axis",
+    }
+
+    # BLOB_PLOTXY
+    # - XY plots
+    # - 1 or more lines can be plotted
+    # - use this type for plotting waves that fit a template (for example)
+    BLOB_PLOTXY_PLOT = {
+        "legend": None,  # change to string
+        "line_width": 1,
+        "x": [],         # x/y list lengths must be the same
+        "y": [],
+    }
+    BLOB_PLOTXY = {
+        "type": "BLOB_DICTXY",
+        "BLOB_BOKEH_FIGURE": BLOB_BOKEH_FIGURE,
+        "plots": [],   # append BLOB_DICTXY_PLOTs here as required...
+    }
+
+    # add any new types created here for the purposes of validating
+    BLOB_TYPES = [BLOB_UNKNOWN["type"], BLOB_PLOTXY["type"]]
+
+    # TODO: add histogram plot next

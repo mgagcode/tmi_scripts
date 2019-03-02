@@ -49,11 +49,15 @@ class tst01xx(TestItem):
         FAIL_ID = 0
 
         measurement_results = []
-        _result, _bullet = ctx.record.measurement("apples",
-                                                  random(),
-                                                  ResultAPI.UNIT_DB,
-                                                  ctx.item.args.min,
-                                                  ctx.item.args.max)
+        success, _result, _bullet = ctx.record.measurement("apples",
+                                                           random(),
+                                                           ResultAPI.UNIT_DB,
+                                                           ctx.item.args.min,
+                                                           ctx.item.args.max)
+        if not success:
+            self.item_end(ResultAPI.RECORD_RESULT_INTERNAL_ERROR)
+            return
+
         # set the failure msg on failure
         if _result == ResultAPI.RECORD_RESULT_FAIL:
             msg = ctx.item.fail[FAIL_ID]
@@ -62,11 +66,14 @@ class tst01xx(TestItem):
         self.log_bullet(_bullet)
         measurement_results.append(_result)
 
-        _result, _bullet = ctx.record.measurement("bananas",
-                                                  randint(0, 10),
-                                                  ResultAPI.UNIT_DB,
-                                                  ctx.item.args.min,
-                                                  ctx.item.args.min)
+        success, _result, _bullet = ctx.record.measurement("bananas",
+                                                           randint(0, 10),
+                                                           ResultAPI.UNIT_DB,
+                                                           ctx.item.args.min,
+                                                           ctx.item.args.min)
+        if not success:
+            self.item_end(ResultAPI.RECORD_RESULT_INTERNAL_ERROR)
+            return
 
         # set the failure msg on failure
         if _result == ResultAPI.RECORD_RESULT_FAIL:

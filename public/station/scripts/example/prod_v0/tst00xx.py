@@ -8,8 +8,9 @@ import logging
 from core.tmi_test_item import TestItem
 from public.station.api import ResultAPI
 import time
-from random import randint, random
-
+import random
+import string
+import copy
 
 # file and class name must match
 class tst00xx(TestItem):
@@ -67,13 +68,13 @@ class tst00xx(TestItem):
 
     def TST0xxSETUP(self):
         ctx = self.item_start()  # always first line of test
-        time.sleep(self.DEMO_TIME_DELAY * random() * self.DEMO_TIME_RND_ENABLE)
+        time.sleep(self.DEMO_TIME_DELAY * random.random() * self.DEMO_TIME_RND_ENABLE)
 
         self.item_end()  # always last line of test
 
     def TST0xxTRDN(self):
         ctx = self.item_start()  # always first line of test
-        time.sleep(self.DEMO_TIME_DELAY * random() * self.DEMO_TIME_RND_ENABLE)
+        time.sleep(self.DEMO_TIME_DELAY * random.random() * self.DEMO_TIME_RND_ENABLE)
         self.item_end()  # always last line of test
 
     def TST000_Meas(self):
@@ -87,7 +88,7 @@ class tst00xx(TestItem):
         """
         ctx = self.item_start()   # always first line of test
 
-        time.sleep(self.DEMO_TIME_DELAY * random() * self.DEMO_TIME_RND_ENABLE)
+        time.sleep(self.DEMO_TIME_DELAY * random.random() * self.DEMO_TIME_RND_ENABLE)
 
         FAIL_APPLE   = 0  # indexes into the "fail" list, just for code readability
         FAIL_BANANNA = 1
@@ -95,11 +96,15 @@ class tst00xx(TestItem):
         measurement_results = []  # list for all the coming measurements...
 
         # Apples measurement...
-        _result, _bullet = ctx.record.measurement("apples",
-                                                  randint(0, 10),
-                                                  ResultAPI.UNIT_DB,
-                                                  ctx.item.args.min,
-                                                  ctx.item.args.max)
+        success, _result, _bullet = ctx.record.measurement("apples",
+                                                           random.randint(0, 10),
+                                                           ResultAPI.UNIT_DB,
+                                                           ctx.item.args.min,
+                                                           ctx.item.args.max)
+        if not success:
+            self.item_end(ResultAPI.RECORD_RESULT_INTERNAL_ERROR)
+            return
+
         # if failed, there is a msg in script to attach to the record, for repair purposes
         if _result == ResultAPI.RECORD_RESULT_FAIL:
             msg = ctx.item.fail[FAIL_APPLE]
@@ -109,11 +114,14 @@ class tst00xx(TestItem):
         measurement_results.append(_result)
 
         # Bananas measurement...
-        _result, _bullet = ctx.record.measurement("bananas",
-                                                  randint(0, 10),
-                                                  ResultAPI.UNIT_DB,
-                                                  ctx.item.args.min,
-                                                  ctx.item.args.max)
+        success, _result, _bullet = ctx.record.measurement("bananas",
+                                                           random.randint(0, 10),
+                                                           ResultAPI.UNIT_DB,
+                                                           ctx.item.args.min,
+                                                           ctx.item.args.max)
+        if not success:
+            self.item_end(ResultAPI.RECORD_RESULT_INTERNAL_ERROR)
+            return
 
         # if failed, there is a msg in script to attach to the record, for repair purposes
         if _result == ResultAPI.RECORD_RESULT_FAIL:
@@ -136,7 +144,7 @@ class tst00xx(TestItem):
 
         self.log_bullet("Was I skipped?")
 
-        time.sleep(self.DEMO_TIME_DELAY * random() * self.DEMO_TIME_RND_ENABLE)
+        time.sleep(self.DEMO_TIME_DELAY * random.random() * self.DEMO_TIME_RND_ENABLE)
 
         self.item_end()  # always last line of test
 
@@ -155,7 +163,7 @@ class tst00xx(TestItem):
         if user_select["success"]:
             b_idx = user_select["button"]
             self.log_bullet("{} was pressed!".format(buttons[b_idx]))
-            _result, _bullet = ctx.record.measurement("button", b_idx, ResultAPI.UNIT_INT)
+            _, _result, _bullet = ctx.record.measurement("button", b_idx, ResultAPI.UNIT_INT)
             self.log_bullet(_bullet)
         else:
             _result = ResultAPI.RECORD_RESULT_FAIL
@@ -174,9 +182,9 @@ class tst00xx(TestItem):
         """
         ctx = self.item_start()   # always first line of test
 
-        time.sleep(self.DEMO_TIME_DELAY * random() * self.DEMO_TIME_RND_ENABLE)
+        time.sleep(self.DEMO_TIME_DELAY * random.random() * self.DEMO_TIME_RND_ENABLE)
 
-        value = randint(0, 100)
+        value = random.randint(0, 100)
         ctx.record.add_key("value", value, slot=0)
         self.log_bullet("added key value: {}".format(value))
 
@@ -190,7 +198,7 @@ class tst00xx(TestItem):
         """
         ctx = self.item_start()  # always first line of test
 
-        time.sleep(self.DEMO_TIME_DELAY * random() * self.DEMO_TIME_RND_ENABLE)
+        time.sleep(self.DEMO_TIME_DELAY * random.random() * self.DEMO_TIME_RND_ENABLE)
 
         keys = ctx.record.get_keys()
         if not keys.get("key0", False):
@@ -236,7 +244,7 @@ class tst00xx(TestItem):
         """
         ctx = self.item_start()  # always first line of test
 
-        time.sleep(self.DEMO_TIME_DELAY * random() * self.DEMO_TIME_RND_ENABLE)
+        time.sleep(self.DEMO_TIME_DELAY * random.random() * self.DEMO_TIME_RND_ENABLE)
 
         drivers = self.shared_get_drivers()
         for driver in drivers:
@@ -256,7 +264,7 @@ class tst00xx(TestItem):
             bar = "#" * int(40 * percent / 100)
             msg = "Completed {:3d}% {}".format(percent, bar)
             self.log_bullet(msg, ovrwrite_last_line=True)
-            time.sleep(self.DEMO_TIME_DELAY * random() * self.DEMO_TIME_RND_ENABLE)
+            time.sleep(self.DEMO_TIME_DELAY * random.random() * self.DEMO_TIME_RND_ENABLE)
             percent += 10
 
         self.item_end()  # always last line of test
@@ -273,14 +281,81 @@ class tst00xx(TestItem):
         user_text = self.input_textbox("Enter Some Text:", "change")
         if user_text["success"]:
             self.log_bullet("Text: {}".format(user_text["textbox"]))
-
-            # qualify the text here, and either if the text is invalid, re-ask
             # Note: ResultAPI.UNIT_STRING is used to format the measurement correctly in JSON
-            ctx.record.measurement("input", user_text["textbox"], ResultAPI.UNIT_STRING)
-            _result = ResultAPI.RECORD_RESULT_PASS
+            _, _result, _bullet = ctx.record.measurement("input", user_text["textbox"], ResultAPI.UNIT_STRING)
+            # qualify the text here, and override _result if required
+
         else:
             # operator probably times out...
             _result = ResultAPI.RECORD_RESULT_FAIL
             self.log_bullet(user_text.get("err", "UNKNOWN ERROR"))
+
+        self.item_end(_result)  # always last line of test
+
+    def TST009_BlobUnknown(self):
+        """ Blob Unknown
+
+            {"id": "TST009_BlobUnknown",    "enable": true },
+        """
+        ctx = self.item_start()   # always first line of test
+        _result = ResultAPI.RECORD_RESULT_PASS
+
+        # create a string of random characters to represent a blob
+        myBlob = ResultAPI.BLOB_UNKNOWN
+        myBlob["data"] = ''.join(random.choice(string.ascii_lowercase) for x in range(1000))
+        success, msg = ctx.record.blob("random", myBlob)
+        if not success:
+            self.item_end(ResultAPI.RECORD_RESULT_INTERNAL_ERROR)
+            return
+
+        self.item_end(_result)  # always last line of test
+
+    def TST010_BlobXY(self):
+        """ Blob XY Plots
+
+        An example of creating a waveform, with a template to fit
+        - testing wave fitting the template is beyond the scope of this example
+
+            {"id": "TST010_BlobXY",    "enable": true },
+        """
+        ctx = self.item_start()   # always first line of test
+        from numpy import sin, arange
+        _result = ResultAPI.RECORD_RESULT_PASS
+
+        myBlob = ResultAPI.BLOB_PLOTXY
+
+        # this is the waveform, could come from a scope, artificially generated example
+        myPlot = ResultAPI.BLOB_PLOTXY_PLOT
+        myPlot["x"] = arange(0, 3.2, 0.05).tolist()  # hundreds of data points...
+        myPlot["y"] = sin(myPlot["x"]).tolist()      # tolist() because numpy is not JSON serializable
+        myBlob["plots"].append(copy.deepcopy(myPlot))
+
+        # upper template
+        myPlot = ResultAPI.BLOB_PLOTXY_PLOT
+        myPlot["x"] = [0.0, 1.0, 2.2, 3.2]
+        myPlot["y"] = [0.1, 1.1, 1.1, 0.1]
+        myBlob["plots"].append(copy.deepcopy(myPlot))
+
+        # lower template
+        myPlot = ResultAPI.BLOB_PLOTXY_PLOT
+        myPlot["x"] = [0.1, 1.3, 1.8, 3.0]
+        myPlot["y"] = [0.0, 0.9, 0.9, 0.0]
+        myBlob["plots"].append(copy.deepcopy(myPlot))
+
+        # save the blob of data
+        success, msg = ctx.record.blob("sin", myBlob)
+        if not success:
+            self.item_end(ResultAPI.RECORD_RESULT_INTERNAL_ERROR)
+            return
+
+        # here (the measurement) would be code to determine if waveform fits into template
+        within_template = True  # or False
+
+        # store measurement result
+        success, _result, _bullet = ctx.record.measurement("template", within_template, ResultAPI.UNIT_BOOLEAN)
+        self.log_bullet(_bullet)
+        if not success:
+            self.item_end(_result)
+            return
 
         self.item_end(_result)  # always last line of test
