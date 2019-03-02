@@ -165,6 +165,8 @@ class ResultBaseClass(object):
                 self.logger.error(msg)
                 return False, ResultAPI.RECORD_RESULT_UNKNOWN, msg
 
+        self.logger.info("{}: {} <= {} <= {} {} ??".format(name, min, value, max, unit))
+
         _pass = ResultAPI.RECORD_RESULT_UNKNOWN
 
         d = {
@@ -178,7 +180,8 @@ class ResultBaseClass(object):
             d["min"] = "{:32.16}".format(str(float(min))).rstrip()
             d["max"] = "{:32.16}".format(str(float(max))).rstrip()
             d["value"] = "{:64.16}".format(str(float(value))).rstrip()
-            self.logger.debug("{} <= {} <= {} : {}".format(d["min"], d["value"], d["max"], _pass))
+            _bullet = "{}: {} <= {} <= {} {} :: {}".format(name, d["min"], d["value"], d["max"], unit, _pass)
+            self.logger.info(_bullet)
 
         elif min is None and max is None and isinstance(value, (int, float, str)):
             _pass = ResultAPI.RECORD_RESULT_PASS
@@ -196,22 +199,24 @@ class ResultBaseClass(object):
                 d["value"] = "{:64.16}".format(str(float(value))).rstrip()
             elif isinstance(value, str):
                 d["value"] = "{:64}".format(value).rstrip()
-            self.logger.debug("{} <= {} <= {} : {}".format(d["min"], d["value"], d["max"], _pass))
+            _bullet = "{}: {} {} :: {}".format(name, d["value"], unit, _pass)
+            self.logger.info(_bullet)
 
         elif min is None and max is None and isinstance(value, bool):
             _pass = ResultAPI.RECORD_RESULT_PASS
             if not value: _pass = ResultAPI.RECORD_RESULT_FAIL
             d["value"] = value
-            self.logger.debug("{} : {}".format(d["value"], _pass))
+            _bullet = "{}: {} {} :: {}".format(name, d["value"], unit, _pass)
+            self.logger.info(_bullet)
 
         else:
             _pass = ResultAPI.RECORD_RESULT_INTERNAL_ERROR
-            self.logger.error("{} <= {} <= {} : {}".format(min, value, max, _pass))
+            _bullet = "{}: {} <= {} <= {} {} :: {}".format(name, d["min"], d["value"], d["max"], unit, _pass)
+            self.logger.error(_bullet)
+            return False, _pass, _bullet
 
         d["result"] = _pass
-
         self._item["measurements"].append(d)
-        _bullet = "{}: {} <= {} <= {} {} :: {}".format(name, d["min"], d["value"], d["max"], unit, _pass)
         self.logger.info(d)
         return True, _pass, _bullet
 
@@ -273,7 +278,7 @@ class ResultBaseClass(object):
         """
         self._record["html_summary"] = summary
 
-    def record_publish(self, type=TMI_RESULTHANDLER.FILE_TYPE_RESULT):
+    def record_publish(self, type="result"):
         ruid = str(uuid.uuid4())
         _file = type + "_" + ruid + ".json"
         self._record["meta"]["ruid"] = ruid
@@ -289,7 +294,7 @@ class ResultBaseClass(object):
 
         with open(_file, 'w') as fp:
             json.dump(d, fp, indent=2)
-        self.logger.info("Created: {}".format(_file))
+        self.logger.info("Result: {}, Created: {}".format(self._record["meta"]["result"], _file))
 
         return _file
 
