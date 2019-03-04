@@ -8,6 +8,12 @@ would be configured.
    :local:
 
 
+Production Infrastructure Cycle
+*******************************
+
+.. image:: _static/Screenshot_prodplan_02.png
+
+
 Stages
 ******
 

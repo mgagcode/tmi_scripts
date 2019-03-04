@@ -327,7 +327,7 @@ class tst00xx(TestItem):
         # this is the waveform, could come from a scope, artificially generated example
         myPlot = ResultAPI.BLOB_PLOTXY_PLOT
         myPlot["x"] = arange(0, 3.2, 0.05).tolist()  # hundreds of data points...
-        myPlot["y"] = sin(myPlot["x"]).tolist()      # tolist() because numpy is not JSON serializable
+        myPlot["y"] = sin(myPlot["x"]).tolist()
         myBlob["plots"].append(copy.deepcopy(myPlot))
 
         # upper template

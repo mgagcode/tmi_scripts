@@ -26,7 +26,6 @@
     "location": "%%Loc"
   },
   "config": {
-    "result": "public.station.result.ResultBaseV1",
     "fail_fast": false,
     "drivers": ["public.station.drivers.fake.tmi_fake"]
   },

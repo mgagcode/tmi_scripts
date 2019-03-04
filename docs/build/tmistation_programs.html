@@ -33,7 +33,8 @@
         <li class="right" >
           <a href="tmistation_scripts.html" title="Scripts"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">TMI 0.1.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">TMI 0.1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="tmistation_main.html" accesskey="U">TMIStation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -76,7 +77,6 @@ class helloWorld(TestItem):
     <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="s2">&quot;FACTORY1&quot;</span>
   <span class="p">},</span>
   <span class="s2">&quot;config&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;public.station.result.ResultBaseV1&quot;</span><span class="p">,</span>
     <span class="s2">&quot;drivers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;public.station.drivers.fake.tmi_fake&quot;</span><span class="p">]</span>
   <span class="p">},</span>
   <span class="s2">&quot;tests&quot;</span><span class="p">:</span> <span class="p">[</span>
@@ -177,7 +177,6 @@ code in the <code class="docutils literal notranslate"><span class="pre">__init_
     <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="s2">&quot;FACTORY1&quot;</span>
   <span class="p">},</span>
   <span class="s2">&quot;config&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;public.station.result.ResultBaseV1&quot;</span><span class="p">,</span>
     <span class="s2">&quot;drivers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;public.station.drivers.fake.tmi_fake&quot;</span><span class="p">]</span>
   <span class="p">},</span>
   <span class="s2">&quot;tests&quot;</span><span class="p">:</span> <span class="p">[</span>
@@ -531,9 +530,6 @@ example program is distributed with the system, and may be more up to date than 
     <span class="c1">#&quot;result_server_retry_timer_sec&quot;: 10,</span>
     <span class="c1">#&quot;result_encrypt&quot;: false,</span>
     <span class="c1"># --</span>
-    <span class="c1"># record_handler: a specific definition of the result record (fields, backend database schema, etc)</span>
-    <span class="c1">#   and must be located in public/station/record</span>
-    <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;public.station.result.ResultBaseKeysV1&quot;</span><span class="p">,</span>
     <span class="c1"># fail_fast: if true (default), testing will stop on first failed test</span>
     <span class="s2">&quot;fail_fast&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
     <span class="c1"># channel_hw_driver: list of code to initialize the test environment, must be specified</span>
@@ -605,6 +601,11 @@ name is a unique identifier</p>
 <p><code class="docutils literal notranslate"><span class="pre">units</span></code> - from,</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ResultAPI</span><span class="p">(</span><span class="n">Const</span><span class="p">):</span>
 
+    <span class="c1"># More types can be created for your specific application needs</span>
+    <span class="c1"># These items will be in the result record and backend database</span>
+
+    <span class="n">TESTITEM_TIMEOUT</span> <span class="o">=</span> <span class="mf">10.0</span>  <span class="c1"># default test item timeout in seconds</span>
+
     <span class="n">RECORD_RESULT_UNKNOWN</span> <span class="o">=</span> <span class="s2">&quot;UNKNOWN&quot;</span> <span class="c1"># this is an error if not changed</span>
     <span class="n">RECORD_RESULT_PASS</span> <span class="o">=</span> <span class="s2">&quot;PASS&quot;</span>
     <span class="n">RECORD_RESULT_FAIL</span> <span class="o">=</span> <span class="s2">&quot;FAIL&quot;</span>
@@ -622,9 +623,53 @@ name is a unique identifier</p>
     <span class="n">UNIT_INT</span> <span class="o">=</span> <span class="s2">&quot;Integer&quot;</span>
     <span class="n">UNIT_FLOAT</span> <span class="o">=</span> <span class="s2">&quot;Float&quot;</span>
     <span class="n">UNIT_CELCIUS</span> <span class="o">=</span> <span class="s2">&quot;Celcius&quot;</span>
-    <span class="n">UNIT_NONE</span> <span class="o">=</span> <span class="s2">&quot;None&quot;</span>
+    <span class="n">UNIT_BOOLEAN</span> <span class="o">=</span> <span class="s2">&quot;Boolean&quot;</span>
+    <span class="n">UNIT_NONE</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">UNIT_ALL</span> <span class="o">=</span> <span class="p">[</span><span class="n">UNIT_OHMS</span><span class="p">,</span> <span class="n">UNIT_BOOLEAN</span><span class="p">,</span> <span class="n">UNIT_NONE</span><span class="p">,</span> <span class="n">UNIT_STRING</span><span class="p">,</span> <span class="n">UNIT_VOLTS</span><span class="p">,</span> <span class="n">UNIT_CELCIUS</span><span class="p">,</span> <span class="n">UNIT_CURRENT</span><span class="p">,</span>
+                <span class="n">UNIT_DB</span><span class="p">,</span> <span class="n">UNIT_FLOAT</span><span class="p">,</span> <span class="n">UNIT_INT</span><span class="p">]</span>
 
-    <span class="n">TESTITEM_TIMEOUT</span> <span class="o">=</span> <span class="mf">10.0</span>
+
+    <span class="c1"># ===================================================================================</span>
+    <span class="c1"># BLOB data types</span>
+    <span class="c1">#</span>
+    <span class="c1"># BLOB_UNKNOWN</span>
+    <span class="c1"># - unknown type of blob</span>
+    <span class="c1"># - TMI will not try and plot/analyse blobs of this type, they are unknown</span>
+    <span class="n">BLOB_UNKNOWN</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;BLOB_UNKNOWN&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>              <span class="c1"># replace with your data, must be JSON serializable</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Blobs that can be plotted</span>
+    <span class="c1"># - TMI can plot blob data given the blob data type</span>
+    <span class="c1"># - blobs that can be plotted, use BLOB_BOKEH_* dicts to define the plot</span>
+    <span class="c1"># - there are a billion options to plotting with Bokeh, TMI only does bare minimum</span>
+    <span class="n">BLOB_BOKEH_FIGURE</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Title&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;x_axis_type&quot;</span><span class="p">:</span> <span class="s2">&quot;auto&quot;</span><span class="p">,</span>  <span class="c1"># auto, linear, log, datetime, mercator</span>
+        <span class="s2">&quot;x_axis_label&quot;</span><span class="p">:</span> <span class="s2">&quot;X-Axis&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;y_axis_type&quot;</span><span class="p">:</span> <span class="s2">&quot;auto&quot;</span><span class="p">,</span>  <span class="c1"># auto, linear, log, datetime, mercator</span>
+        <span class="s2">&quot;y_axis_label&quot;</span><span class="p">:</span> <span class="s2">&quot;Y-Axis&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="c1"># BLOB_PLOTXY</span>
+    <span class="c1"># - XY plots</span>
+    <span class="c1"># - 1 or more lines can be plotted</span>
+    <span class="c1"># - use this type for plotting waves that fit a template (for example)</span>
+    <span class="n">BLOB_PLOTXY_PLOT</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;legend&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># change to string</span>
+        <span class="s2">&quot;line_width&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="p">[],</span>         <span class="c1"># x/y list lengths must be the same</span>
+        <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="p">}</span>
+    <span class="n">BLOB_PLOTXY</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;BLOB_DICTXY&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;BLOB_BOKEH_FIGURE&quot;</span><span class="p">:</span> <span class="n">BLOB_BOKEH_FIGURE</span><span class="p">,</span>
+        <span class="s2">&quot;plots&quot;</span><span class="p">:</span> <span class="p">[],</span>   <span class="c1"># append BLOB_DICTXY_PLOTs here as required...</span>
+    <span class="p">}</span>
+
+    <span class="c1"># add any new types created here for the purposes of validating</span>
+    <span class="n">BLOB_TYPES</span> <span class="o">=</span> <span class="p">[</span><span class="n">BLOB_UNKNOWN</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">],</span> <span class="n">BLOB_PLOTXY</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]]</span>
 </pre></div>
 </div>
 <p>Measurements are called thru the <code class="docutils literal notranslate"><span class="pre">ctx.record.measurement()</span></code> API like this,</p>
@@ -776,7 +821,8 @@ production failures become understood.</p>
         <li class="right" >
           <a href="tmistation_scripts.html" title="Scripts"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">TMI 0.1.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">TMI 0.1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="tmistation_main.html" >TMIStation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

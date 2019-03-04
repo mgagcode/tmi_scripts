@@ -7,6 +7,7 @@ import logging.handlers as handlers
 import importlib
 
 from public.station.api import ResultAPI
+from public.station.ResultBaseKeysV1 import ResultBaseKeysV1
 from core.tmi_core_helpers import SharedState
 
 logger = None
@@ -93,12 +94,7 @@ class TMIChanCon(object):
         self.operator = operator
         self.num_channels = 0
 
-        record_handler = script["config"]["result"]
-        i = importlib.import_module(record_handler)
-        klass = record_handler.split(".")[-1]
-        record_handler_klass = getattr(i, klass)
-
-        self.record = record_handler_klass(0, "tmidev", script_filename)
+        self.record = ResultBaseKeysV1(0, "tmidev", script_filename)
         self.record.record_info_set(script.get("info", {}))
         self.record.record_record_meta_init()
 
@@ -268,10 +264,6 @@ def parse_args():
 def script_validated(script):
     if not script.get("config", False):
         logger.error("Script is missing 'config' section")
-        return False
-
-    if not script["config"].get("result", False):
-        logger.error("Script is missing 'config.result' section")
         return False
 
     if not script["config"].get("drivers", False):

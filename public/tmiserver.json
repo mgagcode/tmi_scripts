@@ -4,11 +4,6 @@
     "results_bkup_encrypted": false
   },
   "postgres": {
-    "ResultBaseV1": {
-      "user": "postgres",
-      "pw": "qwerty",
-      "ip": "tmidb"
-    },
     "ResultBaseKeysV1": {
       "user": "postgres",
       "pw": "qwerty",
