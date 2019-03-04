@@ -66,7 +66,6 @@ TMIServer needs a postgresql backend to be running in order to work, which will 
 
 ::
 
-    docker exec -it tmidb createdb -U postgres resultbasev1
     docker exec -it tmidb createdb -U postgres resultbasekeysv1
 
 
