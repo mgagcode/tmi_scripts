@@ -131,7 +131,7 @@ Run Full
 
   * You need to provide a TMIServer IP address
 
-    * If you don't have TMIServer running, use the suggested address, '192.168.1.10'
+    * If you don't have TMIServer running, then it won't matter what IP address you use, use '127.0.0.1'
     * If TMIserver is running on this computer, use this computer IP address, don't use
       'localhost', or '127.0.0.1'
 

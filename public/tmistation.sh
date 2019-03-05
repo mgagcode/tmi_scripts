@@ -22,6 +22,7 @@ docker run -d \
     -e TMI_SERVERIP=${TMI_SERVERIP} \
     --hostname=${HOSTNAME} \
     -p 6800:6800 \
+    -v $(pwd):/app/public \
     --name tmistation \
     --rm \
     mgagcode/tmistation
