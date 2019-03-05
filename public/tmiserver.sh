@@ -22,4 +22,5 @@ docker run -d \
     -p 6600:6600 \
     -v $(pwd):/app/public \
     --name tmiserver \
+    --rm \
     mgagcode/tmiserver

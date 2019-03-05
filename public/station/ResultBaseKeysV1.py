@@ -251,12 +251,12 @@ class ResultBaseKeysV1(ResultBaseClass):
             ...
           }
 
-        - best way to use Custom JSONB
-              my_jsonb = { "myKey": "myValue" }
-              get_jsonb = ctx.record.getCustomJSONB()
-              get_jsonb.update(my_jsonb)
-              success, msg = ctx.record.setCustomJSONB()
-              # error handle here...
+        - best way to use Custom JSONB:
+            my_jsonb = {"serialNum": 123456789}
+            jsonb = ctx.record.getCustomJSONB()
+            jsonb.update(my_jsonb)
+            success, msg = ctx.record.setCustomJSONB(jsonb)
+            # error handle here...
 
         :param jsonb_dict:
         :return: success, msg

@@ -23,4 +23,5 @@ docker run -d \
     --hostname=${HOSTNAME} \
     -p 6800:6800 \
     --name tmistation \
+    --rm \
     mgagcode/tmistation

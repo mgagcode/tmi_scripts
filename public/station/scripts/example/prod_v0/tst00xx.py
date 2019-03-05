@@ -298,7 +298,6 @@ class tst00xx(TestItem):
             {"id": "TST009_BlobUnknown",    "enable": true },
         """
         ctx = self.item_start()   # always first line of test
-        _result = ResultAPI.RECORD_RESULT_PASS
 
         # create a string of random characters to represent a blob
         myBlob = ResultAPI.BLOB_UNKNOWN
@@ -308,7 +307,7 @@ class tst00xx(TestItem):
             self.item_end(ResultAPI.RECORD_RESULT_INTERNAL_ERROR)
             return
 
-        self.item_end(_result)  # always last line of test
+        self.item_end()  # always last line of test
 
     def TST010_BlobXY(self):
         """ Blob XY Plots
@@ -320,7 +319,6 @@ class tst00xx(TestItem):
         """
         ctx = self.item_start()   # always first line of test
         from numpy import sin, arange
-        _result = ResultAPI.RECORD_RESULT_PASS
 
         myBlob = ResultAPI.BLOB_PLOTXY
 
@@ -358,4 +356,21 @@ class tst00xx(TestItem):
             self.item_end(_result)
             return
 
-        self.item_end(_result)  # always last line of test
+        self.item_end()  # always last line of test
+
+    def TST011_JSONB(self):
+        """ postgres JSONB object example
+
+            {"id": "TST009_BlobUnknown",    "enable": true },
+        """
+        ctx = self.item_start()   # always first line of test
+
+        my_jsonb = {"serialNum": 123456789}
+        jsonb = ctx.record.getCustomJSONB()
+        jsonb.update(my_jsonb)
+        success, msg = ctx.record.setCustomJSONB(jsonb)
+        if not success:
+            self.item_end(ResultAPI.RECORD_RESULT_INTERNAL_ERROR)
+            return
+
+        self.item_end()  # always last line of test
