@@ -9,8 +9,10 @@ TMIStation is the production floor prgram that runs your scripts and tests your 
 
    tmistation_demo
    tmistation_screenshots
+   tmistation_config
    tmistation_scripts
    tmistation_programs
    tmistation_drivers
    tmistation_accounts
    tmistation_travellers
+   tmistation_manifest

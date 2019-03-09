@@ -17,6 +17,7 @@ infrastructure to manage the data, scripts, users, roles, reporting and other mu
    tmi_system
    tmi_prodplan
    tmi_jigs
+   tmi_security
 
 
 Indices and tables

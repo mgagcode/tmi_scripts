@@ -4,3 +4,5 @@ record/
 core/__pycache__/
 *.pyc
 create_manifest
+
+public/postgdata/

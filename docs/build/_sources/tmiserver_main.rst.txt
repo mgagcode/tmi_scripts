@@ -10,4 +10,5 @@ TMIServer is the management dashboard and backend database processor.
 
    tmiserver_demo
    tmiserver_screenshots
+   tmiserver_config
    tmiserver_accounts

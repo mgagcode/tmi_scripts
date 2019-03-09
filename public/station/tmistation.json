@@ -7,7 +7,7 @@
     # if unlocked (false) ONLY this file is checked against the manifest
     "manifest_locked": false,
 
-    #, path to results waiting to be sent to TMI Server
+    # path to results waiting to be sent to TMI Server
     # must be named 'stage', must be under parent 'public'
     # DEFAULT: "public/result/stage",
     "result_stage_dir": "public/result/stage",
