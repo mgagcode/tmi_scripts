@@ -24,8 +24,9 @@ if [[ $1 == "--help" ]] || [[ $1 == "" ]] ; then
 fi
 
 # set defaults here
-flag_server=not_specified
+flag_server_ip=not_specified
 flag_hostname=(hostname)
+flag_restart=no
 
 
 start () {
@@ -33,14 +34,17 @@ start () {
     #
     # docker run --rm and --restart commands are exclusive of each other
     #
-    if [[ $flag_server == "not_specified" ]]; then
+    if [[ flag_server_ip == "not_specified" ]]; then
         echo "TMIServer IP address is required flag (--server)"
-    elif [[ $flag_server == "none" ]]; then
+    elif [[ flag_server_ip == "none" ]]; then
         TMI_SERVERIP=127.0.0.1
+    else
+        TMI_SERVERIP=$(flag_server_ip)
     fi
+    echo Using TMIServer IP = $TMI_SERVERIP
     if [[ $flag_restart == "always" ]]; then
         docker run -d \
-            --restart=${RESTART} \
+            --restart=${flag_restart} \
             -e TMI_SERVERIP=${TMI_SERVERIP} \
             --hostname=${flag_hostname} \
             -p 6800:6800 \
@@ -94,10 +98,12 @@ while [ "$#" -gt 0 ]; do
   case "$1" in
     -r) flag_restart="$2"; shift 2;;
     -h) flag_hostname="$2"; shift 2;;
+    -s) flag_server_ip="$2"; shift 2;;
 
     --restart=*) flag_restart="${1#*=}"; shift 1;;
     --hostname=*) flag_hostname="${1#*=}"; shift 1;;
-    --restart|--hostname) echo "$1 requires an argument" >&2; exit 1;;
+    --server=*) flag_server_ip="${1#*=}"; shift 1;;
+    --restart|--hostname|--server) echo "$1 requires an argument" >&2; exit 1;;
 
     -*) echo "unknown option: $1" >&2; exit 1;;
     *) handle_command "$1"; shift 1;;

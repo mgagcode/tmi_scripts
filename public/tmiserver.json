@@ -1,11 +1,14 @@
 {
   "config": {
-    # Should the result JSON files be stored as encrypted, true (default) or false
+    # Should the result JSON files be stored as encrypted, true (default) or false,
+    # If the results were not encrypted by TMIStation, they won't be ecrypted by TMIServer
     "results_bkup_encrypted": false
   },
   "postgres": {
     "ResultBaseKeysV1": {
       "user": "postgres",
+      # !! Change "pw" to a real password for a real deployment
+      # !! This pw must match your postgres deployment too
       "pw": "qwerty",
       "ip": "tmidb"
     }
