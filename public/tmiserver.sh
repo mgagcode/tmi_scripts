@@ -6,13 +6,13 @@ usage () {
   echo "command:"
   echo "  start                     Start TMIServer"
   echo ""
-  echo "    flags, --restart=, -r   <always|no> (default no) 'always' will start tmiserver EVERY time the"
+  echo "    flags, --restart=, -r   <always|no> (default no) 'always' will start TMIServer EVERY time the"
   echo "                            computer is booted, which is typically used on a node that"
   echo "                            is in actual deployment."
   echo "                            To disable restart, use 'docker update --restart=no tmiserver'"
   echo "                            and then reboot the node."
   echo ""
-  echo "  update"
+  echo "  update                    Update the docker image, requires internet connection."
   echo ""
 }
 
