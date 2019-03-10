@@ -41,14 +41,14 @@ start () {
             --name tmidb \
             --restart=${flag_restart} \
             -v $(pwd)/postgdata:/var/lib/postgresql/data \
-            -e POSTGRES_PASSWORD=$(flag_password) \
+            -e POSTGRES_PASSWORD=$flag_password \
             -d \
             postgres:11
     elif [[ $flag_restart == "no" ]]; then
         docker run --net tminet \
             --name tmidb \
             -v $(pwd)/postgdata:/var/lib/postgresql/data \
-            -e POSTGRES_PASSWORD=$(flag_password) \
+            -e POSTGRES_PASSWORD=$flag_password \
             -d \
             --rm \
             postgres:11
