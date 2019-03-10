@@ -12,7 +12,7 @@ usage () {
   echo "                            To disable restart, use 'docker update --restart=no tmiserver'"
   echo "                            and then reboot the node."
   echo ""
-  echo "  update                    Update the docker image, requires internet connection."
+  echo "  update                    Update the docker images (both TMIServer & TMIStation), requires internet connection."
   echo ""
 }
 

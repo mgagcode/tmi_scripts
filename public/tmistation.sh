@@ -25,9 +25,24 @@ fi
 
 # set defaults here
 flag_server_ip=not_specified
-flag_hostname=(hostname)
+flag_hostname=$(hostname)
 flag_restart=no
 
+function valid_ip() {
+    local  ip=$1
+    local  stat=1
+
+    if [[ $ip =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+        OIFS=$IFS
+        IFS='.'
+        ip=($ip)
+        IFS=$OIFS
+        [[ ${ip[0]} -le 255 && ${ip[1]} -le 255 \
+            && ${ip[2]} -le 255 && ${ip[3]} -le 255 ]]
+        stat=$?
+    fi
+    return $stat
+}
 
 start () {
     echo start TMIStation: $flag_restart $flag_hostname $flag_server_ip
@@ -36,10 +51,16 @@ start () {
     #
     if [[ $flag_server_ip == "not_specified" ]]; then
         echo "TMIServer IP address is required flag (--server)"
+        exit 1
     elif [[ $flag_server_ip == "none" ]]; then
         TMI_SERVERIP=127.0.0.1
     else
-        TMI_SERVERIP=$flag_server_ip
+        if valid_ip $flag_server_ip; then
+            TMI_SERVERIP=${flag_server_ip}
+        else
+            echo "IP address is valid, please check"
+            exit 1
+        fi
     fi
     echo Using TMIServer IP = $TMI_SERVERIP
     if [[ $flag_restart == "always" ]]; then
