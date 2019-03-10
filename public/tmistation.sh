@@ -30,16 +30,16 @@ flag_restart=no
 
 
 start () {
-    echo start $flag_restart
+    echo start TMIStation: $flag_restart $flag_hostname $flag_server_ip
     #
     # docker run --rm and --restart commands are exclusive of each other
     #
-    if [[ flag_server_ip == "not_specified" ]]; then
+    if [[ $flag_server_ip == "not_specified" ]]; then
         echo "TMIServer IP address is required flag (--server)"
-    elif [[ flag_server_ip == "none" ]]; then
+    elif [[ $flag_server_ip == "none" ]]; then
         TMI_SERVERIP=127.0.0.1
     else
-        TMI_SERVERIP=$(flag_server_ip)
+        TMI_SERVERIP=$flag_server_ip
     fi
     echo Using TMIServer IP = $TMI_SERVERIP
     if [[ $flag_restart == "always" ]]; then
@@ -49,6 +49,8 @@ start () {
             --hostname=${flag_hostname} \
             -p 6800:6800 \
             -v $(pwd):/app/public \
+            -v /dev:/dev \
+            --device=/dev \
             --name tmistation \
             mgagcode/tmistation
     elif [[ $flag_restart == "no" ]]; then
@@ -57,6 +59,8 @@ start () {
             --hostname=${flag_hostname} \
             -p 6800:6800 \
             -v $(pwd):/app/public \
+            -v /dev:/dev \
+            --device=/dev \
             --name tmistation \
             --rm \
             mgagcode/tmistation
@@ -72,7 +76,6 @@ docker_pull () {
 }
 
 handle_command () {
-  echo $1
   case $1 in
     start)
       start

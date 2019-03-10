@@ -25,7 +25,7 @@ fi
 flag_restart=no
 
 start () {
-    echo start $flag_restart
+    echo start TMIServer: $flag_restart
     #
     # docker run --rm and --restart commands are exclusive of each other
     #
@@ -61,7 +61,6 @@ docker_pull () {
 }
 
 handle_command () {
-  echo $1
   case $1 in
     start)
       start
