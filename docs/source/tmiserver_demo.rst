@@ -133,10 +133,15 @@ Clone TMIScripts
 Run Full
 ========
 
+* Run postgres::
+
+    cd ~/git/tmi_scripts/public
+    ./tmipostg.sh
+
 * Run TMIServer::
 
     cd ~/git/tmi_scripts/public
-    docker run --net tminet -ti -p 6600:6600 -v $(pwd):/app/public mgagcode/tmiserver
+    ./tmiserver.sh
 
 * Open Google Chrome to
 
