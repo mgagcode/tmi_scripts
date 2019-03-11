@@ -62,7 +62,13 @@ start () {
             exit 1
         fi
     fi
+    if [[ ${flag_restart} != "always" ]] && [[ ${flag_restart} != "no" ]]; then
+            echo "--restart= must be always or no"
+            exit 1
+    fi
     echo Using TMIServer IP = $TMI_SERVERIP
+    docker stop tmistation 2> /dev/null
+    docker rm tmistation 2> /dev/null
     if [[ $flag_restart == "always" ]]; then
         docker run -d \
             --restart=${flag_restart} \
@@ -85,9 +91,6 @@ start () {
             --name tmistation \
             --rm \
             mgagcode/tmistation
-    else
-      echo Unexpected restart value, must be always or no, example: --restart=always
-      exit 1
     fi
 }
 

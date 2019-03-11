@@ -31,11 +31,15 @@ start () {
     #
     # docker run --rm and --restart commands are exclusive of each other
     #
-    if [[ $flag_password == "qwerty" ]]; then
+    if [[ ${flag_password} == "qwerty" ]]; then
         echo WARNING: pastgres password is insecure - this better not be production!
     fi
+    if [[ ${flag_restart} != "always" ]] && [[ ${flag_restart} != "no" ]]; then
+        echo "--restart= must be always or no"
+        exit 1
+    fi
     mkdir -p postgdata
-    docker network create tminet
+    docker network create tminet 2> /dev/null
     if [[ $flag_restart == "always" ]]; then
         docker run --net tminet \
             --name tmidb \
@@ -52,13 +56,10 @@ start () {
             -d \
             --rm \
             postgres:11
-    else
-      echo Unexpected restart value, must be always or no, example: --restart=always
-      exit 1
     fi
     echo Waiting 5 sec for postgres to start....
     sleep 5
-    docker exec -it tmidb createdb -U postgres resultbasekeysv1
+    docker exec -it tmidb createdb -U postgres resultbasekeysv1 2> /dev/null
 }
 
 docker_pull () {

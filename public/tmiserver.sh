@@ -29,7 +29,13 @@ start () {
     #
     # docker run --rm and --restart commands are exclusive of each other
     #
-    docker network create tminet
+    if [[ ${flag_restart} != "always" ]] && [[ ${flag_restart} != "no" ]]; then
+        echo "--restart= must be always or no"
+        exit 1
+    fi
+    docker network create tminet 2> /dev/null
+    docker stop tmiserver 2> /dev/null
+    docker rm tmiserver 2> /dev/null
     if [[ $flag_restart == "always" ]]; then
         docker run -d \
             --net tminet \
@@ -48,9 +54,6 @@ start () {
             --name tmiserver \
             --rm \
             mgagcode/tmiserver
-    else
-      echo Unexpected restart value, must be always or no, example: --restart=always
-      exit 1
     fi
 }
 
