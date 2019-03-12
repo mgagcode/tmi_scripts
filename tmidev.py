@@ -262,6 +262,10 @@ def parse_args():
 
 
 def script_validated(script):
+    if not script.get("info", False):
+        logger.error("Script is missing 'info' section")
+        return False
+
     if not script.get("config", False):
         logger.error("Script is missing 'config' section")
         return False
