@@ -4,6 +4,10 @@
     # If the results were not encrypted by TMIStation, they won't be ecrypted by TMIServer
     "results_bkup_encrypted": false
   },
+  # specify an upstream TMIServer URL
+  "upstream_server_url": null,
+  "upstream_stage_dir": "./public/upstream/stage",
+  "upstream_quarantine_dir": "./public/upstream/quarantine",
   "postgres": {
     "ResultBaseKeysV1": {
       "user": "postgres",

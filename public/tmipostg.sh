@@ -13,6 +13,7 @@ usage () {
   echo "                            and then reboot the node."
   echo "           --password=, -p  Password. (default qwerty)"
   echo ""
+  echo " stop                       Stop postgres"
   echo ""
 }
 
@@ -59,13 +60,14 @@ start () {
     fi
     echo Waiting 5 sec for postgres to start....
     sleep 5
+    echo Creating resultbasekeysv1
     docker exec -it tmidb createdb -U postgres resultbasekeysv1 2> /dev/null
 }
 
-docker_pull () {
-    echo docker pull
-    docker pull mgagcode/tmiserver
-    docker pull mgagcode/tmistation
+stop () {
+    echo stop
+    docker stop tmidb
+    docker container rm tmidb
 }
 
 handle_command () {
@@ -73,6 +75,10 @@ handle_command () {
   case $1 in
     start)
       start
+      ;;
+
+    stop)
+      stop
       ;;
 
     *)

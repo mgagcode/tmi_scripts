@@ -13,6 +13,9 @@ usage () {
   echo "                            and then reboot the node."
   echo ""
   echo "  update                    Update the docker images (both TMIServer & TMIStation), requires internet connection."
+  echo "                            You will need to restart TMIServer with the start command."
+  echo ""
+  echo "  stop                      Stop TMIServer"
   echo ""
 }
 
@@ -60,7 +63,17 @@ start () {
 docker_pull () {
     echo docker pull
     docker pull mgagcode/tmiserver
-    docker pull mgagcode/tmistation
+    docker update --restart=no tmiserver
+    docker stop tmiserver
+    docker container rm tmiserver
+    echo
+    echo Now restart tmiserver: ./tmiserver.sh --restart=always start
+}
+
+stop () {
+    docker update --restart=no tmiserver
+    docker stop tmiserver
+    docker container rm tmiserver
 }
 
 handle_command () {
@@ -71,6 +84,10 @@ handle_command () {
 
     update)
       docker_pull
+      ;;
+
+    stop)
+      stop
       ;;
 
     *)
