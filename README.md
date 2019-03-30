@@ -6,7 +6,7 @@
 * Write Python scripts to control measurement equipment and other fixtures
 * APIs for recording measurements, setting Pass/Fail, locking resources, etc
 * Server dashboard to monitor production yield, rate, etc
-* Check out the [PDF](https://github.com/mgagcode/tmi_scripts/blob/master/TMISystem_Overview_06.pdf) slide deck for more information
+* Check out the [PDF](https://github.com/mgagcode/tmi_scripts/blob/master/TMISystem_Overview_08.pdf) slide deck for more information
 * postgresql backend
 * deployed as Docker containers for easy installation
 * https://tmi-scripts.readthedocs.io/en/latest/
