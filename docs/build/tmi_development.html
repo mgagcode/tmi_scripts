@@ -48,6 +48,11 @@
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><a class="reference internal" href="#your-own-git-repo" id="id1">Your Own Git Repo</a></li>
+<li><a class="reference internal" href="#repo-setup" id="id2">Repo Setup</a><ul>
+<li><a class="reference internal" href="#install-git-hooks" id="id3">Install Git Hooks</a></li>
+<li><a class="reference internal" href="#create-a-tag" id="id4">Create a Tag</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="section" id="your-own-git-repo">
@@ -55,6 +60,13 @@
 <p>You will want to begin with setting up your own Git repo.  If you are unfamiliar with Git,
 then you should read up on it, and/or do some tutorials.  It is beyond the scope
 of this documentation to teach Git.</p>
+<p>There are some 3rd party Git GUI tools that you could use to help, especially if you don’t like
+the command line interface of Git.  Consider these,</p>
+<blockquote>
+<div><p><a class="reference external" href="https://www.gitkraken.com/git-client">https://www.gitkraken.com/git-client</a> (not free, works everywhere)</p>
+<p><a class="reference external" href="https://www.sourcetreeapp.com">https://www.sourcetreeapp.com</a> (free, Windows/Max only)</p>
+<p><a class="reference external" href="https://git-scm.com/download/gui/linux">https://git-scm.com/download/gui/linux</a>  (list of others)</p>
+</div></blockquote>
 <p>To get started, create yourself a guthub account.</p>
 <p>There are two ways to being using TMI with Git,</p>
 <p>The first way, is to fork the <cite>tmi_scripts</cite> repo to your own github repo.  This is the
@@ -120,6 +132,48 @@ do something like this,</li>
 <li>You want to be able to pull from TMI <cite>tmi_scripts</cite> occasionally to get TMI updates to scripts, and/or
 examples, drivers, etc.</li>
 </ul>
+</div>
+<div class="section" id="repo-setup">
+<h2><a class="toc-backref" href="#id2">Repo Setup</a><a class="headerlink" href="#repo-setup" title="Permalink to this headline">¶</a></h2>
+<p>Additional steps.</p>
+<div class="section" id="install-git-hooks">
+<h3><a class="toc-backref" href="#id3">Install Git Hooks</a><a class="headerlink" href="#install-git-hooks" title="Permalink to this headline">¶</a></h3>
+<p>In the <cite>tmi_scripts</cite> repo, there is a folder called <cite>hooks</cite>.  The contents of this folder
+needs to be copied to <cite>./.git/hooks</cite> folder of your repository.</p>
+<p>Depending on your directory structure, this example command may work,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">git</span><span class="o">/</span><span class="n">tmi_scripts</span>
+<span class="n">cp</span> <span class="n">hooks</span><span class="o">/*</span> <span class="o">./</span><span class="n">git</span><span class="o">/</span><span class="n">hooks</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-a-tag">
+<h3><a class="toc-backref" href="#id4">Create a Tag</a><a class="headerlink" href="#create-a-tag" title="Permalink to this headline">¶</a></h3>
+<p>The TMI system reports the version of things to help keep you organized, including the version of your scripts.</p>
+<p>On whatever branch you decide to “release” your scripts, for example, the “master” branch, create a
+tag on that branch.  The tag <strong>MUST</strong> be of this format,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Name</span><span class="o">-</span><span class="n">V</span><span class="o">.</span><span class="n">v</span>
+
+<span class="n">where</span><span class="p">:</span>
+    <span class="n">Name</span> <span class="o">-</span> <span class="ow">is</span> <span class="n">anything</span> <span class="n">you</span> <span class="n">want</span><span class="p">,</span> <span class="n">keep</span> <span class="n">it</span> <span class="n">short</span><span class="p">,</span> <span class="n">say</span> <span class="o">&lt;</span><span class="mi">8</span> <span class="n">characters</span>
+    <span class="n">V</span> <span class="o">-</span> <span class="ow">is</span> <span class="n">major</span> <span class="n">revision</span><span class="p">,</span> <span class="n">manually</span> <span class="n">increased</span> <span class="n">by</span> <span class="n">YOU</span><span class="p">,</span> <span class="n">be</span> <span class="n">making</span> <span class="n">a</span> <span class="n">new</span> <span class="n">Tag</span>
+    <span class="n">v</span> <span class="o">-</span> <span class="ow">is</span> <span class="n">minor</span> <span class="n">revision</span><span class="p">,</span> <span class="n">manually</span> <span class="n">increased</span> <span class="n">by</span> <span class="n">YOU</span><span class="p">,</span> <span class="n">be</span> <span class="n">making</span> <span class="n">a</span> <span class="n">new</span> <span class="n">Tag</span>
+</pre></div>
+</div>
+<p>Example commands to create (and push) a tag,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">checkout</span> <span class="n">master</span>
+<span class="n">git</span> <span class="n">tag</span> <span class="n">MyTest</span><span class="o">-</span><span class="mf">1.0</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="o">--</span><span class="n">tags</span>
+</pre></div>
+</div>
+<p>There should only be one tag in effect at a time, so remove a previous tag.  Here is the sequence to change
+the minor version,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">checkout</span> <span class="n">master</span>
+<span class="n">git</span> <span class="n">tag</span> <span class="o">--</span><span class="n">delete</span> <span class="n">MyTest</span><span class="o">-</span><span class="mf">1.0</span>
+<span class="n">git</span> <span class="n">tag</span> <span class="n">MyTest</span><span class="o">-</span><span class="mf">1.1</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="o">--</span><span class="n">tags</span>
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 

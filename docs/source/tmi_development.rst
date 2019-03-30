@@ -14,6 +14,15 @@ You will want to begin with setting up your own Git repo.  If you are unfamiliar
 then you should read up on it, and/or do some tutorials.  It is beyond the scope
 of this documentation to teach Git.
 
+There are some 3rd party Git GUI tools that you could use to help, especially if you don't like
+the command line interface of Git.  Consider these,
+
+    https://www.gitkraken.com/git-client (not free, works everywhere)
+
+    https://www.sourcetreeapp.com (free, Windows/Max only)
+
+    https://git-scm.com/download/gui/linux  (list of others)
+
 To get started, create yourself a guthub account.
 
 There are two ways to being using TMI with Git,
@@ -83,4 +92,62 @@ are shown below
 
 * You want to be able to pull from TMI `tmi_scripts` occasionally to get TMI updates to scripts, and/or
   examples, drivers, etc.
+
+
+Repo Setup
+**********
+
+Additional steps.
+
+
+Install Git Hooks
+=================
+
+In the `tmi_scripts` repo, there is a folder called `hooks`.  The contents of this folder
+needs to be copied to `./.git/hooks` folder of your repository.
+
+Depending on your directory structure, this example command may work,
+
+::
+
+    cd ~/git/tmi_scripts
+    cp hooks/* ./git/hooks
+
+
+Create a Tag
+============
+
+The TMI system reports the version of things to help keep you organized, including the version of your scripts.
+
+On whatever branch you decide to "release" your scripts, for example, the "master" branch, create a
+tag on that branch.  The tag **MUST** be of this format,
+
+::
+
+        Name-V.v
+
+        where:
+            Name - is anything you want, keep it short, say <8 characters
+            V - is major revision, manually increased by YOU, be making a new Tag
+            v - is minor revision, manually increased by YOU, be making a new Tag
+
+Example commands to create (and push) a tag,
+
+::
+
+        git checkout master
+        git tag MyTest-1.0
+        git push origin --tags
+
+
+There should only be one tag in effect at a time, so remove a previous tag.  Here is the sequence to change
+the minor version,
+
+::
+
+        git checkout master
+        git tag --delete MyTest-1.0
+        git tag MyTest-1.1
+        git push origin --tags
+
 
