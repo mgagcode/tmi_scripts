@@ -139,6 +139,14 @@ Example commands to create (and push) a tag,
         git tag MyTest-1.0
         git push origin --tags
 
+**There should only be one tag in effect at a time, and `tmi_scripts` has a tag already, remove that tag,**
+
+::
+
+        git checkout master
+        git tag --delete TMIScripts-0.1
+        git push origin --tags
+
 
 There should only be one tag in effect at a time, so remove a previous tag.  Here is the sequence to change
 the minor version,
@@ -149,5 +157,11 @@ the minor version,
         git tag --delete MyTest-1.0
         git tag MyTest-1.1
         git push origin --tags
+
+
+Change README.md
+================
+
+Change this file to suit your needs.  For example, document your script/program naming strategy.
 
 

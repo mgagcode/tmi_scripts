@@ -27,7 +27,7 @@
   },
   "info": {
     "product": "widget_1",
-    "bom": "B00012-001",
+    "bom": "B00012-002",
     # list fields present user choice or fill in
     "lot": "%%Lot",
     "location": "%%Loc"

@@ -1,4 +1,6 @@
 # Example: MicroPython board test script
+# !! NOTE: Only works if there is a provisioned Micro Python board on USB !!
+# !!       See tmi_scripts/public/station/drivers/micropythonbrd/tmi_upybrd.py for provision instructions
 {
   "info": {
     "product": "pybrd_1",
